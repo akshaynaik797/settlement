@@ -42,7 +42,7 @@ def process_folder(folder_name, insname, foldertime):
                 pass
             elif 'inamdar.xlsx' in file:
                 op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-                subprocess.run(["python", "master.py", insname, op, ''])
+                subprocess.run(["python", "master.py", insname, op, '', path])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
                 pass
