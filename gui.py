@@ -30,6 +30,7 @@ def send_values():
     if fromtime.get() != '' and totime.get() != '' and insname.get() != '':
         result = accept_values(fromtime.get(), totime.get(), insname.get())
         if result is True:
+            print('Job finished')
             messagebox.showinfo(title='Success', message='Job finished')
         else:
             messagebox.showerror(title='Error', message='Job failed, see logs')

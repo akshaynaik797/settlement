@@ -10,16 +10,20 @@ from openpyxl.styles import colors
 from openpyxl import load_workbook
 from make_log import log_exceptions
 
+directory = 'backups/'
+
+
 try:
 
     ins = str(sys.argv[1])
+    hospital_name = sys.argv[2]
 
     redFill = PatternFill(start_color='FFFF0000',
                           end_color='FFFF0000',
                           fill_type='solid')
     # with open('config.txt', 'r') as myfile:
     #	f = myfile.read()
-    op = sys.argv[2]
+    # op = sys.argv[2]
     # op.pop(-1)
     wbName = 'master.xlsx'
     wb = openpyxl.Workbook()
@@ -56,12 +60,12 @@ try:
         main_s1.cell(row=1, column=i + 1).value = sh1[i]
     for i in range(0, len(sh2)):
         main_s2.cell(row=1, column=i + 1).value = sh2[i]
-    for i in range(0, 1):
-        k = op.split(' ')
+    # for i in range(0, 1):
+        # k = op.split(' ')
 
         # aditya_birla
         if ins == 'aditya_birla':
-            wbkName = 'aditya_birla/aditya' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -109,7 +113,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -170,7 +174,7 @@ try:
                     eo.append(s3.cell(row=t, column=4).value)
                 main_row_count = main_s2.max_row
                 for i in range(0, len(we)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=8).value = we[i]
@@ -178,7 +182,7 @@ try:
 
         # apollo_munich
         if ins == 'apollo_munich':
-            wbkName = 'apollo_munich/apollo' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -234,7 +238,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = mid[i]
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
@@ -272,7 +276,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(r)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -280,7 +284,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = r[i]
         # fgh
         if ins == 'fgh':
-            wbkName = 'FGH/FGH' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -344,7 +348,7 @@ try:
                     fur = float(x[0]) + float(x[1]) + float(x[2]) + float(x[3]) + float(x[4])
                     stt.append(str(fur))
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -386,7 +390,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(ccn)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -397,7 +401,7 @@ try:
 
         # Fhpl
         if ins == 'fhpl':
-            wbkName = 'fhpl/fhpl' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -460,7 +464,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = al[i]
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
@@ -498,7 +502,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -508,7 +512,7 @@ try:
         # health_heritage
 
         if ins == 'health_heritage':
-            wbkName = 'health_heritage/health_heritage' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -559,7 +563,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -601,7 +605,7 @@ try:
 						for ko in range(1,num_ko+1):
 							if(re[i]==main_s1.cell(row=ko, column=5).value):
 								main_s1.cell(row=ko, column=18).value=ks[i]'''
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = re[i]
                     main_s2.cell(row=i + main_row_count + 1, column=8).value = ks[i]
@@ -624,7 +628,7 @@ try:
 
         # health_india
         if ins == 'health_india':
-            wbkName = 'health_india/health_india' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -690,7 +694,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -732,7 +736,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(ccn)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=6).value = p[i]
@@ -743,7 +747,7 @@ try:
 
         # HDFC
         if ins == 'hdfc':
-            wbkName = 'hdfc/hdfc' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -788,7 +792,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -855,7 +859,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(re)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = pe[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = re[i]
@@ -866,7 +870,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=10).value = ro[i]
         # Religare
         if ins == 'religare':
-            wbkName = 'religare/religare' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -928,7 +932,7 @@ try:
                     fur = float(x[0]) + float(x[2]) + float(x[1]) + float(x[3])  # +float(x[4])
                     stt.append(str(fur))
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = al[i]
@@ -967,7 +971,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(re)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = pe[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = re[i]
@@ -977,7 +981,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = b[i]
         # star
         if ins == 'star':
-            wbkName = 'star/star' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -1026,7 +1030,7 @@ try:
                 star_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -1062,7 +1066,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(r)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -1085,7 +1089,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = s_v[i]
         # small_star
         if ins == 'small_star':
-            wbkName = 'star/star_small' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             row_count = s1.max_row
@@ -1129,7 +1133,7 @@ try:
                         y = fd[j]
                         # print(y)
                         main_s1.cell(row=y + 1, column=1).value = sys.argv[3]
-                        main_s1.cell(row=y + 1, column=2).value = k[3]
+                        main_s1.cell(row=y + 1, column=2).value = hospital_name
                         main_s1.cell(row=y + 1, column=3).value = ins
                         main_s1.cell(row=y + 1, column=4).value = ccn[i]
                         main_s1.cell(row=y + 1, column=5).value = ccn[i]
@@ -1141,7 +1145,7 @@ try:
                     else:
                         main_row_count = main_s1.max_row
                         main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                        main_s1.cell(row=main_row_count + 1, column=2).value = k[3]
+                        main_s1.cell(row=main_row_count + 1, column=2).value = hospital_name
                         main_s1.cell(row=main_row_count + 1, column=3).value = ins
                         main_s1.cell(row=main_row_count + 1, column=4).value = ccn[i]
                         main_s1.cell(row=main_row_count + 1, column=5).value = ccn[i]
@@ -1153,7 +1157,7 @@ try:
 
             '''	main_row_count = main_s1.max_row
 				for i in range(0,len(ccn)):
-					main_s1.cell(row=i+main_row_count+1, column=2).value=k[3]
+					main_s1.cell(row=i+main_row_count+1, column=2).value=hospital_name
 					main_s1.cell(row=i+main_row_count+1, column=3).value=ins
 					main_s1.cell(row=i+main_row_count+1, column=4).value=ccn[i]
 					main_s1.cell(row=i+main_row_count+1, column=5).value=ccn[i]
@@ -1163,7 +1167,7 @@ try:
 					main_s1.cell(row=i+main_row_count+1, column=10).value=s_v[i]'''
         # united
         if ins == 'united':
-            wbkName = 'united/united' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -1229,7 +1233,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -1285,7 +1289,7 @@ try:
 						for ko in range(1,num_ko+1):
 							if(ccn[i]==main_s1.cell(row=ko, column=5).value):
 								main_s1.cell(row=ko, column=18).value=p[i]'''
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=8).value = p[i]
@@ -1310,7 +1314,7 @@ try:
                         det - float(iu[0]) - float(up[0]) - float(ju[0]) - float(jl[0]))
         # vidal
         if ins == 'vidal':
-            wbkName = 'vidal/vidal' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -1377,7 +1381,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = p[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -1424,7 +1428,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -1435,7 +1439,7 @@ try:
 
         # Medi_Assist
         if ins == 'Medi_Assist':
-            wbkName = 'Medi_Assist/Medi_Assist' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             mypath = os.getcwd() + wbkName
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
@@ -1483,7 +1487,7 @@ try:
                 # insert
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -1625,7 +1629,7 @@ try:
                             # print(int(r[i])+temp_ded-dis_r-co_r-tax)
 
                             temp_er += 1
-                        main_s2.cell(row=it + main_row_count + 1, column=2).value = k[3]
+                        main_s2.cell(row=it + main_row_count + 1, column=2).value = hospital_name
                         main_s2.cell(row=it + main_row_count + 1, column=3).value = ins
                         main_s2.cell(row=it + main_row_count + 1, column=4).value = kl[i]
                         main_s2.cell(row=it + main_row_count + 1, column=5).value = b[i]
@@ -1637,7 +1641,7 @@ try:
 
         # icici lombard
         if ins == 'icici_lombard':
-            wbkName = 'icici_lombard/icici_lombard' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -1695,7 +1699,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -1742,7 +1746,7 @@ try:
 								if(ccn[i]==main_s1.cell(row=ko, column=5).value):
 									main_s1.cell(row=ko, column=18).value=r[i]
 									#print(r[i])'''
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -1773,7 +1777,7 @@ try:
         # paramount
 
         if ins == 'Paramount':
-            wbkName = 'Paramount/Paramount' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             mypath = os.getcwd() + wbkName
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
@@ -1824,7 +1828,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -1897,7 +1901,7 @@ try:
                         s_v.append(wd.cell(row=t, column=7).value)
                 main_row_count = main_s2.max_row
                 for i in range(0, len(p)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = kl[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -1907,8 +1911,8 @@ try:
 
         # MDINDIA 11 23
         if ins == 'MDINDIA':
-            wbkName = 'MDINDIA/MDINDIA' + k[3] + '.xlsx'
-            # wbkName = 'MDINDIA/MDINDIAtherisingmedicare.xlsx'
+            wbkName = sys.argv[4]
+            # wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
 
             s1 = wbk.worksheets[0]
@@ -1984,7 +1988,7 @@ try:
                 main_row_count = main_s1.max_row
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2028,7 +2032,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=8).value = p[i]
@@ -2048,7 +2052,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2056,7 +2060,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = rt[i]
         # universal_sompo
         if ins == 'Universal_Sompo':
-            wbkName = 'universal_sompo/universal_sompo' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -2114,7 +2118,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2154,7 +2158,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2162,7 +2166,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = po[i]
         # vipul
         if ins == 'vipul':
-            wbkName = 'vipul/vipul' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -2215,7 +2219,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2248,7 +2252,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=8).value = p[i]
@@ -2256,7 +2260,7 @@ try:
 
         # reliance
         if ins == 'reliance':
-            wbkName = 'reliance/reliance' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -2315,7 +2319,7 @@ try:
                 main_row_count = main_s1.max_row
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2361,7 +2365,7 @@ try:
                         cpy.append(ccn[i])
                         ded.append(np[i])
                     else:
-                        main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                        main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                         main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                         main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                         main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2378,7 +2382,7 @@ try:
                             print(j, ded[i])
         # raksha
         if ins == 'raksha':
-            wbkName = 'raksha/raksha' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -2436,7 +2440,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2476,7 +2480,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2488,7 +2492,7 @@ try:
 
         # medsave
         if ins == 'medsave':
-            wbkName = 'medsave/medsave' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             mypath = os.getcwd() + wbkName
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
@@ -2539,7 +2543,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2579,7 +2583,7 @@ try:
                         cpy.append(ccn[i])
                         ded.append(po[i])
                     else:
-                        main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                        main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                         main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                         main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                         main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2593,7 +2597,7 @@ try:
                         # print(j,ded[i])
         # hitpa
         if ins == 'health_insurance':
-            wbkName = 'health_insurance/health_insurance' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -2650,7 +2654,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2688,7 +2692,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2697,8 +2701,8 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=8).value = np[i]
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = po[i]
         # Ease_West
-        if ins == 'East_West':
-            wbkName = 'East_West/East_West' + k[3] + '.xlsx'
+        if ins == 'East_West' or ins == 'east_west':
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             s1 = wbk.worksheets[0]
             s2 = wbk.worksheets[1]
@@ -2756,7 +2760,7 @@ try:
                 temp_row = main_row_count
                 for i in range(0, len(ccn)):
                     main_s1.cell(row=i + main_row_count + 1, column=1).value = sys.argv[3]
-                    main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s1.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s1.cell(row=i + main_row_count + 1, column=5).value = ccn[i]
@@ -2796,7 +2800,7 @@ try:
                 # insert
                 main_row_count = main_s2.max_row
                 for i in range(0, len(np)):
-                    main_s2.cell(row=i + main_row_count + 1, column=2).value = k[3]
+                    main_s2.cell(row=i + main_row_count + 1, column=2).value = hospital_name
                     main_s2.cell(row=i + main_row_count + 1, column=3).value = ins
                     main_s2.cell(row=i + main_row_count + 1, column=4).value = ccn[i]
                     main_s2.cell(row=i + main_row_count + 1, column=5).value = p[i]
@@ -2806,7 +2810,7 @@ try:
                     main_s2.cell(row=i + main_row_count + 1, column=9).value = po[i]
 
         if ins == 'bajaj':
-            # wbkName = 'bajaj/bajaj'+k[3]+'.xlsx'
+            # wbkName = sys.argv[4]
             # wbk= openpyxl.load_workbook(wbkName)
 
             # book = load_workbook(wbkName)
@@ -2822,7 +2826,7 @@ try:
             # tran_date = sheet.cell(row=2, column=7).value
 
             # main_row_count = main_s1.max_row
-            # main_s1.cell(row=i + main_row_count + 1, column=2).value = k[3]
+            # main_s1.cell(row=i + main_row_count + 1, column=2).value = hospital_name
             # main_s1.cell(row=i + main_row_count + 1, column=3).value = ins
             # main_s1.cell(row=i + main_row_count + 1, column=4).value = alno
             # main_s1.cell(row=i + main_row_count + 1, column=5).value = claim_no
@@ -2832,7 +2836,7 @@ try:
             # main_s1.cell(row=i + main_row_count + 1, column=17).value = netpayable
             # main_s1.cell(row=i + main_row_count + 1, column=64).value = tran_date
 
-            wbkName = 'bajaj/bajaj' + k[3] + '.xlsx'
+            wbkName = sys.argv[4]
             wbk = openpyxl.load_workbook(wbkName)
             book = load_workbook(wbkName)
             sheetlist = book.get_sheet_names()
@@ -2846,7 +2850,7 @@ try:
                 rowno = main_s1.max_row
                 dtrow = sheet[i]
                 main_s1[rowno][0].value = sys.argv[3]
-                main_s1[rowno][1].value = k[3]
+                main_s1[rowno][1].value = hospital_name
                 main_s1[rowno][2].value = ins
                 main_s1[rowno][3].value = dtrow[2].value
                 main_s1[rowno][4].value = dtrow[3].value
@@ -2870,7 +2874,7 @@ try:
                 rowno = main_s2.max_row + 1
                 dtrow = sheet1[i]
                 main_s2[rowno][0].value = ''  # rowno-1
-                main_s2[rowno][1].value = 'inamdar'  # k[3]
+                # main_s2[rowno][1].value = 'inamdar'  # hospital_name
                 main_s2[rowno][2].value = 'bajaj'  # ins
                 main_s2[rowno][3].value = main_s1[main_s1.max_row][4].value
                 main_s2[rowno][4].value = dtrow[1].value
@@ -2934,6 +2938,7 @@ try:
                             d = d[:-1]
                         main_s1.cell(row=i, column=j).value = d
                 except Exception as e:
+                    log_exceptions()
                     # s1.cell(row=i, column=1).value = 'error'
                     print(i, s1.cell(row=i, column=4).value)
 

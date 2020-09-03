@@ -1,6 +1,8 @@
 import os
 import re
+import subprocess
 from datetime import datetime
+from movemaster import move_master_to_master_insurer
 
 directory = 'backups'
 
@@ -33,10 +35,14 @@ def process_folder(folder_name, insname, foldertime):
         for file in files:
             path = (os.path.join(root, file))
             if 'Max.xlsx' in file:
-                print(path)
+                subprocess.run(["python3", "create_master.py", insname, 'Max', '', path])
+                move_master_to_master_insurer('')
+                print(f'processed {path}')
                 pass
             elif 'inamdar.xlsx' in file:
-                print(path)
+                subprocess.run(["python3", "create_master.py", insname, 'inamdar', '', path])
+                move_master_to_master_insurer('')
+                print(f'processed {path}')
                 pass
             else:
                 pass
