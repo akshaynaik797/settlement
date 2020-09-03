@@ -32,6 +32,7 @@ def collect_folder_data(fromtime, totime, insname):
 
 def process_folder(folder_name, insname, foldertime):
     for root, dirs, files in os.walk(directory+'/'+folder_name):
+        flag = 0
         for file in files:
             path = (os.path.join(root, file))
             if 'Max.xlsx' in file:
@@ -39,18 +40,19 @@ def process_folder(folder_name, insname, foldertime):
                 subprocess.run(["python", "master.py", insname, op, '', path])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
-                pass
+                flag = 1
+                break
             elif 'inamdar.xlsx' in file:
                 op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
                 subprocess.run(["python", "master.py", insname, op, '', path])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
-                pass
-            else:
-                pass
-        pass
+                flag = 1
+                break
+        if flag == 0:
+            #code for 2nd condtion
+            pass
     pass
-
 
 
 if __name__ == '__main__':
