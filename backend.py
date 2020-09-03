@@ -35,12 +35,14 @@ def process_folder(folder_name, insname, foldertime):
         for file in files:
             path = (os.path.join(root, file))
             if 'Max.xlsx' in file:
-                subprocess.run(["python3", "create_master.py", insname, 'Max', '', path])
+                op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
+                subprocess.run(["python", "master.py", insname, op, '', path])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
                 pass
             elif 'inamdar.xlsx' in file:
-                subprocess.run(["python3", "create_master.py", insname, 'inamdar', '', path])
+                op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
+                subprocess.run(["python", "master.py", insname, op, ''])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
                 pass
