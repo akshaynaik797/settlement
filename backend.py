@@ -25,33 +25,43 @@ def collect_folder_data(fromtime, totime, insname):
                     tempdict = result.groupdict()
                     folder_insname, foldertime = tempdict['name'], datetime.strptime(tempdict['date'], '%m%d%Y%H%M%S')
                     if fromtime < foldertime < totime and folder_insname == insname:
-                        process_folder(y, insname, foldertime)
+                        process_insurer_excel(y, insname, foldertime)
         break
     return True
 
 
-def process_folder(folder_name, insname, foldertime):
-    for root, dirs, files in os.walk(directory+'/'+folder_name):
+def process_insurer_excel(folder_name, insname, foldertime):
+    for root, dirs, files in os.walk(directory + '/' + folder_name):
         flag = 0
         for file in files:
             path = (os.path.join(root, file))
             if 'Max.xlsx' in file:
                 op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
-                subprocess.run(["python", "master.py", insname, op, '', path])
+                subprocess.run(["python", "make_master.py", insname, op, '', path])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
                 flag = 1
                 break
             elif 'inamdar.xlsx' in file:
                 op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-                subprocess.run(["python", "master.py", insname, op, '', path])
+                subprocess.run(["python", "make_master.py", insname, op, '', path])
                 move_master_to_master_insurer('')
                 print(f'processed {path}')
                 flag = 1
                 break
         if flag == 0:
-            #code for 2nd condtion
+            # code for 2nd condtion
+            process_insurer_pdfs(folder_name, insname, files)
             pass
+    pass
+
+
+def process_insurer_pdfs(folder_name, insname, files):
+    for f in files:
+        if '.pdf' in f:
+            fpath = directory+'/'+folder_name+'/'+f
+            subprocess.run(["python", "make_insurer_excel.py", insname, fpath])
+        pass
     pass
 
 
