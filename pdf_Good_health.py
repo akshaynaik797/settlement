@@ -164,7 +164,7 @@ try:
             s2.cell(row=row_num, column=7).value = hj[i - 1] + ' ' + hj[i]
     wbk.save(wbkName)
     wbk.close()
-    subprocess.run(["python", "make_master.py", 'temp_files', op, '', wbkName])
+    subprocess.run(["python", "make_master.py", 'Good_health', op, '', wbkName])
     ###########################################################
     move_master_to_master_insurer('')
     print(f'processed {wbkName}')
