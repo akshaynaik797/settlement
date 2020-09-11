@@ -8,8 +8,8 @@ from make_log import log_exceptions
 from movemaster import move_master_to_master_insurer
 
 try:
-    pdfpath = '/home/akshay/PycharmProjects/settelement/backups/fgh_07202020163942/16-FGH-20-3-868412-01.pdf'
-    # pdfpath = sys.argv[1]
+    # pdfpath = '/home/akshay/PycharmProjects/settelement/backups/fgh_07202020163942/16-FGH-20-3-868412-01.pdf'
+    pdfpath = sys.argv[1]
     hosp_name = ''
 
     with open(pdfpath, "rb") as f:
