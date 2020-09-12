@@ -23,7 +23,7 @@ try:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r') as myfile:
         f = myfile.read()
-    if 'has been settled' not in f:
+    if wanted_text not in f:
         sys.exit(f'{pdfpath} wrong pdf recieved, so not processed')
     else:
         if 'Balaji Medical' in f:
