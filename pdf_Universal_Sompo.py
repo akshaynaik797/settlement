@@ -12,8 +12,7 @@ from make_log import log_exceptions
 from movemaster import move_master_to_master_insurer
 
 try:
-    pdfpath = '/home/akshay/PycharmProjects/settelement/backups/Universal_Sompo_08122020185638/211368_ClaimSettelmentCashlessLetter_23292.pdf'
-    # pdfpath = sys.argv[1]
+    pdfpath = sys.argv[1]
     onlyfiles = [os.path.split(pdfpath)[1]]
     mypath = os.path.dirname(pdfpath)+'/'
 

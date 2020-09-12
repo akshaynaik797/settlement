@@ -11,7 +11,6 @@ from make_log import log_exceptions
 from movemaster import move_master_to_master_insurer
 
 try:
-    # pdfpath = '/home/akshay/PycharmProjects/settelement/backups/religare_09012020182631/80416311.pdf'
     pdfpath = sys.argv[1]
     onlyfiles = [os.path.split(pdfpath)[1]]
     mypath = os.path.dirname(pdfpath) + '/'

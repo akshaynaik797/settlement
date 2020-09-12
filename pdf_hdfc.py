@@ -8,7 +8,6 @@ from make_log import log_exceptions
 from movemaster import move_master_to_master_insurer
 
 try:
-    # pdfpath = '/home/akshay/PycharmProjects/settelement/backups/hdfc_08072020204127/5269025901_254.pdf'
     pdfpath = sys.argv[1]
     hosp_name = ''
 

@@ -16,7 +16,6 @@ try:
     attachment_path = "/home/akshay/Downloads/"
     chromeOptions = webdriver.ChromeOptions()
     # chromeOptions.add_argument("--headless")
-    # pdfpath = '/home/akshay/PycharmProjects/settelement/backups/Medi_Assist_08282020204211/101162656.pdf'
     pdfpath = sys.argv[1]
     onlyfiles = [os.path.split(pdfpath)[1]]
     mypath = os.path.dirname(pdfpath)+'/'
