@@ -10,8 +10,8 @@ from make_log import log_exceptions
 from movemaster import move_master_to_master_insurer
 
 try:
-    pdfpath = '/home/akshay/PycharmProjects/settelement/backups/Medi_Assist_08282020204211/101162656.pdf'
-    # pdfpath = sys.argv[1]
+    # pdfpath = '/home/akshay/PycharmProjects/settelement/backups/Medi_Assist_08282020204211/101162656.pdf'
+    pdfpath = sys.argv[1]
     onlyfiles = [os.path.split(pdfpath)[1]]
     mypath = os.path.dirname(pdfpath)+'/'
 
@@ -62,7 +62,7 @@ try:
                     wks.create_sheet(sheet_name)
                 # print(sheet_name)
 
-                wks.save('temp_files/Medi_Assist' + str(sys.argv[6]) + '.xlsx')
+                wks.save('temp_files/Medi_Assist' + hosp_name + '.xlsx')
 
 
             def select_column(wks, s, ro):
@@ -241,7 +241,7 @@ try:
                 ro.append(sheet_2.row_values(2))
                 ro = ro[0][2:]
                 # print(ro)
-                xls = xlrd.open_workbook('temp_files/Medi_Assist' + str(sys.argv[6]) + '.xlsx', on_demand=True)
+                xls = xlrd.open_workbook('temp_files/Medi_Assist' + hosp_name + '.xlsx', on_demand=True)
                 sheet_list = xls.sheet_names()
                 # print(sheet_list)
                 for i in range(len(s_v)):
@@ -387,7 +387,7 @@ try:
                 ro.append(sheet_2.row_values(1))
                 ro = ro[0][2:]
                 # print(s_v)
-                xls = xlrd.open_workbook('temp_files/Medi_Assist' + str(sys.argv[6]) + '.xlsx', on_demand=True)
+                xls = xlrd.open_workbook('temp_files/Medi_Assist' + hosp_name + '.xlsx', on_demand=True)
                 sheet_list = xls.sheet_names()
                 # print(sheet_list)
                 for i in range(len(s_v)):

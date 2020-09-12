@@ -51,7 +51,7 @@ def process_insurer_excel(folder_name, insname, foldertime):
                 break
         if flag == 0:
             # code for 2nd condtion
-            process_insurer_pdfs(folder_name, insname, files)
+            # process_insurer_pdfs(folder_name, insname, files)
             pass
     pass
 
