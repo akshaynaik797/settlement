@@ -182,7 +182,6 @@ try:
     ###########################################################
     move_master_to_master_insurer('')
     print(f'processed {wbkName}')
-
 except:
     log_exceptions()
     pass
