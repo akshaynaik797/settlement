@@ -55,7 +55,7 @@ try:
             hosp_pass = ''
 
     for t in range(0, len(onlyfiles)):
-        with open(pdfpath + onlyfiles[t], "rb") as f:
+        with open(mypath + onlyfiles[t], "rb") as f:
             pdf = pdftotext.PDF(f)
         data = "\n\n".join(pdf)
         with open('temp_files/temppdf.txt', "w") as f:
@@ -123,7 +123,7 @@ try:
                     log_exceptions(claimno=claimno)
                     if driver in locals():
                         driver.quit()
-                if sys.path.exists(attachment_path + 'claimCoveringLetter.pdf'):
+                if os.path.exists(attachment_path + 'claimCoveringLetter.pdf'):
                     os.replace(attachment_path+'claimCoveringLetter.pdf', 'temp_files/'+i+'.pdf')
 
                     filepath = 'temp_files/'+i+'.pdf'
