@@ -18,7 +18,7 @@ try:
 
     with open(pdfpath, "rb") as f:
         pdf = pdftotext.PDF(f)
-    with open('temp_files/output.txt', 'w') as f:
+    with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
@@ -55,7 +55,7 @@ try:
         with open(pdfpath + onlyfiles[t], "rb") as f:
             pdf = pdftotext.PDF(f)
 
-        with open('temp_files/output.txt', 'w') as f:
+        with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
             f.write(" ".join(pdf))
         with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
             f = myfile.read()
