@@ -43,7 +43,7 @@ try:
     with sqlite3.connect("database1.db") as con:
         cur = con.cursor()
         q = f'select id, password from bajaj_credentials where hospital="{hosp_name}";'
-        print(q)
+        # print(q)
         cur.execute(q)
         r = cur.fetchone()
 

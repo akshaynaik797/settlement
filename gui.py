@@ -20,7 +20,7 @@ totime.set("01/09/2020 00:00:01")
 insname = StringVar()
 ttk.Label(mygui, text="Insurer Name", width=10).grid(column=0, row=4, pady=15, padx=15)
 inslist = ttk.Combobox(mygui, width=12, textvariable=insname)
-inslist['values'] = ('aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl', 'Good_health', 'hdfc',
+inslist['values'] = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl', 'Good_health', 'hdfc',
                      'health_heritage', 'health_india', 'health_insurance', 'icici_lombard', 'MDINDIA', 'Medi_Assist',
                      'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
                      'vidal', 'vipul')

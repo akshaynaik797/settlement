@@ -6,11 +6,23 @@ from movemaster import move_master_to_master_insurer
 
 directory = 'backups'
 
+inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl', 'Good_health', 'hdfc',
+           'health_heritage', 'health_india', 'health_insurance', 'icici_lombard', 'MDINDIA', 'Medi_Assist',
+           'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
+           'vidal', 'vipul')
+
 
 def accept_values(fromtime, totime, insname):
     fromtime = datetime.strptime(fromtime, '%d/%m/%Y %H:%M:%S')
     totime = datetime.strptime(totime, '%d/%m/%Y %H:%M:%S')
-    if collect_folder_data(fromtime, totime, insname):
+    if insname == 'all':
+        for i in inslist:
+            if collect_folder_data(fromtime, totime, i):
+                print(f'{i} completed')
+            else:
+                print(f'{i} incomplete')
+        return True
+    elif collect_folder_data(fromtime, totime, insname):
         return True
     return False
 
@@ -98,7 +110,7 @@ def process_insurer_excel(folder_name, insname, foldertime):
 def process_insurer_pdfs(folder_name, insname, files):
     for f in files:
         if '.pdf' in f:
-            fpath = directory+'/'+folder_name+'/'+f
+            fpath = directory + '/' + folder_name + '/' + f
             subprocess.run(["python", "make_insurer_excel.py", insname, fpath])
         pass
     pass
