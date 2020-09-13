@@ -20,7 +20,7 @@ try:
         pdf = pdftotext.PDF(f)
     with open('temp_files/output.txt', 'w') as f:
         f.write(" ".join(pdf))
-    with open('temp_files/output.txt', 'r') as myfile:
+    with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
     if 'has been settled' not in f:
         sys.exit(f'{pdfpath} wrong pdf recieved, so not processed')
@@ -50,7 +50,7 @@ try:
 
         with open('temp_files/output.txt', 'w') as f:
             f.write(" ".join(pdf))
-        with open('temp_files/output.txt', 'r') as myfile:
+        with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
             f = myfile.read()
 
         for i in range(0, len(sh1)):
