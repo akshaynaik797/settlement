@@ -231,7 +231,11 @@ try:
     ###########################################################
     move_master_to_master_insurer('')
     print(f'processed {wbkName}')
-
+except SystemExit as e:
+    v = e.code
+    if 'exit' in v:
+        a =1
+        os._exit(0)
 except:
     log_exceptions()
     pass
