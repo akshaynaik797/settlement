@@ -35,11 +35,11 @@ def read_from_delete(subject, hospital):
         type, data = mail.search(None, f'(SUBJECT "{subject}")')
         mid = data[0]  # this is the list, get last element and assign it to mid
         if type == 'OK' and len(mid) != 0:
-            return True
-        return False
+            return 'Yes'
+        return 'No'
     except:
         log_exceptions()
-        return False
+        return 'No'
 
 
 if __name__ == "__main__":

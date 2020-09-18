@@ -76,6 +76,7 @@ def check_deleted():
     listbox.pack()
     temp = accept_data(my_date)
     for j in temp:
+        print(j)
         listbox.insert(END, j)
 
     # bind listbox to scrollbar
