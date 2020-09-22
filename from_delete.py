@@ -45,5 +45,5 @@ def read_from_delete(subject, hospital):
 if __name__ == "__main__":
     subject = 'HDFC ERGO HEALTH - Cashless Claim Approved-RC-HS20-11197900'
     # read_from_delete(subject, 'Max')
-    a = accept_data('16/09/2020 12:37:46')
+    a = accept_data('16/09/2020 12:47:46')
     pass
