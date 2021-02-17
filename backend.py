@@ -1,7 +1,12 @@
+from distutils.dir_util import copy_tree, remove_tree
+import zipfile
 import os
 import re
 import subprocess
 from datetime import datetime
+from pathlib import Path
+from shutil import copyfile
+
 from movemaster import move_master_to_master_insurer
 
 directory = 'backups'
@@ -11,6 +16,11 @@ inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl'
            'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
            'vidal', 'vipul')
 
+def zipdir(path, ziph):
+    # ziph is zipfile handle
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            ziph.write(os.path.join(root, file), os.path.relpath(os.path.join(root, file), os.path.join(path, '..')))
 
 def accept_values(fromtime, totime, insname):
     fromtime = datetime.strptime(fromtime, '%d/%m/%Y %H:%M:%S')
@@ -116,6 +126,37 @@ def process_insurer_pdfs(folder_name, insname, files):
     pass
 
 
+def automate_processing():
+    dst = 'excels/'
+    remove_tree(dst)
+    Path(dst).mkdir(parents=True, exist_ok=True)
+    master_excel = 'master_insurer.xlsx'
+    letters_location = "../index/"
+    today = datetime.now()
+    fromtime = today.replace(hour=0, minute=0, second=1)
+    totime = today.replace(hour=23, minute=59, second=59)
+    today = datetime.now().strftime("%d_%m_%Y")
+    hospital_list = ['Max PPT', 'ils', 'ils_dumdum', 'noble', 'inamdar', 'ils_agartala', 'ils_howrah']
+    for hospital in hospital_list:
+        if os.path.exists(master_excel):
+            os.remove(master_excel)
+        remove_tree(directory)
+        folder = os.path.join(letters_location, today, hospital, "letters/")
+        Path(folder).mkdir(parents=True, exist_ok=True)
+        Path(directory).mkdir(parents=True, exist_ok=True)
+        copy_tree(folder, directory)
+        for ins in inslist:
+            if collect_folder_data(fromtime, totime, ins):
+                print(f'{ins} completed')
+            else:
+                print(f'{ins} incomplete')
+        if os.path.exists(master_excel):
+            copyfile(master_excel, os.path.join(dst, hospital + '.xlsx'))
+    zipf = zipfile.ZipFile('letters.zip', 'w', zipfile.ZIP_DEFLATED)
+    zipdir(dst, zipf)
+    zipf.close()
+    #code to send zip to emails
+    return True
+
 if __name__ == '__main__':
-    # collect_folder_data()
-    pass
+    automate_processing()
