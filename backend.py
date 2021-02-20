@@ -6,6 +6,16 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 from shutil import copyfile
+import smtplib
+from datetime import datetime
+import mimetypes
+from email.mime.multipart import MIMEMultipart
+from email import encoders
+from email.message import Message
+from email.mime.audio import MIMEAudio
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
+from email.mime.text import MIMEText
 
 from movemaster import move_master_to_master_insurer
 
@@ -127,6 +137,7 @@ def process_insurer_pdfs(folder_name, insname, files):
 
 
 def automate_processing():
+    zip_file = 'letters.zip'
     dst = 'excels/'
     remove_tree(dst)
     Path(dst).mkdir(parents=True, exist_ok=True)
@@ -152,11 +163,60 @@ def automate_processing():
                 print(f'{ins} incomplete')
         if os.path.exists(master_excel):
             copyfile(master_excel, os.path.join(dst, hospital + '.xlsx'))
-    zipf = zipfile.ZipFile('letters.zip', 'w', zipfile.ZIP_DEFLATED)
+    zipf = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
     zipdir(dst, zipf)
     zipf.close()
-    #code to send zip to emails
+    date = datetime.now().strftime('%d-%b-%Y')
+    if os.path.exists(zip_file):
+        subject = f"settlement excels for {date}"
+        send_email(zip_file, subject)
     return True
+
+def send_email(file, subject):
+    emailfrom = "iClaim.vnusoftware@gmail.com"
+    emailto = ["akshaynaik797@gmail.com", "sachin@vnusoftware.com", 'ceo@vnusoftware.com']
+    fileToSend = file
+    username = emailfrom
+    password = "44308000"
+
+    msg = MIMEMultipart()
+    msg["From"] = emailfrom
+    msg["To"] = ", ".join(emailto)
+    msg["Subject"] = subject
+    msg.preamble = subject
+
+    ctype, encoding = mimetypes.guess_type(fileToSend)
+    if ctype is None or encoding is not None:
+        ctype = "application/octet-stream"
+
+    maintype, subtype = ctype.split("/", 1)
+
+    if maintype == "text":
+        fp = open(fileToSend)
+        # Note: we should handle calculating the charset
+        attachment = MIMEText(fp.read(), _subtype=subtype)
+        fp.close()
+    elif maintype == "image":
+        fp = open(fileToSend, "rb")
+        attachment = MIMEImage(fp.read(), _subtype=subtype)
+        fp.close()
+    elif maintype == "audio":
+        fp = open(fileToSend, "rb")
+        attachment = MIMEAudio(fp.read(), _subtype=subtype)
+        fp.close()
+    else:
+        fp = open(fileToSend, "rb")
+        attachment = MIMEBase(maintype, subtype)
+        attachment.set_payload(fp.read())
+        fp.close()
+        encoders.encode_base64(attachment)
+    attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+    msg.attach(attachment)
+    server = smtplib.SMTP("smtp.gmail.com:587")
+    server.starttls()
+    server.login(username,password)
+    server.sendmail(emailfrom, emailto, msg.as_string())
+    server.quit()
 
 if __name__ == '__main__':
     automate_processing()
