@@ -38,3 +38,17 @@ def log_data(**kwargs):
                  '---------------------------------------------------------------------------------------------------\n'
                  f'variables->{str(kwargs)}\n')
         fp.write(entry)
+
+def custom_log_data(**kwargs):
+    from datetime import datetime as akdatetime
+
+    directory = 'logs/'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with open(directory + kwargs['filename'] + '.log', 'a+') as fp:
+        nowtime = str(akdatetime.now())
+        entry = ('===================================================================================================\n'
+                 f'{nowtime}\n'
+                 '---------------------------------------------------------------------------------------------------\n'
+                 f'variables->{str(kwargs)}\n')
+        fp.write(entry)

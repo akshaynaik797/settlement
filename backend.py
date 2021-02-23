@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from shutil import copyfile
 import smtplib
-from datetime import datetime
+from datetime import datetime, timedelta
 import mimetypes
 from email.mime.multipart import MIMEMultipart
 from email import encoders
@@ -17,7 +17,15 @@ from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 
+import re
+import mysql.connector
+
 from movemaster import move_master_to_master_insurer
+from make_log import log_exceptions
+conn_data = {'host': "iclaimdev.caq5osti8c47.ap-south-1.rds.amazonaws.com",
+             'user': "admin",
+             'password': "Welcome1!",
+             'database': 'python'}
 
 directory = 'backups'
 
@@ -144,9 +152,27 @@ def automate_processing():
     master_excel = 'master_insurer.xlsx'
     letters_location = "../index/"
     today = datetime.now()
-    fromtime = today.replace(hour=0, minute=0, second=1)
-    totime = today.replace(hour=23, minute=59, second=59)
+    fromtime = today - timedelta(days=120)
+    totime = today - timedelta(days=120)
     today = datetime.now().strftime("%d_%m_%Y")
+    try:
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            q = "select sno, attach_path from settlement_mails where completed = ''"
+            cur.execute(q)
+            result = cur.fetchall()
+            for sno, filepath in result:
+                if today not in filepath:
+                    dst = re.sub(r"\d+_\d+_\d+", today, filepath)
+                    if os.path.exists(filepath):
+                        temp = os.path.split(dst)[0]
+                        Path(temp).mkdir(parents=True, exist_ok=True)
+                        copyfile(filepath, dst)
+                        q = "update settlement_mails set attach_path=%s where sno=%s"
+                        cur.execute(q, (dst, sno))
+                        con.commit()
+    except:
+        log_exceptions()
     hospital_list = ['Max PPT', 'ils', 'ils_dumdum', 'noble', 'inamdar', 'ils_agartala', 'ils_howrah']
     for hospital in hospital_list:
         if os.path.exists(master_excel):
