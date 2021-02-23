@@ -34,6 +34,16 @@ inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl'
            'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
            'vidal', 'vipul')
 
+
+def mark_flag(flag, filepath):
+    filepath = os.path.split(filepath)[-1]
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        q = "update settlement_mails set completed=%s where attach_path like %s"
+        cur.execute(q, (flag, '%' + filepath + '%s',))
+        con.commit()
+
+
 def zipdir(path, ziph):
     # ziph is zipfile handle
     for root, dirs, files in os.walk(path):
@@ -153,7 +163,7 @@ def automate_processing():
     letters_location = "../index/"
     today = datetime.now()
     fromtime = today - timedelta(days=120)
-    totime = today - timedelta(days=120)
+    totime = today + timedelta(days=120)
     today = datetime.now().strftime("%d_%m_%Y")
     try:
         with mysql.connector.connect(**conn_data) as con:
