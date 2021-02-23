@@ -6,8 +6,8 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from custom_parallel import conn_data, write
-
+from backend import conn_data
+from make_log import log_exceptions
 
 try:
     with open(sys.argv[1], "rb") as f:
@@ -44,7 +44,7 @@ try:
                     break
                 datadict[i] = ""
 
-        temp = re.compile(r"(?<=BCS_).*").search(sys.argv[5])
+        temp = re.compile(r"(?<=BCS_).*").search("")
         if temp is None:
             datadict['advice_no'] = ""
         else:

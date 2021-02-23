@@ -2853,7 +2853,8 @@ try:
 				main_s1[rowno][17].value = sheet1[sheet1.max_row][3].value
 				main_s1[rowno][37].value = dtrow[4].value
 				main_s1[rowno][38].value = dtrow[5].value
-				main_s1[rowno][54].value = int(dtrow[10].value)-int(sheet1[sheet1.max_row][3].value)
+				# main_s1[rowno][54].value = int(dtrow[10].value)-int(sheet1[sheet1.max_row][3].value)
+				main_s1[rowno][54].value = int(0)
 				main_s1[rowno][63].value = dtrow[12].value
 				a = main_s1[rowno][6].value
 

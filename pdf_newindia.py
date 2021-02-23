@@ -6,13 +6,13 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from custom_parallel import conn_data, write
+from backend import conn_data
 from make_log import log_exceptions
 
 
 try:
-    mail_id = sys.argv[8]
-    mail_date = sys.argv[6]
+    mail_id = ""
+    mail_date = ""
     fpath = sys.argv[1]
 
     start = now = datetime.datetime.now()
