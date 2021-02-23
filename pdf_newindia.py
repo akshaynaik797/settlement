@@ -6,10 +6,9 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from custom_datadict import make_datadict
 from custom_parallel import conn_data, write
 from make_log import log_exceptions
-from custom_app import set_flag_graphapi
+
 
 try:
     mail_id = sys.argv[8]

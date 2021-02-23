@@ -7,6 +7,7 @@ import camelot
 import pdftotext
 import xlrd
 from make_log import log_exceptions
+from backend import mark_flag
 from movemaster import move_master_to_master_insurer
 
 try:
@@ -115,6 +116,7 @@ try:
     subprocess.run(["python", "make_master.py", 'apollo', op, '', wbkName])
     ###########################################################
     move_master_to_master_insurer('')
+    mark_flag('X', sys.argv[1])
     print(f'processed {wbkName}')
 except SystemExit as e:
     v = e.code

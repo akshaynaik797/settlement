@@ -6,11 +6,8 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from custom_datadict import make_datadict
-from custom_funct_city_pay import mail_body_to_text
 from custom_parallel import conn_data, write
-from custom_app import set_flag_graphapi
-from make_log import log_exceptionsg
+
 
 try:
     with open(sys.argv[1], "rb") as f:
