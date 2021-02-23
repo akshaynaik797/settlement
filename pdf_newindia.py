@@ -6,7 +6,7 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from backend import conn_data
+from backend import conn_data, mark_flag
 from make_log import log_exceptions
 
 
@@ -125,6 +125,7 @@ try:
                 print(query)
                 cur.execute(query)
                 conn.commit()
+    mark_flag('X', sys.argv[1])
 except:
     log_exceptions()
     pass

@@ -34,13 +34,59 @@ inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl'
            'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
            'vidal', 'vipul')
 
+def send_email(file, subject):
+    emailfrom = "iClaim.vnusoftware@gmail.com"
+    emailto = ["akshaynaik797@gmail.com", "sachin@vnusoftware.com", 'ceo@vnusoftware.com']
+    fileToSend = file
+    username = emailfrom
+    password = "44308000"
+
+    msg = MIMEMultipart()
+    msg["From"] = emailfrom
+    msg["To"] = ", ".join(emailto)
+    msg["Subject"] = subject
+    msg.preamble = subject
+
+    ctype, encoding = mimetypes.guess_type(fileToSend)
+    if ctype is None or encoding is not None:
+        ctype = "application/octet-stream"
+
+    maintype, subtype = ctype.split("/", 1)
+
+    if maintype == "text":
+        fp = open(fileToSend)
+        # Note: we should handle calculating the charset
+        attachment = MIMEText(fp.read(), _subtype=subtype)
+        fp.close()
+    elif maintype == "image":
+        fp = open(fileToSend, "rb")
+        attachment = MIMEImage(fp.read(), _subtype=subtype)
+        fp.close()
+    elif maintype == "audio":
+        fp = open(fileToSend, "rb")
+        attachment = MIMEAudio(fp.read(), _subtype=subtype)
+        fp.close()
+    else:
+        fp = open(fileToSend, "rb")
+        attachment = MIMEBase(maintype, subtype)
+        attachment.set_payload(fp.read())
+        fp.close()
+        encoders.encode_base64(attachment)
+    attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+    msg.attach(attachment)
+    server = smtplib.SMTP("smtp.gmail.com:587")
+    server.starttls()
+    server.login(username,password)
+    server.sendmail(emailfrom, emailto, msg.as_string())
+    server.quit()
+
 
 def mark_flag(flag, filepath):
     filepath = os.path.split(filepath)[-1]
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         q = "update settlement_mails set completed=%s where attach_path like %s"
-        cur.execute(q, (flag, '%' + filepath + '%s',))
+        cur.execute(q, (flag, '%' + filepath + '%',))
         con.commit()
 
 
@@ -168,7 +214,7 @@ def automate_processing():
     try:
         with mysql.connector.connect(**conn_data) as con:
             cur = con.cursor()
-            q = "select sno, attach_path from settlement_mails where completed = ''"
+            q = "select sno, attach_path from settlement_mails where completed != 'X'"
             cur.execute(q)
             result = cur.fetchall()
             for sno, filepath in result:
@@ -208,51 +254,6 @@ def automate_processing():
         send_email(zip_file, subject)
     return True
 
-def send_email(file, subject):
-    emailfrom = "iClaim.vnusoftware@gmail.com"
-    emailto = ["akshaynaik797@gmail.com", "sachin@vnusoftware.com", 'ceo@vnusoftware.com']
-    fileToSend = file
-    username = emailfrom
-    password = "44308000"
-
-    msg = MIMEMultipart()
-    msg["From"] = emailfrom
-    msg["To"] = ", ".join(emailto)
-    msg["Subject"] = subject
-    msg.preamble = subject
-
-    ctype, encoding = mimetypes.guess_type(fileToSend)
-    if ctype is None or encoding is not None:
-        ctype = "application/octet-stream"
-
-    maintype, subtype = ctype.split("/", 1)
-
-    if maintype == "text":
-        fp = open(fileToSend)
-        # Note: we should handle calculating the charset
-        attachment = MIMEText(fp.read(), _subtype=subtype)
-        fp.close()
-    elif maintype == "image":
-        fp = open(fileToSend, "rb")
-        attachment = MIMEImage(fp.read(), _subtype=subtype)
-        fp.close()
-    elif maintype == "audio":
-        fp = open(fileToSend, "rb")
-        attachment = MIMEAudio(fp.read(), _subtype=subtype)
-        fp.close()
-    else:
-        fp = open(fileToSend, "rb")
-        attachment = MIMEBase(maintype, subtype)
-        attachment.set_payload(fp.read())
-        fp.close()
-        encoders.encode_base64(attachment)
-    attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
-    msg.attach(attachment)
-    server = smtplib.SMTP("smtp.gmail.com:587")
-    server.starttls()
-    server.login(username,password)
-    server.sendmail(emailfrom, emailto, msg.as_string())
-    server.quit()
 
 if __name__ == '__main__':
     automate_processing()
