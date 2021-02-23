@@ -61,7 +61,7 @@ try:
         query = """insert into NIC(TPA_Name,Transaction_Reference_No,Amount,Date_on_attachment,MailId,Date_Of_Mail,Amount_In_Mail, hospital) values \
             ('%s','%s','%s','%s','%s','%s','%s','%s')""" % (
         tempDic['TPA Name'], tempDic['Transaction Reference no'], tempDic['Amount'], mdate, mail_id, mail_date,
-        amount, sys.argv[7])
+        amount, "")
 
         print(query)
         cur.execute(query)
@@ -90,7 +90,7 @@ try:
             netAmount = df1.loc[i, "Net Amount"]
             query = """insert into NIC_Records(Transaction_Reference_No,Policy_Number,Claim_Number,Name_Of_Patient,Gross_Amounts,tds,Net_Amount,tpa_No, hospital) values \
             ('%s','%s','%s','%s','%s','%s','%s','%s','%s')""" % (
-            refrenceNo, policyNo, claimNo, patientName, grossAmount, tdsAmount, netAmount, tpa, sys.argv[7])
+            refrenceNo, policyNo, claimNo, patientName, grossAmount, tdsAmount, netAmount, tpa, "")
             print(query)
             cur.execute(query)
             conn.commit()
@@ -121,7 +121,7 @@ try:
                 netAmount = df1.loc[i, "Net Amount"]
                 query = """insert into NIC_Records(Transaction_Reference_No,Policy_Number,Claim_Number,Name_Of_Patient,Gross_Amounts,tds,Net_Amount,tpa_No,hospital) values \
                 ('%s','%s','%s','%s','%s','%s','%s','%s','%s')""" % (
-                refrenceNo, policyNo, claimNo, patientName, grossAmount, tdsAmount, netAmount, tpa, sys.argv[7])
+                refrenceNo, policyNo, claimNo, patientName, grossAmount, tdsAmount, netAmount, tpa, "")
                 print(query)
                 cur.execute(query)
                 conn.commit()

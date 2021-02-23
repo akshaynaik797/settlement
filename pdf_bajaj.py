@@ -8,6 +8,7 @@ import time
 import openpyxl
 import pdftotext
 
+from backend import mark_flag
 from make_log import log_exceptions
 from movemaster import move_master_to_master_insurer
 
@@ -181,6 +182,7 @@ try:
                 subprocess.run(["python", "make_master.py", 'bajaj', op, '', wbkName])
                 ###########################################################
                 move_master_to_master_insurer('')
+                mark_flag('X', sys.argv[1])
                 print(f'processed {wbkName}')
 except SystemExit as e:
     v = e.code
