@@ -87,26 +87,15 @@ try:
                 else:
                     datadict['patientname'] = i[2] + ' ' + j[2]
                 if len(j) > 3:
-                    datadict['claimno'] = i[3] + j[3]
+                    datadict['claim_no'] = i[3] + j[3]
                 else:
-                    datadict['claimno'] = i[3] + j[2]
-                datadict['amt'] = i[-1].replace(',', '')
-                datadict['tds'] = i[-2]
-                datadict['utr_ref'] = utr
+                    datadict['claim_no'] = i[3] + j[2]
+                datadict['bill_amount'] = i[4]
+                datadict['paid_amount'] = i[-1].replace(',', '')
+                datadict['tds_amount'] = i[-2]
+                datadict['utr_no'] = utr
                 table.append(datadict)
-            claimno_list = [i['claimno'] for i in table]
-            for i in claimno_list:
-                clean = []
-                claimno = i
-                with open(pdfpath, "rb") as f:
-                    pdf = pdftotext.PDF(f)
-                data = "\n\n".join(pdf)
-                with open('temp_files/temppdf.txt', "w") as f:
-                    f.write(data)
-                with open('temp_files/temppdf.txt', "r") as f:
-                    f = f.read()
-                datadict = dict()
-
+            for index, row in enumerate(table):
                 params = (
                     ('patientname', r'(?<=Name Of The Patient)[ \S]+'),
                     ('idcardno', r'(?<=ID Card No)[ \S]+'),
@@ -122,14 +111,11 @@ try:
                     ('tds_amount', r'\d+(?=\s+Hospital Service Tax No)'),
                 )
 
-                for i in params:
-                    regex = i[1]
-                    x = re.search(regex, f)
-                    keyname = i[0]
-                    if x:
-                        datadict[keyname] = x.group().strip()
+                for i, j in params:
+                    if i in row:
+                        datadict[i] = row[i]
                     else:
-                        datadict[keyname] = ''
+                        datadict[i] = ''
 
                 regex = r'\w+ ?Charges[\s\S]+(?=\n[\s\S]+Payment Details)'
                 x = re.search(regex, f)
@@ -151,11 +137,16 @@ try:
                 else:
                     data = ''
 
-                tempdata = table[claimno_list.index(claimno)]
+                tempdata = table[index]
 
                 mylist = [i[0] for i in params]
                 mylist.append('date')
-                mydata = [datadict[i[0]] for i in params]
+                mydata = []
+                for i, j in params:
+                    if i in datadict:
+                        mydata.append(datadict[i])
+                    else:
+                        mydata.append("")
                 mydata.append(tempdata['date'].replace('/','-'))
                 wbk = openpyxl.Workbook()
                 wbk.create_sheet('1')
@@ -169,6 +160,7 @@ try:
                 mylist = ['Sr no','Particular', 'Bill Amount', 'Disallowed Amount', 'Approved Amount', 'Disallowance Reason']
                 for i, j in enumerate(mylist):
                     s2.cell(row=1, column=i+1).value = j
+                clean = []
                 for i, j in enumerate(clean):
                     for x, y in enumerate(j):
                         s2.cell(row=i+2, column=1).value = i+1

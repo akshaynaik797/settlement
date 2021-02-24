@@ -32,7 +32,7 @@ directory = 'backups'
 inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl', 'Good_health', 'hdfc',
            'health_heritage', 'health_india', 'health_insurance', 'icici_lombard', 'MDINDIA', 'Medi_Assist',
            'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
-           'vidal', 'vipul')
+           'vidal', 'vipul', 'newindia', 'city')
 
 def send_email(file, subject):
     emailfrom = "iClaim.vnusoftware@gmail.com"
@@ -80,6 +80,18 @@ def send_email(file, subject):
     server.sendmail(emailfrom, emailto, msg.as_string())
     server.quit()
 
+def get_hospital(filepath):
+    hospital = ""
+    if filepath != "":
+        filepath = os.path.split(filepath)[-1]
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            q = "select hospital from settlement_mails where attach_path like %s limit 1"
+            cur.execute(q, ('%' + filepath + '%',))
+            r = cur.fetchone()
+            if r is not None:
+                hospital = r[0]
+    return hospital
 
 def mark_flag(flag, filepath):
     filepath = os.path.split(filepath)[-1]
@@ -219,13 +231,13 @@ def automate_processing():
             result = cur.fetchall()
             for sno, filepath in result:
                 if today not in filepath:
-                    dst = re.sub(r"\d+_\d+_\d+", today, filepath)
+                    tmpdst = re.sub(r"\d+_\d+_\d+", today, filepath)
                     if os.path.exists(filepath):
-                        temp = os.path.split(dst)[0]
+                        temp = os.path.split(tmpdst)[0]
                         Path(temp).mkdir(parents=True, exist_ok=True)
-                        copyfile(filepath, dst)
+                        copyfile(filepath, tmpdst)
                         q = "update settlement_mails set attach_path=%s where sno=%s"
-                        cur.execute(q, (dst, sno))
+                        cur.execute(q, (tmpdst, sno))
                         con.commit()
     except:
         log_exceptions()

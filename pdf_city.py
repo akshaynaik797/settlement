@@ -6,10 +6,11 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from backend import conn_data, mark_flag
+from backend import conn_data, mark_flag, get_hospital
 from make_log import log_exceptions
 
 try:
+    hospital = get_hospital(sys.argv[1])
     with open(sys.argv[1], "rb") as f:
         pdf = pdftotext.PDF(f)
     with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
@@ -66,7 +67,7 @@ try:
             datadict['tpa'],
             datadict['payment_details'],
             datadict['nia_transaction_reference'],
-            "")
+            hospital)
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         sql = "insert into City_Records (`Advice_No`,`Insurer_name`,`City_Transaction_Reference`,`Payer_Reference_No`,`Payment_Amount`,`Processing_Date`,`City_Claim_No`,`City_Patient_name`,`City_Admission_Date`,`City_TPA`,`Payment_Details`,`NIA_Transaction_Reference`, `hospital`) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
