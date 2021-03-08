@@ -6,13 +6,14 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from backend import conn_data, mark_flag, get_hospital
+from backend import conn_data, mark_flag, get_hospital, get_row
 from make_log import log_exceptions
 
 
 try:
-    mail_id = ""
-    mail_date = ""
+    row_data = get_row(sys.argv[1])
+    mail_id = row_data['id']
+    mail_date = row_data['date']
     fpath = sys.argv[1]
     hospital = get_hospital(fpath)
     start = now = datetime.datetime.now()

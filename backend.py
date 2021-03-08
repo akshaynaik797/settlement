@@ -93,6 +93,23 @@ def get_hospital(filepath):
                 hospital = r[0]
     return hospital
 
+def get_row(filepath):
+    fields = ("id","subject","date","sys_time","attach_path","completed","sender","sno","folder","process","hospital")
+    temp = {}
+    for i in fields:
+        temp[i] = ""
+    if filepath != "":
+        filepath = os.path.split(filepath)[-1]
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            q = "select * from settlement_mails where attach_path like %s limit 1"
+            cur.execute(q, ('%' + filepath + '%',))
+            r = cur.fetchone()
+            if r is not None:
+                for k, v in zip(fields, r):
+                    temp[k] = v
+    return temp
+
 def mark_flag(flag, filepath):
     filepath = os.path.split(filepath)[-1]
     with mysql.connector.connect(**conn_data) as con:

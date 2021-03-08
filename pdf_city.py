@@ -6,32 +6,34 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from backend import conn_data, mark_flag, get_hospital
+from backend import conn_data, mark_flag, get_hospital, get_row
 from make_log import log_exceptions
 
 try:
     hospital = get_hospital(sys.argv[1])
+    row_data = get_row(sys.argv[1])
+    mail_id = row_data['id']
     with open(sys.argv[1], "rb") as f:
         pdf = pdftotext.PDF(f)
     with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
-        f.write(" ".join(pdf))
+        f.write(" ".join(pdf).replace('\n', ''))
     with open('temp_files/output.txt', 'r', encoding='utf-8') as myfile:
         f = myfile.read()
 
     start = now = datetime.datetime.now()
     badchars = ('/',)
     datadict = {}
-    regexdict = {'transaction_reference': [r"(?<=Transaction Reference:).*"],
-                 'payer_reference_no': [r"(?<=Reference No:).*"],
-                 'payment_amount': [r"(?<=Payment Amount:).*"],
-                 'payment_details': [r"(?<=Payment Details:)[\w\W]+(?=Kindly)"],
-                 'nia_transaction_reference': [r"(?<=Payment Details: N)\d+"],
+    regexdict = {'transaction_reference': [r"(?<=Transaction Reference:).*(?=Payer)"],
+                 'payer_reference_no': [r"(?<=Reference No:).*(?=Beneficiary Details)"],
+                 'payment_amount': [r"(?<=Payment Amount:).*(?=Currency)"],
+                 'payment_details': [r"(?<=Payment Details:).*(?=Kindly)"],
+                 'nia_transaction_reference': [r"(?<=Payment Details:N).*(?=Kindly)"],
                  'claim_no': [r"(?<=CLAIM).*"],
                  'pname': [r".*(?=,ADMSN)"],
                  'adminssion_date': [r"(?<=ADMSN) ?\d+"],
-                 'insurer_name': [r"(?<=behalf of).*"],
+                 'insurer_name': [r"(?<=behalf of).*(?=Transaction Reference:)"],
                  'tpa': [r"(?<=TPA-).*"],
-                 'procesing_date': [r"(?<=Processing Date:).*"]}
+                 'procesing_date': [r"(?<=Processing Date:).*(?=Payment Details)"]}
 
     for i in regexdict:
         for j in regexdict[i]:
@@ -44,7 +46,7 @@ try:
                 break
             datadict[i] = ""
 
-    temp = re.compile(r"(?<=BCS_).*").search("")
+    temp = re.compile(r"(?<=BCS_).*").search(row_data['subject'])
     if temp is None:
         datadict['advice_no'] = ""
     else:
@@ -67,10 +69,10 @@ try:
             datadict['tpa'],
             datadict['payment_details'],
             datadict['nia_transaction_reference'],
-            hospital)
+            hospital, mail_id)
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
-        sql = "insert into City_Records (`Advice_No`,`Insurer_name`,`City_Transaction_Reference`,`Payer_Reference_No`,`Payment_Amount`,`Processing_Date`,`City_Claim_No`,`City_Patient_name`,`City_Admission_Date`,`City_TPA`,`Payment_Details`,`NIA_Transaction_Reference`, `hospital`) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        sql = "insert into City_Records (`Advice_No`,`Insurer_name`,`City_Transaction_Reference`,`Payer_Reference_No`,`Payment_Amount`,`Processing_Date`,`City_Claim_No`,`City_Patient_name`,`City_Admission_Date`,`City_TPA`,`Payment_Details`,`NIA_Transaction_Reference`, `hospital`, mail_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cur.execute(sql, data)
         con.commit()
     mark_flag('X', sys.argv[1])
