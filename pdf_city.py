@@ -24,10 +24,10 @@ try:
     badchars = ('/',)
     datadict = {}
     regexdict = {'transaction_reference': [r"(?<=Transaction Reference:).*(?=Payer)"],
-                 'payer_reference_no': [r"(?<=Reference No:).*(?=Beneficiary Details)"],
+                 'payer_reference_no': [r"(?<=Reference No:).*(?=Beneficiary)"],
                  'payment_amount': [r"(?<=Payment Amount:).*(?=Currency)"],
                  'payment_details': [r"(?<=Payment Details:).*(?=Kindly)"],
-                 'nia_transaction_reference': [r"(?<=Payment Details:N).*(?=Kindly)"],
+                 'nia_transaction_reference': [r"(?<=Details:N).*(?=Kindly)", r"(?<=Details: N).*(?=Kindly)", r"(?<=Details :N).*(?=Kindly)"],
                  'claim_no': [r"(?<=CLAIM).*"],
                  'pname': [r".*(?=,ADMSN)"],
                  'adminssion_date': [r"(?<=ADMSN) ?\d+"],
@@ -56,6 +56,18 @@ try:
         a = datadict['adminssion_date']
         a = date_parser.parse(a[0:2] + '/' + a[2:4] + '/' + a[4:])
         datadict['adminssion_date'] = a.strftime("%d-%b-%Y")
+    temp_l = datadict['payment_details'].split(',')
+    if len(temp_l) == 4:
+        datadict['claim_no'] = temp_l[0]
+        ad_date = ""
+        temp = re.compile(r'\d+').search(temp_l[1])
+        if temp is not None:
+            ad_date = temp.group()
+        datadict['adminssion_date'] = ad_date
+        datadict['pname'] = temp_l[2]
+        datadict['tpa'] = temp_l[3]
+
+
 
     data = (datadict['advice_no'],
             datadict['insurer_name'],

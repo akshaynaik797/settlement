@@ -34,9 +34,10 @@ inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl'
            'Medsave', 'Paramount', 'Raksha', 'reliance', 'religare', 'small', 'united', 'Universal_Sompo',
            'vidal', 'vipul', 'newindia', 'city')
 
+
 def send_email(file, subject):
     emailfrom = "iClaim.vnusoftware@gmail.com"
-    emailto = ["akshaynaik797@gmail.com", "sachin@vnusoftware.com", 'ceo@vnusoftware.com']
+    emailto = ["sachin@vnusoftware.com", 'ceo@vnusoftware.com']
     fileToSend = file
     username = emailfrom
     password = "44308000"
@@ -237,8 +238,8 @@ def automate_processing():
     master_excel = 'master_insurer.xlsx'
     letters_location = "../index/"
     today = datetime.now()
-    fromtime = today - timedelta(days=120)
-    totime = today + timedelta(days=120)
+    fromtime = today - timedelta(days=365)
+    totime = today + timedelta(days=365)
     today = datetime.now().strftime("%d_%m_%Y")
     try:
         with mysql.connector.connect(**conn_data) as con:
