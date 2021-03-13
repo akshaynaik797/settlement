@@ -3,7 +3,7 @@ import subprocess
 import sys
 import os
 from make_log import log_exceptions
-from backend import mark_flag, get_hospital
+from backend import mark_flag, get_hospital, mark_utr_tables
 
 try:
     hosp = get_hospital(sys.argv[2])
@@ -14,6 +14,7 @@ try:
         if os.path.exists('pdf_' + insname + ".py"):
             mark_flag('p', fpath)
             subprocess.run(["python", 'pdf_' + insname + ".py", fpath])
+            mark_utr_tables(fpath)
         else:
             mark_flag('NOFILE', fpath)
 except:

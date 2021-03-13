@@ -119,6 +119,34 @@ def mark_flag(flag, filepath):
         cur.execute(q, (flag, '%' + filepath + '%',))
         con.commit()
 
+def mark_utr_tables(filepath):
+    filepath = os.path.split(filepath)[-1]
+    flag = ''
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        q = "select completed from settlement_mails where attach_path like %s limit 1"
+        cur.execute(q, ('%' + filepath + '%',))
+        result = cur.fetchone()
+        if result is not None:
+            flag = result[0]
+            #make fun for moving from utr_mails to utr_copy and delete
+            #make utr_mails entry -> flag
+            q = "update utr_mails set completed=%s where attach_path like %s limit 1"
+            cur.execute(q, (flag, '%' + filepath + '%',))
+            con.commit()
+            q = "select sno from utr_mails where completed='X' and attach_path like %s limit 1"
+            cur.execute(q, ('%' + filepath + '%',))
+            r = cur.fetchone()
+            if r is not None:
+                sno = r[0]
+                set_utr_mails_flag(sno)
+
+def set_utr_mails_flag(sno):
+    q = "BEGIN ; INSERT INTO utr_mails_copy SELECT * FROM utr_mails WHERE sno=%s; DELETE FROM utr_mails WHERE  sno=%s; COMMIT;"
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(q, (sno,))
+        con.commit()
 
 def zipdir(path, ziph):
     # ziph is zipfile handle
