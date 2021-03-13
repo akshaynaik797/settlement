@@ -1,4 +1,8 @@
 from os import path
+from pathlib import Path
+from shutil import copyfile
+
+import openpyxl
 import pandas as pd
 import subprocess
 from openpyxl import Workbook, load_workbook
@@ -6,9 +10,26 @@ from openpyxl.utils.dataframe import dataframe_to_rows
 from make_log import log_exceptions
 
 
-def move_master_to_master_insurer(mail_uid):
+def move_master_to_master_insurer(mail_uid, **kwargs):
     try:
         source, dest = 'master.xlsx','master_insurer.xlsx'
+        if 'pdfpath' in kwargs:
+            wb = openpyxl.open(source)
+            worksheet = wb.active
+            temp = []
+            temp.extend([worksheet.cell(row=2, column=5).value, worksheet.cell(row=2, column=4).value])
+            wb.close()
+            f_dst = "../index/Attachments/"
+            Path(f_dst).mkdir(parents=True, exist_ok=True)
+            r_flag = 0
+            for i in temp:
+                if i is not None:
+                    f_dst = path.join(f_dst, f"{i}.pdf")
+                    copyfile(kwargs['pdfpath'], f_dst)
+                    r_flag = 1
+                    break
+            if r_flag == 0:
+                copyfile(kwargs['pdfpath'], path.join(f_dst, path.split(kwargs['pdfpath'])[-1]))
         #subprocess.run(["python", "updation.py","1","max","11",'Yes'])
         if not path.exists(dest):
             wb = Workbook()
@@ -43,4 +64,4 @@ def move_master_to_master_insurer(mail_uid):
         log_exceptions()
         return False
 if __name__ == '__main__':
-    move_master_to_master_insurer()
+    move_master_to_master_insurer('', pdfpath='/home/akshay/temp/19429253_.pdf')
