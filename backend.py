@@ -37,7 +37,7 @@ inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl'
 
 def send_email(file, subject):
     emailfrom = "iClaim.vnusoftware@gmail.com"
-    emailto = ["sachin@vnusoftware.com", 'ceo@vnusoftware.com']
+    emailto = ["sachin@vnusoftware.com", 'ceo@vnusoftware.com', 'maneesh@vnusoftware.com']
     fileToSend = file
     username = emailfrom
     password = "44308000"
@@ -282,22 +282,28 @@ def automate_processing():
                 q = "SELECT sno, attach_path FROM settlement_mails where hospital=%s and completed!='X'"
                 cur.execute(q, (hosp,))
                 result = cur.fetchall()
-                for sno, filepath in result:
-                    try:
-                        tmp = re.compile(r"(?<=letters\/).*").search(filepath)
-                        if tmp is not None:
-                            tmp = tmp.group()
-                            tmp_dst = os.path.join(directory, tmp)
-                            dst_fol = os.path.split(tmp_dst)[0]
-                            Path(dst_fol).mkdir(parents=True, exist_ok=True)
-                            copyfile(filepath, tmp_dst)
-                    except:
-                        log_exceptions(filepath=filepath)
-                for ins in inslist:
-                    if collect_folder_data(fromtime, totime, ins):
-                        print(f'{ins} completed')
-                    else:
-                        print(f'{ins} incomplete')
+            for sno, filepath in result:
+                try:
+                    with mysql.connector.connect(**conn_data) as con:
+                        cur = con.cursor()
+                        q = "update settlement_mails set completed='p' where sno=%s"
+                        cur.execute(q, (sno,))
+                        con.commit()
+                    tmp = re.compile(r"(?<=letters\/)[a-zA-Z_]+(?=_)").search(filepath)
+                    if tmp is not None:
+                        tmp = tmp.group()
+                        subprocess.run(["python", "make_insurer_excel.py", tmp, filepath])
+                        # tmp_dst = os.path.join(directory, tmp)
+                        # dst_fol = os.path.split(tmp_dst)[0]
+                        # Path(dst_fol).mkdir(parents=True, exist_ok=True)
+                        # copyfile(filepath, tmp_dst)
+                except:
+                    log_exceptions(filepath=filepath)
+                # for ins in inslist:
+                #     if collect_folder_data(fromtime, totime, ins):
+                #         print(f'{ins} completed')
+                #     else:
+                #         print(f'{ins} incomplete')
                 if os.path.exists(master_excel):
                     copyfile(master_excel, os.path.join(dst, hosp + '.xlsx'))
         zipf = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
