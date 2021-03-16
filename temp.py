@@ -1,17 +1,9 @@
-import subprocess
-
-import shutil
-import subprocess
-import sys
+from distutils.dir_util import copy_tree
 import os
-from make_log import log_exceptions
-from backend import mark_flag
-try:
-    shutil.rmtree('temp_files', ignore_errors=True)
-    os.mkdir('temp_files')
-    insname, fpath = "city", "/home/akshay/temp/78311300_.pdf"
-    # mark_flag('p', fpath)
-    subprocess.run(["python", 'pdf_' + insname + ".py", fpath])
-except:
-    log_exceptions()
-pass
+from pathlib import Path
+from shutil import copyfile
+
+dst = '/home/akshay/Videos/teasdmp.txt'
+a = os.path.split(dst)[0]
+Path(a).mkdir(parents=True, exist_ok=True)
+copyfile('/home/akshay/temp.txt', dst)

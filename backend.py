@@ -261,7 +261,8 @@ def process_insurer_pdfs(folder_name, insname, files):
 def automate_processing():
     zip_file = 'letters.zip'
     dst = 'excels/'
-    remove_tree(dst)
+    if os.path.exists(dst):
+        remove_tree(dst)
     Path(dst).mkdir(parents=True, exist_ok=True)
     master_excel = 'master_insurer.xlsx'
     letters_location = "../index/"
@@ -269,49 +270,46 @@ def automate_processing():
     fromtime = today - timedelta(days=365)
     totime = today + timedelta(days=365)
     today = datetime.now().strftime("%d_%m_%Y")
+    hospital_list = ['ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah']
     try:
-        with mysql.connector.connect(**conn_data) as con:
-            cur = con.cursor()
-            q = "select sno, attach_path from settlement_mails where completed != 'X'"
-            cur.execute(q)
-            result = cur.fetchall()
-            for sno, filepath in result:
-                if today not in filepath:
-                    tmpdst = re.sub(r"\d+_\d+_\d+", today, filepath)
-                    if os.path.exists(filepath):
-                        temp = os.path.split(tmpdst)[0]
-                        Path(temp).mkdir(parents=True, exist_ok=True)
-                        copyfile(filepath, tmpdst)
-                        q = "update settlement_mails set attach_path=%s where sno=%s"
-                        cur.execute(q, (tmpdst, sno))
-                        con.commit()
+        for hosp in hospital_list:
+            if os.path.exists(master_excel):
+                os.remove(master_excel)
+            if os.path.exists(directory):
+                remove_tree(directory)
+            with mysql.connector.connect(**conn_data) as con:
+                cur = con.cursor()
+                q = "SELECT sno, attach_path FROM settlement_mails where hospital=%s and completed!='X'"
+                cur.execute(q, (hosp,))
+                result = cur.fetchall()
+                for sno, filepath in result:
+                    try:
+                        tmp = re.compile(r"(?<=letters\/).*").search(filepath)
+                        if tmp is not None:
+                            tmp = tmp.group()
+                            tmp_dst = os.path.join(directory, tmp)
+                            dst_fol = os.path.split(tmp_dst)[0]
+                            Path(dst_fol).mkdir(parents=True, exist_ok=True)
+                            copyfile(filepath, tmp_dst)
+                    except:
+                        log_exceptions(filepath=filepath)
+                for ins in inslist:
+                    if collect_folder_data(fromtime, totime, ins):
+                        print(f'{ins} completed')
+                    else:
+                        print(f'{ins} incomplete')
+                if os.path.exists(master_excel):
+                    copyfile(master_excel, os.path.join(dst, hosp + '.xlsx'))
+        zipf = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
+        zipdir(dst, zipf)
+        zipf.close()
+        date = datetime.now().strftime('%d-%b-%Y')
+        if os.path.exists(zip_file):
+            subject = f"settlement excels for {date}"
+            send_email(zip_file, subject)
+        return True
     except:
         log_exceptions()
-    hospital_list = ['Max PPT', 'ils', 'ils_dumdum', 'noble', 'inamdar', 'ils_agartala', 'ils_howrah']
-    for hospital in hospital_list:
-        if os.path.exists(master_excel):
-            os.remove(master_excel)
-        remove_tree(directory)
-        folder = os.path.join(letters_location, today, hospital, "letters/")
-        Path(folder).mkdir(parents=True, exist_ok=True)
-        Path(directory).mkdir(parents=True, exist_ok=True)
-        copy_tree(folder, directory)
-        for ins in inslist:
-            if collect_folder_data(fromtime, totime, ins):
-                print(f'{ins} completed')
-            else:
-                print(f'{ins} incomplete')
-        if os.path.exists(master_excel):
-            copyfile(master_excel, os.path.join(dst, hospital + '.xlsx'))
-    zipf = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
-    zipdir(dst, zipf)
-    zipf.close()
-    date = datetime.now().strftime('%d-%b-%Y')
-    if os.path.exists(zip_file):
-        subject = f"settlement excels for {date}"
-        send_email(zip_file, subject)
-    return True
-
 
 if __name__ == '__main__':
     automate_processing()

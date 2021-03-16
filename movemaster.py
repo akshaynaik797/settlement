@@ -24,6 +24,7 @@ def move_master_to_master_insurer(mail_uid, **kwargs):
             r_flag = 0
             for i in temp:
                 if i is not None:
+                    i = i.strip()
                     f_dst = path.join(f_dst, f"{i}.pdf")
                     copyfile(kwargs['pdfpath'], f_dst)
                     r_flag = 1

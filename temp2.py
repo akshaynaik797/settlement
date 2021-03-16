@@ -1,14 +1,16 @@
-from pathlib import Path
-from shutil import copyfile
 import os
-import openpyxl
 
-wb = openpyxl.open('master.xlsx')
-worksheet = wb.active
-x1 = worksheet.cell(row=2, column=5).value
-x2 = worksheet.cell(row=2, column=4).value
-wb.close()
-b = '/home/akshay/temp/19429253_.pdf'
-dst = "../index/Attachments/"
-Path(dst).mkdir(parents=True, exist_ok=True)
-copyfile(f_src, f_dst)
+import mysql.connector
+
+from backend import conn_data
+
+with mysql.connector.connect(**conn_data) as con:
+    cur = con.cursor()
+    q = "select sno, attach_path from settlement_mails"
+    cur.execute(q)
+    r = cur.fetchall()
+    for sno, attach_path in r:
+        if not os.path.exists(attach_path):
+            q = "update settlement_mails set completed='NF' where sno=%s"
+            cur.execute(q, (sno,))
+    con.commit()
