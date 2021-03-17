@@ -105,14 +105,14 @@ try:
         for i in range(0, len(sh3)):
             s3.cell(row=1, column=i + 1).value = sh3[i]
 
-        html = open('temp_files/attachments_' + hosp_name + str(t + 1) + ".html")
-        f = str(html.read())
-        w = open("temp_files/out.txt", "w")
-        w.write(html2text.html2text(f))
-        html.close()
-        w.close()
-        with open('temp_files/out.txt', 'r') as myfile:
-            f = myfile.read()
+        # html = open('temp_files/attachments_' + hosp_name + str(t + 1) + ".html")
+        # f = str(html.read())
+        # w = open("temp_files/out.txt", "w")
+        # w.write(html2text.html2text(f))
+        # html.close()
+        # w.close()
+        # with open('temp_files/out.txt', 'r') as myfile:
+        #     f = myfile.read()
         claim = None
         if claim is None:
             gh = []
@@ -202,7 +202,7 @@ try:
             for i in range(0, len(gh)):
                 s1.cell(row=t + 2, column=i + 3).value = gh[i]
             # print(gh[4])
-            subj = read_alno(gh[0], gh[5])
+            subj = None
             if subj == None:
                 subj = ccn
             s1.cell(row=t + 2, column=2).value = ccn

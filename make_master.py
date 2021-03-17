@@ -3278,7 +3278,7 @@ try:
 				##################################################akshay
 				# main_s1.cell(row=i, column=19).value=main_s1.cell(row=i, column=19).value+cop[main_s1.cell(row=i, column=5).value]
 				if main_s1.cell(row=i, column=19).value is not None:
-					main_s1.cell(row=i, column=19).value=float(main_s1.cell(row=i, column=19).value)+cop[main_s1.cell(row=i, column=5).value]
+					main_s1.cell(row=i, column=19).value=float(main_s1.cell(row=i, column=19).value.replace(',',''))+cop[main_s1.cell(row=i, column=5).value]
 				##################################################akshayend
 			##################################################akshay
 			# main_s1.cell(row=i, column=55).value=main_s1.cell(row=i, column=55).value-cop[main_s1.cell(row=i, column=5).value]

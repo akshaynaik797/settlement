@@ -258,7 +258,10 @@ try:
         s3.cell(row=t + 2, column=i + 3).value = gh[i]
     s3.cell(row=t + 2, column=1).value = t + 1
     s3.cell(row=t + 2, column=2).value = ccn
-    s3.cell(row=t + 2, column=8).value = dis
+    try:
+        s3.cell(row=t + 2, column=8).value = dis
+    except NameError:
+        s3.cell(row=t + 2, column=8).value = ''
     s3.cell(row=t + 2, column=9).value = ded
     s3.cell(row=t + 2, column=10).value = sett
     print("Done")

@@ -409,7 +409,7 @@ try:
             log_exceptions()
             s1.cell(row=t + 2, column=1).value = 'error'
     for t in range(0, len(onlyfiles)):
-        CCN = onlyfiles[t].replace('.pdf', '')
+        CCN = onlyfiles[t].replace('.pdf', '').split('_')[-1]
         for wd in wbk.worksheets:
             wd.cell(row=1, column=1).value = 'Sr. No.'
             wd.cell(row=1, column=2).value = 'CCN'

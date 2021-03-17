@@ -160,7 +160,10 @@ try:
                 break
             hg.append(sheet_1.cell_value(i, 2))
             b.append(sheet_1.cell_value(i, 5))
-            p.append(sheet_1.cell_value(i, 8))
+            try:
+                p.append(sheet_1.cell_value(i, 8))
+            except IndexError:
+                p.append('')
 
             k = sheet_1.cell_value(i, 9)
             if (k[0:5] == 'Refer'):
@@ -185,7 +188,10 @@ try:
                     break
                 hg.append(sheet_2.cell_value(i, 2))
                 b.append(sheet_2.cell_value(i, 5))
-                p.append(sheet_2.cell_value(i, 8))
+                try:
+                    p.append(sheet_2.cell_value(i, 8))
+                except IndexError:
+                    p.append('')
                 k = sheet_2.cell_value(i, 9)
                 if (k[0:5] == 'Refer'):
                     u = k[11:]
