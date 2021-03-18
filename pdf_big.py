@@ -23,18 +23,12 @@ try:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
-    if 'Intimation No' not in f:
-        if 'Bene Code' in f:
-            subprocess.run(["python", 'pdf_' + 'small' + ".py", sys.argv[1]])
-            os._exit(1)
-        sys.exit(f'{pdfpath} wrong pdf recieved, so not processed')
+    if 'Balaji Medical' in f:
+        op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
+        hosp_name = 'Max'
     else:
-        if 'Balaji Medical' in f:
-            op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
-            hosp_name = 'Max'
-        else:
-            op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-            hosp_name = 'inamdar'
+        op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
+        hosp_name = 'inamdar'
     ###########################################################
     wbkName = 'temp_files/' + 'big' + hosp_name + '.xlsx'
     t, wq =0, 0
@@ -164,8 +158,10 @@ try:
                 p.append(sheet_1.cell_value(i, 8))
             except IndexError:
                 p.append('')
-
-            k = sheet_1.cell_value(i, 9)
+            try:
+                k = sheet_1.cell_value(i, 9)
+            except:
+                k = ''
             if (k[0:5] == 'Refer'):
                 u = k[11:]
                 # print(u)
@@ -263,7 +259,7 @@ try:
     wbk.close()
     subprocess.run(["python", "make_master.py", 'star', op, '', wbkName])
     ###########################################################
-    move_master_to_master_insurer('', pdfpath=pdfpath)
+    move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
     mark_flag('X', sys.argv[1])
     print(f'processed {wbkName}')
 except SystemExit as e:

@@ -10,10 +10,10 @@ try:
     if hosp != '':
         shutil.rmtree('temp_files', ignore_errors=True)
         os.mkdir('temp_files')
-        insname, fpath = sys.argv[1], sys.argv[2]
+        insname, fpath, mid = sys.argv[1], sys.argv[2], sys.argv[3]
         if os.path.exists('pdf_' + insname + ".py"):
             mark_flag('p', fpath)
-            subprocess.run(["python", 'pdf_' + insname + ".py", fpath])
+            subprocess.run(["python", 'pdf_' + insname + ".py", fpath, mid])
             mark_utr_tables(fpath)
         else:
             mark_flag('NOFILE', fpath)

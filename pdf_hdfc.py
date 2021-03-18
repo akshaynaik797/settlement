@@ -262,14 +262,20 @@ try:
         s3.cell(row=t + 2, column=8).value = dis
     except NameError:
         s3.cell(row=t + 2, column=8).value = ''
-    s3.cell(row=t + 2, column=9).value = ded
-    s3.cell(row=t + 2, column=10).value = sett
+    try:
+        s3.cell(row=t + 2, column=9).value = ded
+    except NameError:
+        s3.cell(row=t + 2, column=9).value = ''
+    try:
+        s3.cell(row=t + 2, column=10).value = sett
+    except:
+        s3.cell(row=t + 2, column=10).value = ''
     print("Done")
     wbk.save(wbkName)
     wbk.close()
     subprocess.run(["python", "make_master.py", 'hdfc', op, '', wbkName])
     ###########################################################
-    move_master_to_master_insurer('', pdfpath=pdfpath)
+    move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
     mark_flag('X', sys.argv[1])
     print(f'processed {wbkName}')
     pass

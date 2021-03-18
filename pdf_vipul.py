@@ -183,7 +183,7 @@ try:
     wbk.close()
     subprocess.run(["python", "make_master.py", 'vipul', op, '', wbkName])
     ###########################################################
-    move_master_to_master_insurer('', pdfpath=pdfpath)
+    move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
     mark_flag('X', sys.argv[1])
     print(f'processed {wbkName}')
 except SystemExit as e:

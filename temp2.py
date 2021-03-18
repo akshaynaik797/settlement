@@ -6,7 +6,7 @@ from backend import conn_data
 
 with mysql.connector.connect(**conn_data) as con:
     cur = con.cursor()
-    q = "select sno, attach_path from settlement_mails"
+    q = "select sno, attach_path from settlement_mails where completed = 'p' and hospital like '%ils%';"
     cur.execute(q)
     r = cur.fetchall()
     for sno, attach_path in r:

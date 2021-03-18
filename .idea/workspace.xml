@@ -21,12 +21,35 @@
   <component name="ChangeListManager">
     <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/make_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_master.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_insurer_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_insurer_excel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movemaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/movemaster.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/one.py" beforeDir="false" afterPath="$PROJECT_DIR$/one.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Good_health.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Good_health.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_MDINDIA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_MDINDIA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_Medi_Assist.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medi_Assist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Medsave.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medsave.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Universal_Sompo.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Universal_Sompo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_aditya.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_aditya.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_apollo.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_apollo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_east_west.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_east_west.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_fgh.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fgh.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_hdfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_heritage.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_heritage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_india.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_india.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_insurance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_reliance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_reliance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_religare.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_religare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_small.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_small.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_united.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_united.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_vidal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vidal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_vipul.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vipul.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp2.py" beforeDir="false" afterPath="$PROJECT_DIR$/temp2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +77,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.one">
+  <component name="RunManager" selected="Python.backend">
     <configuration name="backend" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.one" />
         <item itemvalue="Python.backend" />
+        <item itemvalue="Python.movemaster" />
+        <item itemvalue="Python.one" />
         <item itemvalue="Python.temp" />
         <item itemvalue="Python.temp2" />
-        <item itemvalue="Python.movemaster" />
       </list>
     </recent_temporary>
   </component>
@@ -254,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615905299781</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="0.0.15">
+      <created>1615969652543</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1615969652543</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,17 +310,18 @@
     <MESSAGE value="0.0.12" />
     <MESSAGE value="0.0.13" />
     <MESSAGE value="0.0.14" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.14" />
+    <MESSAGE value="0.0.15" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.15" />
   </component>
   <component name="WindowStateProjectService">
     <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614071490460">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.900@0.0.1600.900" timestamp="1614071490460" />
-    <state x="624" y="-2" width="881" height="866" key="CommitChangelistDialog2" timestamp="1615905299529">
+    <state x="623" y="-20" width="881" height="866" key="CommitChangelistDialog2" timestamp="1615969652173">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="624" y="-2" width="881" height="866" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1615905299529" />
+    <state x="623" y="-20" width="881" height="866" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1615969652173" />
     <state width="1334" height="485" key="DebuggerActiveHint" timestamp="1615281610088">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -299,46 +330,46 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1614071447746" />
-    <state width="1577" height="287" key="GridCell.Tab.0.bottom" timestamp="1615966813498">
+    <state width="1577" height="280" key="GridCell.Tab.0.bottom" timestamp="1616072521819">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1615966813498" />
-    <state width="1577" height="287" key="GridCell.Tab.0.center" timestamp="1615966813495">
+    <state width="1577" height="280" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1616072521819" />
+    <state width="1577" height="280" key="GridCell.Tab.0.center" timestamp="1616072521815">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1615966813495" />
-    <state width="1577" height="287" key="GridCell.Tab.0.left" timestamp="1615966813493">
+    <state width="1577" height="280" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1616072521815" />
+    <state width="1577" height="280" key="GridCell.Tab.0.left" timestamp="1616072521813">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1615966813493" />
-    <state width="1577" height="287" key="GridCell.Tab.0.right" timestamp="1615966813496">
+    <state width="1577" height="280" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1616072521813" />
+    <state width="1577" height="280" key="GridCell.Tab.0.right" timestamp="1616072521817">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1615966813496" />
-    <state width="1577" height="287" key="GridCell.Tab.1.bottom" timestamp="1615966813502">
+    <state width="1577" height="280" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1616072521817" />
+    <state width="1577" height="280" key="GridCell.Tab.1.bottom" timestamp="1616072521826">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1615966813502" />
-    <state width="1577" height="287" key="GridCell.Tab.1.center" timestamp="1615966813500">
+    <state width="1577" height="280" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1616072521826" />
+    <state width="1577" height="280" key="GridCell.Tab.1.center" timestamp="1616072521823">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1615966813500" />
-    <state width="1577" height="287" key="GridCell.Tab.1.left" timestamp="1615966813499">
+    <state width="1577" height="280" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1616072521823" />
+    <state width="1577" height="280" key="GridCell.Tab.1.left" timestamp="1616072521821">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1615966813499" />
-    <state width="1577" height="287" key="GridCell.Tab.1.right" timestamp="1615966813501">
+    <state width="1577" height="280" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1616072521821" />
+    <state width="1577" height="280" key="GridCell.Tab.1.right" timestamp="1616072521825">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="287" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1615966813501" />
+    <state width="1577" height="280" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1616072521825" />
     <state x="286" y="36" key="SettingsEditor" timestamp="1615873997265">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="286" y="36" key="SettingsEditor/0.0.1600.900@0.0.1600.900" timestamp="1615873997265" />
-    <state x="385" y="23" width="802" height="515" key="Vcs.Push.Dialog.v2" timestamp="1615905301111">
+    <state x="384" y="5" width="802" height="515" key="Vcs.Push.Dialog.v2" timestamp="1615969654064">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="385" y="23" width="802" height="515" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1615905301111" />
+    <state x="384" y="5" width="802" height="515" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1615969654064" />
     <state width="800" height="446" key="XDebugger.FullValuePopup" timestamp="1615184217470">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -351,10 +382,10 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="345" y="104" width="893" height="544" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1600.900@0.0.1600.900" timestamp="1615964136398" />
-    <state x="433" y="154" width="740" height="634" key="find.popup" timestamp="1615901939205">
+    <state x="433" y="154" width="740" height="634" key="find.popup" timestamp="1616071870419">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="433" y="154" width="740" height="634" key="find.popup/0.0.1600.900@0.0.1600.900" timestamp="1615901939205" />
+    <state x="433" y="154" width="740" height="634" key="find.popup/0.0.1600.900@0.0.1600.900" timestamp="1616071870419" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -363,11 +394,6 @@
           <url>file://$PROJECT_DIR$/pdf_newindia.py</url>
           <line>131</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
-          <line>185</line>
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_newindia.py</url>
@@ -413,6 +439,11 @@
           <url>file://$PROJECT_DIR$/pdf_fhpl.py</url>
           <line>21</line>
           <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/movemaster.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

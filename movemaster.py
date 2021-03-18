@@ -18,6 +18,8 @@ def move_master_to_master_insurer(mail_uid, **kwargs):
             worksheet = wb.active
             temp = []
             temp.extend([worksheet.cell(row=2, column=5).value, worksheet.cell(row=2, column=4).value])
+            worksheet['A2'] = mail_uid
+            wb.save(source)
             wb.close()
             f_dst = "../index/Attachments/"
             Path(f_dst).mkdir(parents=True, exist_ok=True)
@@ -66,4 +68,4 @@ def move_master_to_master_insurer(mail_uid, **kwargs):
         log_exceptions()
         return False
 if __name__ == '__main__':
-    move_master_to_master_insurer('', pdfpath='/home/akshay/temp/19429253_.pdf')
+    move_master_to_master_insurer('', pdfpath='/home/akshay/temp/8134_rptSettlementLetterIndivisual_RC-HS20-12265991_202_20210316131902960.pdf')

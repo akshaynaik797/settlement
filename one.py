@@ -9,7 +9,7 @@ from backend import mark_flag
 try:
     shutil.rmtree('temp_files', ignore_errors=True)
     os.mkdir('temp_files')
-    insname, fpath = "hdfc", "/home/akshay/temp/8134_rptSettlementLetterIndivisual_RC-HS20-12265991_202_20210316131902960.pdf"
+    insname, fpath = "MDINDIA", "/home/akshay/temp/6366_MDI6072986_CPS_Cash Less_23_02_2021_02_01_00.pdf"
     # mark_flag('p', fpath)
     subprocess.run(["python", 'pdf_' + insname + ".py", fpath])
 except:
