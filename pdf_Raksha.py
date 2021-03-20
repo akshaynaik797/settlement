@@ -23,15 +23,12 @@ try:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
-    if 'wanted_text' not in f:
-        sys.exit(f'{pdfpath} wrong pdf recieved, so not processed')
+    if 'Balaji Medical' in f:
+        op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
+        hosp_name = 'Max'
     else:
-        if 'Balaji Medical' in f:
-            op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
-            hosp_name = 'Max'
-        else:
-            op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-            hosp_name = 'inamdar'
+        op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
+        hosp_name = 'inamdar'
     ###########################################################
     wbkName = 'temp_files/' + 'Raksha' + hosp_name + '.xlsx'
     t, wq =0, 0
@@ -121,7 +118,7 @@ try:
     subprocess.run(["python", "make_master.py", 'Raksha', op, '', wbkName])
     ###########################################################
     move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
-    mark_flag('X', sys.argv[1])
+    mark_flag('X', sys.argv[2])
     print(f'processed {wbkName}')
 except SystemExit as e:
     v = e.code

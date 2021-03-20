@@ -19,6 +19,7 @@ from email.mime.text import MIMEText
 
 import re
 import mysql.connector
+import openpyxl
 
 from movemaster import move_master_to_master_insurer
 from make_log import log_exceptions
@@ -37,7 +38,7 @@ inslist = ('all', 'aditya', 'apollo', 'bajaj', 'big', 'east_west', 'fgh', 'fhpl'
 
 def send_email(file, subject):
     emailfrom = "iClaim.vnusoftware@gmail.com"
-    emailto = ["sachin@vnusoftware.com", 'ceo@vnusoftware.com', 'maneesh@vnusoftware.com', 'akshaynaik@workmail.com']
+    emailto = ["sachin@vnusoftware.com", 'ceo@vnusoftware.com', 'maneesh@vnusoftware.com', 'akshaynaik797@gmail.com']
     fileToSend = file
     username = emailfrom
     password = "44308000"
@@ -111,12 +112,27 @@ def get_row(filepath):
                     temp[k] = v
     return temp
 
-def mark_flag(flag, filepath):
-    filepath = os.path.split(filepath)[-1]
+def check_mid_in_master(mid):
+    filepath = 'master_insurer.xlsx'
+    if os.path.exists(filepath):
+        wb = openpyxl.open(filepath)
+        ws = wb.active
+        for row in ws.iter_rows(max_col=1, values_only=True):
+            if mid in row:
+                return True
+    return False
+
+def mark_flag(flag, mid):
+    time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if flag == 'X':
+        if check_mid_in_master(mid):
+            pass
+        else:
+            return None
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
-        q = "update settlement_mails set completed=%s where attach_path like %s"
-        cur.execute(q, (flag, '%' + filepath + '%',))
+        q = "update settlement_mails set completed=%s, processed_time=%s where id=%s"
+        cur.execute(q, (flag, time_stamp, mid))
         con.commit()
 
 def mark_utr_tables(filepath):
@@ -270,7 +286,7 @@ def automate_processing():
     fromtime = today - timedelta(days=365)
     totime = today + timedelta(days=365)
     today = datetime.now().strftime("%d_%m_%Y")
-    hospital_list = ['ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah']
+    hospital_list = ['noble']
     try:
         for hosp in hospital_list:
             if os.path.exists(master_excel):
@@ -294,6 +310,12 @@ def automate_processing():
                         if tmp is not None:
                             tmp = tmp.group()
                             subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
+                        else:
+                            with mysql.connector.connect(**conn_data) as con:
+                                cur = con.cursor()
+                                q = "update settlement_mails set completed='NO_INS' where sno=%s"
+                                cur.execute(q, (sno,))
+                                con.commit()
                     else:
                         with mysql.connector.connect(**conn_data) as con:
                             cur = con.cursor()

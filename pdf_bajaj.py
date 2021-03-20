@@ -34,19 +34,6 @@ try:
     ###########################################################
     wbkName = 'temp_files/' + 'bajaj' + hosp_name + '.xlsx'
     t, wq =0, 0
-    with sqlite3.connect("database1.db") as con:
-        cur = con.cursor()
-        q = f'select id, password from bajaj_credentials where hospital="{hosp_name}";'
-        # print(q)
-        cur.execute(q)
-        r = cur.fetchone()
-
-        if r:
-            hosp_mail = r[0]
-            hosp_pass = r[1]
-        else:
-            hosp_mail = ''
-            hosp_pass = ''
 
     for t in range(0, len(onlyfiles)):
         with open(mypath + onlyfiles[t], "rb") as f:
@@ -171,7 +158,7 @@ try:
                 subprocess.run(["python", "make_master.py", 'bajaj', op, '', wbkName])
                 ###########################################################
                 move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
-                mark_flag('X', sys.argv[1])
+                mark_flag('X', sys.argv[2])
                 print(f'processed {wbkName}')
 except SystemExit as e:
     v = e.code

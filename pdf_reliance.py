@@ -135,7 +135,7 @@ try:
     subprocess.run(["python", "make_master.py", 'reliance', op, '', wbkName])
     ###########################################################
     move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
-    mark_flag('X', sys.argv[1])
+    mark_flag('X', sys.argv[2])
     print(f'processed {wbkName}')
 except SystemExit as e:
     v = e.code

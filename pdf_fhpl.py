@@ -293,7 +293,8 @@ try:
                         l = i[m + 3:]
                         s3.cell(row=row_num, column=1).value = wq
                         s3.cell(row=row_num, column=2).value = ccn
-                        s3.cell(row=row_num, column=3).value = sd
+                        # s3.cell(row=row_num, column=3).value = sd
+                        s3.cell(row=row_num, column=3).value = ''
                         s3.cell(row=row_num, column=4).value = s
                         s3.cell(row=row_num, column=5).value = l
                 if x.find('_') != -1:
@@ -591,7 +592,7 @@ try:
     subprocess.run(["python", "make_master.py", 'fhpl', op, '', wbkName])
     ###########################################################
     move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
-    mark_flag('X', sys.argv[1])
+    mark_flag('X', sys.argv[2])
     print(f'processed {wbkName}')
 except SystemExit as e:
     v = e.code

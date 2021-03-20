@@ -2366,8 +2366,8 @@ try:
 						if(cpy[i]==main_s1.cell(row=j, column=4).value):
 							main_s1.cell(row=j, column=55).value=ded[i]
 							print(j,ded[i])
-	#raksha
-		if ins=='raksha':
+	#Raksha
+		if ins=='Raksha':
 			wbkName  = sys.argv[4]
 			wbk= openpyxl.load_workbook(wbkName)
 			s1=wbk.worksheets[0]
@@ -3262,7 +3262,10 @@ try:
 				##################################################akshay
 				# main_s1.cell(row=i, column=16).value=main_s1.cell(row=i, column=16).value+Tax[main_s1.cell(row=i, column=4).value]
 				if main_s1.cell(row=i, column=16).value is not None:
-					main_s1.cell(row=i, column=16).value=float(main_s1.cell(row=i, column=16).value)+Tax[main_s1.cell(row=i, column=4).value]
+					try:
+						main_s1.cell(row=i, column=16).value=float(main_s1.cell(row=i, column=16).value)+Tax[main_s1.cell(row=i, column=4).value]
+					except:
+						main_s1.cell(row=i, column=16).value='error'
 				##################################################akshayend
 				#main_s1.cell(row=i, column=55).value=main_s1.cell(row=i, column=55).value-Tax[main_s1.cell(row=i, column=4).value]
 
@@ -3320,7 +3323,7 @@ try:
 	mr = ws1.max_row
 	mc = ws1.max_column
 	temp_mr=main_s1.max_row
-	ins_id=['','aditya_birla','bajaj','apollo_munich','fgh','fhpl','health_india','health_hertige','icici_lombard','MDINDIA','Medi_Assist','Paramount','religare','united','hdfc','vidal','universal_sompo','vipul','Ease_West','Good_health','medsave','raksha','reliance','health_insurance']
+	ins_id=['','aditya_birla','bajaj','apollo_munich','fgh','fhpl','health_india','health_hertige','icici_lombard','MDINDIA','Medi_Assist','Paramount','religare','united','hdfc','vidal','universal_sompo','vipul','Ease_West','Good_health','medsave','Raksha','reliance','health_insurance']
 	t_mr = len(ins_id)
 	for i in range (1, mr + 1):
 		for j in range (1, mc + 1):

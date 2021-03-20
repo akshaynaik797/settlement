@@ -87,6 +87,6 @@ try:
         sql = "insert into City_Records (`Advice_No`,`Insurer_name`,`City_Transaction_Reference`,`Payer_Reference_No`,`Payment_Amount`,`Processing_Date`,`City_Claim_No`,`City_Patient_name`,`City_Admission_Date`,`City_TPA`,`Payment_Details`,`NIA_Transaction_Reference`, `hospital`, mail_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cur.execute(sql, data)
         con.commit()
-    mark_flag('X', sys.argv[1])
+    mark_flag('X', sys.argv[2])
 except:
     log_exceptions()

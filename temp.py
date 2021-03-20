@@ -1,9 +1,5 @@
-from distutils.dir_util import copy_tree
-import os
-from pathlib import Path
-from shutil import copyfile
+from backend import mark_flag
 
-dst = '/home/akshay/Videos/teasdmp.txt'
-a = os.path.split(dst)[0]
-Path(a).mkdir(parents=True, exist_ok=True)
-copyfile('/home/akshay/temp.txt', dst)
+if __name__ == '__main__':
+    a = mark_flag('X', '1764b0edbc15db3c')
+    pass

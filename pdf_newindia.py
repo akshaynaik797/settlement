@@ -126,7 +126,7 @@ try:
                 print(query)
                 cur.execute(query)
                 conn.commit()
-    mark_flag('X', sys.argv[1])
+    mark_flag('X', sys.argv[2])
 except:
     log_exceptions()
     pass
