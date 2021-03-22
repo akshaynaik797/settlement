@@ -21,51 +21,6 @@ try:
 
     hosp_name = ''
 
-    def read_alno(ccn, d):
-        SMTP_SERVER = str(sys.argv[5])
-        mail = imaplib.IMAP4_SSL(SMTP_SERVER)
-        # mail.login(user = 'Mediclaim@therisingmedicare.com', password = 'cef@2018')
-
-        e_id = str(sys.argv[1])
-        pswd = str(sys.argv[2])
-        mail.login(user=e_id, password=pswd)
-        mail.select('inbox')
-        d = d.replace(' ', '-')
-        # print(d)
-        type, data = mail.search(None, '(SUBJECT "Patient Name: ' + ccn + ', Uhid No:" since ' + d + ')')
-        count = 0
-        # print(data)
-        if (data == [b'']):
-            count = 1
-            type, data = mail.search(None,
-                                     '(SUBJECT "Cashless Initial Approval of Patient Name:' + ccn + '" since ' + d + ')')
-        try:
-            ids = data[0]  # data is a list.
-            id_list = ids.split()
-            latest_email_id = id_list[0]
-            result, data = mail.fetch(latest_email_id, "(RFC822)")
-
-            raw_email = data[0][1].decode('utf-8')
-
-            email_message = email.message_from_string(raw_email)
-            if (count == 0):
-                v = email_message['Subject']
-                x1 = v.find('PreauthID:') + 11
-                return (v[x1:])
-            if (count == 1):
-                for part in email_message.walk():
-                    # print(part.get_content_type())
-                    if part.get_content_type() == "text/html":
-                        # print('hi')
-                        body = part.get_payload(decode=True)
-                        v = body.decode('utf-8')
-                        x1 = v.find('Claim Number:') + 13
-                        x2 = v.find('(')
-                        return (v[x1:x2])
-        except IndexError as error:
-            s1.cell(row=t + 2, column=14).fill = 'redFill'
-            s1.cell(row=t + 2, column=1).value = 'error'
-
     with open(pdfpath, "rb") as f:
         pdf = pdftotext.PDF(f)
     with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
@@ -110,8 +65,7 @@ try:
         # w.close()
         # with open('temp_files/out.txt', 'r') as myfile:
         #     f = myfile.read()
-        claim = None
-        if claim is None:
+        if 'Claim Settled' not in f:
             gh = []
             w2 = f.find('Claim Of')
             g = f[w2:]
@@ -328,7 +282,7 @@ try:
                 data['diagnosis'] = ''
 
             if f.find('Claim ID') != -1:
-                regex = r'\S+(?=\s*Hospital Name)'
+                regex = r'(?<=Claim ID).*'
                 x = re.search(regex, f)
                 if x:
                     x1 = x.group().strip()
@@ -339,7 +293,7 @@ try:
                 data['claim_id'] = ''
 
             if f.find('Claim Of') != -1:
-                regex = r'\S+ ?\S+(?=\s*---\|---)'
+                regex = r'(?<=Claim Of).*'
                 x = re.search(regex, f)
                 if x:
                     x1 = x.group().strip()
@@ -372,7 +326,7 @@ try:
                 data['card_no'] = ''
 
             if f.find('Date of Admission') != -1:
-                regex = r'( ?\S+){3}(?= *\|\s*Date of Discharge)'
+                regex = r'(?<=Date of Admission).*(?=Date of Discharge)'
                 x = re.search(regex, f)
                 if x:
                     x1 = x.group().strip()

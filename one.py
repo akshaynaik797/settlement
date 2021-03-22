@@ -9,8 +9,9 @@ from backend import mark_flag
 try:
     shutil.rmtree('temp_files', ignore_errors=True)
     os.mkdir('temp_files')
-    insname, fpath = "Raksha", "/home/akshay/temp/3944_90192021625239.pdf"
-    # mark_flag('p', fpath)
+    insname, fpath = "fhpl", "/home/akshay/temp/66878081_.pdf"
+    subprocess.run(["python", 'pdf_' + insname + ".py", fpath, 'mail_id'])
+    insname, fpath = "fhpl", "/home/akshay/temp/74967265_.pdf"
     subprocess.run(["python", 'pdf_' + insname + ".py", fpath, 'mail_id'])
 except:
     log_exceptions()

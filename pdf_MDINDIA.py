@@ -1,6 +1,6 @@
 import os
 import subprocess
-import PyPDF2
+import re
 import openpyxl
 import sys
 import camelot
@@ -23,6 +23,8 @@ try:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
+    with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
+        text = myfile.read()
     if 'Balaji Medical' in f:
         op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
         hosp_name = 'Max'
@@ -74,40 +76,100 @@ try:
         text_file.close()
 
         gh = []
-        x1 = f.find('Policy No.') + 13
-        g = f[x1:]
-        y1 = g.find('$$') + x1
-        gh.append(f[x1:y1])
+        regex, clean = r"(?<=Policy No.).*", ''
+        temp = re.compile(regex).search(text)
+        if temp is not None:
+            temp = temp.group()
+            for i in [':', '$$']:
+                temp = temp.replace(i, '')
+            clean = temp.strip()
+        gh.append(clean)
 
-        x2 = f.find('Insurance Co.') + 16
-        g = f[x2:]
-        y2 = g.find('$$') + x2
-        gh.append(f[x2:y2])
+        regex, clean = r"(?<=Insurance Co.).*", ''
+        temp = re.compile(regex).search(text)
+        if temp is not None:
+            temp = temp.group()
+            for i in [':', '$$']:
+                temp = temp.replace(i, '')
+            clean = temp.strip()
+        gh.append(clean)
 
-        x3 = f.find('CCN') + 6
-        g = f[x3:]
-        y3 = g.find('$$') + x3
-        ccn = (f[x3:y3])
+        # x2 = f.find('Insurance Co.') + 16
+        # g = f[x2:]
+        # y2 = g.find('$$') + x2
+        # gh.append(f[x2:y2])
 
-        x4 = f.find('MD ID No.') + 12
-        g = f[x4:]
-        y4 = g.find('$$') + x4
-        gh.append(f[x4:y4])
+        ccn = ''
+        for regex in [r"(?<=CCN).*(?=MD ID No)", r"(?<=CCN).*"]:
+            temp = re.compile(regex).search(text)
+            if temp is not None:
+                temp = temp.group()
+                for i in [':', '$$']:
+                    temp = temp.replace(i, '')
+                ccn = temp.strip()
+                gh.append(ccn)
+                break
 
-        x5 = f.find('Patient Name') + 15
-        g = f[x5:]
-        y5 = g.find('$$') + x5
-        gh.append(f[x5:y5])
+        # x3 = f.find('CCN') + 6
+        # g = f[x3:]
+        # y3 = g.find('$$') + x3
+        # ccn = (f[x3:y3])
 
-        x6 = f.find('EMP.No.') + 10
-        g = f[x6:]
-        y6 = g.find('$$') + x6
-        gh.append(f[x6:y6])
+        regex, clean = r"(?<=MD ID No.).*", ''
+        temp = re.compile(regex).search(text)
+        if temp is not None:
+            temp = temp.group()
+            for i in [':', '$$']:
+                temp = temp.replace(i, '')
+            clean = temp.strip()
+        gh.append(clean)
 
-        x7 = y6 + 8
-        g = f[x7:]
-        y7 = g.find('$$') + x7
-        gh.append(f[x7:y7])
+        # x4 = f.find('MD ID No.') + 12
+        # g = f[x4:]
+        # y4 = g.find('$$') + x4
+        # gh.append(f[x4:y4])
+
+        regex, clean = r"(?<=Patient Name).*", ''
+        temp = re.compile(regex).search(text)
+        if temp is not None:
+            temp = temp.group()
+            for i in [':', '$$']:
+                temp = temp.replace(i, '')
+            clean = temp.strip()
+        gh.append(clean)
+
+        # x5 = f.find('Patient Name') + 15
+        # g = f[x5:]
+        # y5 = g.find('$$') + x5
+        # gh.append(f[x5:y5])
+
+        regex, clean = r"(?<=EMP.No.).*(?=/)", ''
+        temp = re.compile(regex).search(text)
+        if temp is not None:
+            temp = temp.group()
+            for i in [':', '$$']:
+                temp = temp.replace(i, '')
+            clean = temp.strip()
+        gh.append(clean)
+
+        # x6 = f.find('EMP.No.') + 10
+        # g = f[x6:]
+        # y6 = g.find('$$') + x6
+        # gh.append(f[x6:y6])
+
+        regex, clean = r"(?<=/).*\n.*(?=Contact No)", ''
+        temp = re.compile(regex).search(text)
+        if temp is not None:
+            temp = temp.group()
+            for i in [':', '$$']:
+                temp = temp.replace(i, '')
+            clean = temp.strip()
+        gh.append(clean)
+
+        # x7 = y6 + 8
+        # g = f[x7:]
+        # y7 = g.find('$$') + x7
+        # gh.append(f[x7:y7])
 
         x8 = f.find('Diagnosis') + 16
         g = f[x8:]
