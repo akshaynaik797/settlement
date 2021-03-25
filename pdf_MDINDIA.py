@@ -115,14 +115,14 @@ try:
         # y3 = g.find('$$') + x3
         # ccn = (f[x3:y3])
 
-        regex, clean = r"(?<=MD ID No.).*", ''
-        temp = re.compile(regex).search(text)
-        if temp is not None:
-            temp = temp.group()
-            for i in [':', '$$']:
-                temp = temp.replace(i, '')
-            clean = temp.strip()
-        gh.append(clean)
+        # regex, clean = r"(?<=MD ID No.).*", ''
+        # temp = re.compile(regex).search(text)
+        # if temp is not None:
+        #     temp = temp.group()
+        #     for i in [':', '$$']:
+        #         temp = temp.replace(i, '')
+        #     clean = temp.strip()
+        # gh.append(clean)
 
         # x4 = f.find('MD ID No.') + 12
         # g = f[x4:]

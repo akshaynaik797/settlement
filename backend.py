@@ -122,13 +122,14 @@ def check_mid_in_master(mid):
                 return True
     return False
 
-def mark_flag(flag, mid):
+def mark_flag(flag, mid, **kwargs):
     time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    if flag == 'X':
-        if check_mid_in_master(mid):
-            pass
-        else:
-            return None
+    if not kwargs:
+        if flag == 'X':
+            if check_mid_in_master(mid):
+                pass
+            else:
+                return None
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         q = "update settlement_mails set completed=%s, processed_time=%s where id=%s"
@@ -309,17 +310,24 @@ def automate_processing():
                         tmp = re.compile(r"(?<=letters\/)[a-zA-Z_]+(?=_)").search(filepath)
                         if tmp is not None:
                             tmp = tmp.group()
-                            subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
+                            if os.path.exists('pdf_' + tmp + ".py"):
+                                subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
+                            else:
+                                with mysql.connector.connect(**conn_data) as con:
+                                    cur = con.cursor()
+                                    q = "update settlement_mails set completed='NO_INS_FILE' where sno=%s"
+                                    cur.execute(q, (sno,))
+                                    con.commit()
                         else:
                             with mysql.connector.connect(**conn_data) as con:
                                 cur = con.cursor()
-                                q = "update settlement_mails set completed='NO_INS' where sno=%s"
+                                q = "update settlement_mails set completed='NO_INS_FILE' where sno=%s"
                                 cur.execute(q, (sno,))
                                 con.commit()
                     else:
                         with mysql.connector.connect(**conn_data) as con:
                             cur = con.cursor()
-                            q = "update settlement_mails set completed='NF' where sno=%s"
+                            q = "update settlement_mails set completed='NO_ATTACH' where sno=%s"
                             cur.execute(q, (sno,))
                             con.commit()
                 except:

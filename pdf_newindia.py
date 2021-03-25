@@ -126,7 +126,7 @@ try:
                 print(query)
                 cur.execute(query)
                 conn.commit()
-    mark_flag('X', sys.argv[2])
+    mark_flag('X', sys.argv[2], insurer='newindia')
 except:
     log_exceptions()
     pass

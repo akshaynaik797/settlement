@@ -48,7 +48,7 @@ try:
             s1.cell(row=1, column=i + 1).value = sh1[i]
         for i in range(0, len(sh2)):
             s2.cell(row=1, column=i + 1).value = sh2[i]
-        tables = camelot.read_pdf(mypath + onlyfiles[t], pages='all')
+        tables = camelot.read_pdf(pdfpath, pages='all')
         tables.export('temp_files/foo1.xls', f='excel')
         loc = ("temp_files/foo1.xls")
         wb = xlrd.open_workbook(loc)

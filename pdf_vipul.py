@@ -24,15 +24,12 @@ try:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
-    if 'claim has been' not in f:
-        sys.exit(f'{pdfpath} wrong pdf recieved, so not processed')
+    if 'Balaji Medical' in f:
+        op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
+        hosp_name = 'Max'
     else:
-        if 'Balaji Medical' in f:
-            op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
-            hosp_name = 'Max'
-        else:
-            op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-            hosp_name = 'inamdar'
+        op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
+        hosp_name = 'inamdar'
     ###########################################################
     wbkName = 'temp_files/' + 'vipul' + hosp_name + '.xlsx'
     t, wq = 0, 0
@@ -53,10 +50,9 @@ try:
         tables = camelot.read_pdf(mypath + onlyfiles[t], pages='all', line_scale=90)
         tables.export('temp_files/foo1.xlsx', f='excel')
         loc = "temp_files/foo1.xlsx"
-        wb = xlrd.open_workbook(loc)
+        wb = openpyxl.load_workbook(loc)
         with open(mypath + onlyfiles[t], "rb") as f:
             pdf = pdftotext.PDF(f)
-
         with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
             f.write(" ".join(pdf))
         with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
@@ -98,11 +94,11 @@ try:
         gh = [sub.replace('\n', '') for sub in gh]
         gh = [sub.replace('  ', '') for sub in gh]
 
-        sheet_1 = wb.sheet_by_index(1)
-        sheet_1.cell_value(0, 0)
-        max_row = sheet_1.nrows
+        sheet_1 = wb.worksheets[0]
+        sheet_1.cell(1, 1)
+        max_row = sheet_1.max_row
         # print(max_row)
-        max_col = sheet_1.ncols
+        max_col = sheet_1.max_column
         hg = []
         b = []
         p = []

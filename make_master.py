@@ -913,7 +913,10 @@ try:
 					x=[sub.replace(' ','') for sub in x]
 					x=['0.00' if v is '' else v for v in x]
 					#print(x)
-					fur=float(x[0])+float(x[2])+float(x[1])+float(x[3])#+float(x[4])
+					try:
+						fur=float(x[0])+float(x[2])+float(x[1])+float(x[3])#+float(x[4])
+					except:
+						fur = ''
 					stt.append(str(fur))
 					main_s1.cell(row=i+main_row_count+1, column=1).value=sys.argv[3]
 					main_s1.cell(row=i+main_row_count+1, column=2).value=k[3]
@@ -929,8 +932,14 @@ try:
 					main_s1.cell(row=i+main_row_count+1, column=38).value=e[i]
 					main_s1.cell(row=i+main_row_count+1, column=39).value=eo[i]
 					main_s1.cell(row=i+main_row_count+1, column=14).value=ro[i]
-					main_s1.cell(row=i+main_row_count+1, column=16).value=round(float(b[i])/10)
-					main_s1.cell(row=i+main_row_count+1, column=17).value=float(b[i])-round(float(b[i])/10)
+					try:
+						main_s1.cell(row=i+main_row_count+1, column=16).value=round(float(b[i])/10)
+					except:
+						main_s1.cell(row=i+main_row_count+1, column=16).value=''
+					try:
+						main_s1.cell(row=i+main_row_count+1, column=17).value=float(b[i])-round(float(b[i])/10)
+					except:
+						main_s1.cell(row=i+main_row_count+1, column=17).value=''
 					main_s1.cell(row=i+main_row_count+1, column=19).value=bp[i]
 					main_s1.cell(row=i+main_row_count+1, column=18).value=dis[i]
 					main_s1.cell(row=i+main_row_count+1, column=55).value=ded[i]
@@ -1855,8 +1864,14 @@ try:
 					main_s1.cell(row=i+main_row_count+1, column=18).value=s_v[i]
 					main_s1.cell(row=i+main_row_count+1, column=43).value=we[i]
 					#main_s1.cell(row=i+main_row_count+1, column=16).value=b[i]
-					main_s1.cell(row=i+main_row_count+1, column=16).value=round(float(ew[i])/10)  #TDS
-					main_s1.cell(row=i+main_row_count+1, column=17).value=float(ew[i])-round(float(ew[i])/10) #netpayable
+					try:
+						main_s1.cell(row=i+main_row_count+1, column=16).value=round(float(ew[i])/10)  #TDS
+					except:
+						main_s1.cell(row=i+main_row_count+1, column=16).value=0
+					try:
+						main_s1.cell(row=i+main_row_count+1, column=17).value=float(ew[i])-round(float(ew[i])/10) #netpayable
+					except:
+						main_s1.cell(row=i+main_row_count+1, column=17).value=0
 
 				'''for i in range(0,len(np)):
 					lp=[main_s1.cell(row=i+temp_row+1, column=19).value]

@@ -421,9 +421,11 @@ try:
     if (t != 0):
         u = length + 1
         s3.cell(row=1, column=u).value = 'Net amount recommended for payment'
-    for t in range(0, len(onlyfiles)):
-        s3.cell(row=t + 2, column=u).value = goble_total[t]
-
+    try:
+        for t in range(0, len(onlyfiles)):
+            s3.cell(row=t + 2, column=u).value = goble_total[t]
+    except:
+        pass
     # print(po)
     print("Done")
     wbk.save(wbkName)

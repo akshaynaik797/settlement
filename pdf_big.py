@@ -173,7 +173,10 @@ try:
                     if (ty == u):
                         np.append(sheet_4.cell_value(rw, 2))
             else:
-                np.append(sheet_1.cell_value(i, 9))
+                try:
+                    np.append(sheet_1.cell_value(i, 9))
+                except:
+                    np.append('')
         # Refer Note #1
         sheet_1.cell_value(0, 0)
         hg = [sub.replace('a.ii)', '') for sub in hg]

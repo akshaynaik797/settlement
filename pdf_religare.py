@@ -24,15 +24,12 @@ try:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
         f = myfile.read()
-    if 'Claim Approval & Settlement Letter' not in f:
-        sys.exit(f'{pdfpath} wrong pdf recieved, so not processed')
+    if 'Balaji Medical' in f:
+        op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
+        hosp_name = 'Max'
     else:
-        if 'Balaji Medical' in f:
-            op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
-            hosp_name = 'Max'
-        else:
-            op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-            hosp_name = 'inamdar'
+        op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
+        hosp_name = 'inamdar'
     ###########################################################
     wbkName = 'temp_files/' + 'religare' + hosp_name + '.xlsx'
     t, wq = 0, 0
@@ -294,7 +291,10 @@ try:
             s2.cell(row=row_num + 1, column=7).value = eo[i]
             s2.cell(row=row_num + 1, column=8).value = kl[i]
             s2.cell(row=row_num + 1, column=9).value = lk[i]
-        ded = kl[-1]
+        try:
+            ded = kl[-1]
+        except:
+            ded = ''
         s1.cell(row=t + 2, column=19).value = ded
     print("Done")
     wbk.save(wbkName)
