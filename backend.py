@@ -287,7 +287,7 @@ def automate_processing():
     fromtime = today - timedelta(days=365)
     totime = today + timedelta(days=365)
     today = datetime.now().strftime("%d_%m_%Y")
-    hospital_list = ['noble']
+    hospital_list = ['noble', 'ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah']
     try:
         for hosp in hospital_list:
             if os.path.exists(master_excel):
@@ -302,34 +302,18 @@ def automate_processing():
             for sno, filepath, mid in result:
                 try:
                     if os.path.exists(filepath):
-                        with mysql.connector.connect(**conn_data) as con:
-                            cur = con.cursor()
-                            q = "update settlement_mails set completed='p' where sno=%s"
-                            cur.execute(q, (sno,))
-                            con.commit()
+                        mark_flag('p', mid)
                         tmp = re.compile(r"(?<=letters\/)[a-zA-Z_]+(?=_)").search(filepath)
                         if tmp is not None:
                             tmp = tmp.group()
                             if os.path.exists('pdf_' + tmp + ".py"):
                                 subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
                             else:
-                                with mysql.connector.connect(**conn_data) as con:
-                                    cur = con.cursor()
-                                    q = "update settlement_mails set completed='NO_INS_FILE' where sno=%s"
-                                    cur.execute(q, (sno,))
-                                    con.commit()
+                                mark_flag('NO_INS_FILE', mid)
                         else:
-                            with mysql.connector.connect(**conn_data) as con:
-                                cur = con.cursor()
-                                q = "update settlement_mails set completed='NO_INS_FILE' where sno=%s"
-                                cur.execute(q, (sno,))
-                                con.commit()
+                            mark_flag('NO_INS_EXIST', mid)
                     else:
-                        with mysql.connector.connect(**conn_data) as con:
-                            cur = con.cursor()
-                            q = "update settlement_mails set completed='NO_ATTACH' where sno=%s"
-                            cur.execute(q, (sno,))
-                            con.commit()
+                        mark_flag('NO_ATTACH', mid)
                 except:
                     log_exceptions(filepath=filepath)
                 if os.path.exists(master_excel):

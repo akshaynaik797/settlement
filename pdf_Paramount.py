@@ -58,7 +58,7 @@ try:
     sh1_regex = [r"(?<=Member PHS ID) *:* *\w+", r"(?<=Name of the Patient) *:* *[\w ]+(?= \w+)",
                  r"(?<=Name of Insurance co.).*(?=Amount)", r"(?<=Policy No).*(?=Insurer)",
                  r"(?<=Employee No) *:* *\S+", r"(?<=Group Name).*(?= {3,})"]
-    sh2_regex = [r"(?<=Payment To).*", r"\S+\s*(?=Employee No)", r"\S+\s*(?=Sum Insured)"]
+    sh2_regex = [r"(?<=Payment To).*", r"(?<=Insurer UTR\n).*", r"\S+\s*(?=Sum Insured)"]
     sh3_regex = [r"(?<=Date of Admission).*", r"(?<=Date of Discharge).*", r"(?<=Amount Claimed).*",
                  r"(?<=Claim Amt Settled).*", r"(?<=Amt Paid to Hospital).*", r"(?<=Amt Paid to Member).*"]
 
