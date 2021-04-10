@@ -1,8 +1,2 @@
-a = 1
-
-def b():
-    global a
-    a = 2
-    print(a)
-b()
-print(a)
+tables = camelot.read_pdf(pdfpath, pages='all')
+tables.export('temp_files/foo1.xls', f='excel')
