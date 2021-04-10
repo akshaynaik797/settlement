@@ -20,12 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pdf_national.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf_royal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2.py" beforeDir="false" afterPath="$PROJECT_DIR$/2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movemaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/movemaster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_master.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Medsave.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medsave.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617984636016</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="0.0.22&#10;done nic and royal">
+      <created>1618040519624</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1618040519624</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,57 +332,58 @@
     <MESSAGE value="0.0.19" />
     <MESSAGE value="0.0.20&#10;done all changes" />
     <MESSAGE value="0.0.21" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.21" />
+    <MESSAGE value="0.0.22&#10;done nic and royal" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.22&#10;done nic and royal" />
   </component>
   <component name="WindowStateProjectService">
     <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614071490460">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.900@0.0.1600.900" timestamp="1614071490460" />
-    <state x="617" y="-128" width="881" height="866" key="CommitChangelistDialog2" timestamp="1617984635581">
+    <state x="615" y="-34" width="881" height="866" key="CommitChangelistDialog2" timestamp="1618040519330">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="617" y="-128" width="881" height="866" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1617984635581" />
-    <state width="1334" height="485" key="DebuggerActiveHint" timestamp="1618039001928">
+    <state x="615" y="-34" width="881" height="866" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1618040519330" />
+    <state width="1334" height="485" key="DebuggerActiveHint" timestamp="1618062285133">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1334" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1618039001928" />
+    <state width="1334" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1618062285133" />
     <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl" timestamp="1614071447746">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1614071447746" />
-    <state width="1577" height="289" key="GridCell.Tab.0.bottom" timestamp="1618039229261">
+    <state width="1577" height="297" key="GridCell.Tab.0.bottom" timestamp="1618065617760">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618039229261" />
-    <state width="1577" height="289" key="GridCell.Tab.0.center" timestamp="1618039229260">
+    <state width="1577" height="297" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618065617760" />
+    <state width="1577" height="297" key="GridCell.Tab.0.center" timestamp="1618065617760">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1618039229260" />
-    <state width="1577" height="289" key="GridCell.Tab.0.left" timestamp="1618039229259">
+    <state width="1577" height="297" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1618065617760" />
+    <state width="1577" height="297" key="GridCell.Tab.0.left" timestamp="1618065617759">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1618039229259" />
-    <state width="1577" height="289" key="GridCell.Tab.0.right" timestamp="1618039229261">
+    <state width="1577" height="297" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1618065617759" />
+    <state width="1577" height="297" key="GridCell.Tab.0.right" timestamp="1618065617760">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1618039229261" />
-    <state width="1577" height="289" key="GridCell.Tab.1.bottom" timestamp="1618039177565">
+    <state width="1577" height="297" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1618065617760" />
+    <state width="1577" height="297" key="GridCell.Tab.1.bottom" timestamp="1618065601465">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618039177565" />
-    <state width="1577" height="289" key="GridCell.Tab.1.center" timestamp="1618039177564">
+    <state width="1577" height="297" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618065601465" />
+    <state width="1577" height="297" key="GridCell.Tab.1.center" timestamp="1618065601464">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1618039177564" />
-    <state width="1577" height="289" key="GridCell.Tab.1.left" timestamp="1618039177563">
+    <state width="1577" height="297" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1618065601464" />
+    <state width="1577" height="297" key="GridCell.Tab.1.left" timestamp="1618065601464">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1618039177563" />
-    <state width="1577" height="289" key="GridCell.Tab.1.right" timestamp="1618039177564">
+    <state width="1577" height="297" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1618065601464" />
+    <state width="1577" height="297" key="GridCell.Tab.1.right" timestamp="1618065601465">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="289" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1618039177564" />
+    <state width="1577" height="297" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1618065601465" />
     <state x="285" y="18" key="SettingsEditor" timestamp="1616239458789">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -415,6 +421,16 @@
           <url>file://$PROJECT_DIR$/pdf_national.py</url>
           <line>83</line>
           <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_Medi_Assist.py</url>
+          <line>443</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_Medsave.py</url>
+          <line>110</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

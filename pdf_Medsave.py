@@ -9,6 +9,7 @@ import xlrd
 from make_log import log_exceptions
 from backend import mark_flag
 from movemaster import move_master_to_master_insurer
+import re
 
 try:
     pdfpath = sys.argv[1]
@@ -98,11 +99,14 @@ try:
         u = g.find('\n') + w
         hg.append(f[x1 + 1:u])
 
-        w = f.find('Payment Float No.') + 17
-        g = f[w:]
-        x1 = g.find(':') + w
-        u = g.find('\n') + w
-        hg.append(f[x1 + 1:u])
+        # w = f.find('Payment Float No.') + 17
+        # g = f[w:]
+        # x1 = g.find(':') + w
+        # u = g.find('\n') + w
+        tmp = re.compile(r"(?<=NEFT).*(?=in your Bank Account)").search(f)
+        if tmp is not None:
+            tmp = tmp.group().strip()
+        hg.append(tmp)
 
         w = f.find('issued by') + 9
         g = f[w:]

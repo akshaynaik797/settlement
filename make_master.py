@@ -1437,6 +1437,7 @@ try:
 			s1=wbk.worksheets[0]
 			s2=wbk.worksheets[1]
 			s3=wbk.worksheets[2]
+			# tmp_value = s2.cell(row=2, column=3).value
 			if s1.cell(row=1, column=1).value!=None:
 				row_count = s1.max_row
 				ccn=[]
@@ -1454,6 +1455,7 @@ try:
 				pe=[]
 				doa=[]
 				dod=[]
+				net_pay = []
 				for t in range(2,row_count+1):
 					ccn.append(s1.cell(row=t, column=2).value )
 					if(s1.cell(row=t, column=1).value=='error'):
@@ -1474,6 +1476,7 @@ try:
 					pe.append(s1.cell(row=t, column=13).value)
 					doa.append(s1.cell(row=t, column=14).value)
 					dod.append(s1.cell(row=t, column=15).value)
+					net_pay.append(s2.cell(row=t, column=3).value)
 				#print(pe)
 				main_row_count = main_s1.max_row
 			#insert
@@ -1559,7 +1562,7 @@ try:
 					main_s1.cell(row=i+main_row_count+1, column=19).value=r[i]
 					main_s1.cell(row=i+main_row_count+1, column=16).value=s_v[i]
 					main_s1.cell(row=i+main_row_count+1, column=79).value=ed[i]
-					main_s1.cell(row=i+main_row_count+1, column=17).value=we[i]
+					main_s1.cell(row=i+main_row_count+1, column=17).value=net_pay[i]
 				m=3
 				b=[]
 				p=[]
