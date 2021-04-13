@@ -39,11 +39,11 @@ try:
     data_dict = {'Sno': mid, 'HospitalID': 'inamdar', 'InsurerID': 'icici_lombard'}
     regex_dict = {
         'ALNO': [[r"(?<=AL No).*"], [':']],
-        'ClaimNo': [[r"(?<=Claim No).*(?=AL)"], []],
+        'ClaimNo': [[r"(?<=Claim No).*(?=AL)"], [':']],
         'PolicyNo': [[r"(?<=Policy No :).*"], [':']],
         'UTRNo': [[r"(?<=ref. no.).*(?=dated)"], []],
         'MemberID': [[r"(?<=UHID NO :).*(?=Relationship)"], []],
-        'Diagnosis': [[r".*(?=\s*Diagnosis)"], []],
+        'Diagnosis': [[r".*(?=\s*Diagnosis)", r"(?<=Diagnosis :).*"], []],
         'PatientName': [[r"(?<=Name of the Patient :).*(?=Policy)"], [':']],
         'DateofAdmission': [[r"(?<=Date Of Admission).*(?=Date)"], [':']],
         'DateofDischarge': [[r"(?<=Date Of Discharge).*"], [':']],
@@ -52,11 +52,14 @@ try:
         'DateOfPayment': [[r"(?<=dated).*(?=towards)"], []],
         'Transactiondate': [[r"(?<=dated).*(?=towards)"], []],
         'BilledAmount': [[r"(?<=Requested Amount i! n Rs).*"], [':', 'Rs']],
-        'TDS%': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs']]
+        'TDS%': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs']],
+        'TDS': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs']],
     }
 
+    match_dict = {
+        "Diagnosis": r"^\w+(?: \w+)*$"
+    }
     for i in regex_dict:
-        temp = ''
         for reg in regex_dict[i][0]:
             temp = re.compile(reg).search(f)
             if temp is not None:
@@ -64,9 +67,16 @@ try:
                 for j in regex_dict[i][1]:
                     temp = temp.replace(j, '')
                 temp = temp.strip()
-                break
+                if i in match_dict:
+                    temp = re.compile(match_dict[i]).match(temp)
+                    if temp is not None:
+                        temp = temp.group().strip()
+                        break
+                    else:
+                        temp = ""
         data_dict[i] = temp
 
+    data_dict['COPay'] = '0'
     wbName = 'master.xlsx'
     wb = openpyxl.Workbook()
     wb.create_sheet('Sheet1')

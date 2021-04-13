@@ -1,8 +1,8 @@
 import subprocess
 import os
 
-tmp = 'religare'
+tmp = 'icici_lombard'
 mid = 'temp_id'
-filepath = '/home/akshay/Downloads/1078_Settlement.pdf'
+filepath = '/home/akshay/Downloads/91654494_.pdf'
 
 subprocess.run(["python", 'pdf_' + tmp + ".py", filepath, mid])
