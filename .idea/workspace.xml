@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_master.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/temp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,27 +67,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="backend" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="settlement" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -135,6 +117,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="pdf_temp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="settlement" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pdf_temp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="temp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,10 +162,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.1" />
+        <item itemvalue="Python.pdf_temp" />
         <item itemvalue="Python.pdf_royal" />
         <item itemvalue="Python.temp" />
         <item itemvalue="Python.one" />
-        <item itemvalue="Python.backend" />
       </list>
     </recent_temporary>
   </component>
@@ -355,46 +358,46 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="614" y="-52" width="881" height="866" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1618302814670" />
-    <state width="1334" height="485" key="DebuggerActiveHint" timestamp="1618321470596">
+    <state width="1334" height="485" key="DebuggerActiveHint" timestamp="1618486445656">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1334" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1618321470596" />
+    <state width="1334" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1618486445656" />
     <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl" timestamp="1614071447746">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1614071447746" />
-    <state width="1577" height="223" key="GridCell.Tab.0.bottom" timestamp="1618322394434">
+    <state width="1577" height="222" key="GridCell.Tab.0.bottom" timestamp="1618486426195">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618322394434" />
-    <state width="1577" height="223" key="GridCell.Tab.0.center" timestamp="1618322394432">
+    <state width="1577" height="222" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618486426195" />
+    <state width="1577" height="222" key="GridCell.Tab.0.center" timestamp="1618486426195">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1618322394432" />
-    <state width="1577" height="223" key="GridCell.Tab.0.left" timestamp="1618322394430">
+    <state width="1577" height="222" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1618486426195" />
+    <state width="1577" height="222" key="GridCell.Tab.0.left" timestamp="1618486426194">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1618322394430" />
-    <state width="1577" height="223" key="GridCell.Tab.0.right" timestamp="1618322394433">
+    <state width="1577" height="222" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1618486426194" />
+    <state width="1577" height="222" key="GridCell.Tab.0.right" timestamp="1618486426195">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1618322394433" />
-    <state width="1577" height="223" key="GridCell.Tab.1.bottom" timestamp="1618322394438">
+    <state width="1577" height="222" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1618486426195" />
+    <state width="1577" height="222" key="GridCell.Tab.1.bottom" timestamp="1618486428100">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618322394438" />
-    <state width="1577" height="223" key="GridCell.Tab.1.center" timestamp="1618322394436">
+    <state width="1577" height="222" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1618486428100" />
+    <state width="1577" height="222" key="GridCell.Tab.1.center" timestamp="1618486428099">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1618322394436" />
-    <state width="1577" height="223" key="GridCell.Tab.1.left" timestamp="1618322394435">
+    <state width="1577" height="222" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1618486428099" />
+    <state width="1577" height="222" key="GridCell.Tab.1.left" timestamp="1618486428099">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1618322394435" />
-    <state width="1577" height="223" key="GridCell.Tab.1.right" timestamp="1618322394437">
+    <state width="1577" height="222" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1618486428099" />
+    <state width="1577" height="222" key="GridCell.Tab.1.right" timestamp="1618486428100">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="223" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1618322394437" />
+    <state width="1577" height="222" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1618486428100" />
     <state x="285" y="18" key="SettingsEditor" timestamp="1616239458789">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -419,5 +422,16 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="433" y="154" width="740" height="634" key="find.popup/0.0.1600.900@0.0.1600.900" timestamp="1616843019957" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_temp.py</url>
+          <line>90</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

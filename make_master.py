@@ -1799,6 +1799,7 @@ try:
 				pe=[]
 				cb=[]
 				g_n=[]
+				utr_no=[]
 				for t in range(2,row_count+1):
 					ccn.append(s1.cell(row=t, column=2).value )
 					if(s1.cell(row=t, column=1).value=='error'):
@@ -1820,6 +1821,7 @@ try:
 					b.append(s1.cell(row=t, column=14).value)
 					cb.append(s1.cell(row=t, column=16).value)
 					g_n.append(s1.cell(row=t, column=17).value)
+					utr_no.append(s2.cell(row=t, column=4).value)
 				#print(b,cb)
 		#insert
 				main_row_count = main_s1.max_row
@@ -1843,6 +1845,7 @@ try:
 					main_s1.cell(row=i+main_row_count+1, column=15).value=pe[i]
 					main_s1.cell(row=i+main_row_count+1, column=40).value=b[i]
 					main_s1.cell(row=i+main_row_count+1, column=64).value=cb[i]
+					main_s1.cell(row=i + main_row_count + 1, column=13).value = utr_no[i]
 
 				b=[]
 				p=[]

@@ -1,8 +1,8 @@
 import subprocess
 import os
 
-tmp = 'icici_lombard'
+tmp = 'temp'
 mid = 'temp_id'
-filepath = '/home/akshay/Downloads/91654494_.pdf'
+filepath = '/home/akshay/temp/IN00043Q0343055INBOM.pdf'
 
 subprocess.run(["python", 'pdf_' + tmp + ".py", filepath, mid])
