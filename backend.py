@@ -134,6 +134,8 @@ def mark_flag(flag, mid, **kwargs):
         cur = con.cursor()
         q = "update settlement_mails set completed=%s, processed_time=%s where id=%s"
         cur.execute(q, (flag, time_stamp, mid))
+        q = "update utr_mails set completed='' where id=%s"
+        cur.execute(q, (mid,))
         con.commit()
 
 def mark_utr_tables(filepath):
@@ -296,7 +298,7 @@ def automate_processing():
                 remove_tree(directory)
             with mysql.connector.connect(**conn_data) as con:
                 cur = con.cursor()
-                q = "SELECT sno, attach_path, id FROM settlement_mails where hospital=%s and completed!='X'"
+                q = "SELECT sno, attach_path, id FROM settlement_mails where hospital=%s and completed=''"
                 cur.execute(q, (hosp,))
                 result = cur.fetchall()
             for sno, filepath, mid in result:

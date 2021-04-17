@@ -7,7 +7,7 @@ import camelot
 import pdftotext
 import xlrd
 from make_log import log_exceptions
-from backend import mark_flag
+from backend import mark_flag, conn_data
 from movemaster import move_master_to_master_insurer
 
 try:
@@ -253,9 +253,22 @@ try:
             u1=g.find('\n')+w1
             ty=(f[w1:u1])
             dis2=ty.replace('  ','')
-        else:dis2=0
+        else:
+            dis2=0
         s1.cell(row=t+2, column=16).value = float(dis1)+float(dis2)
 
+        ########
+        import mysql.connector
+        utr, date = "", ""
+        q = "select utr, `date` from ins_big_utr_date where id=%s limit 1"
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            cur.execute(q, (sys.argv[2],))
+            r = cur.fetchone()
+            if r is not None:
+                utr, date = r
+        s1.cell(row=t+2, column=17).value = utr
+        s1.cell(row=t + 2, column=18).value = date
 
     print("Done")
     wbk.save(wbkName)

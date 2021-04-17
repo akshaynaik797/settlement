@@ -996,6 +996,8 @@ try:
 				ks=[]
 				sk=[]
 				dis=[]
+				utr=[]
+				utr_date = []
 				for t in range(2,row_count+1):
 					ccn.append(s1.cell(row=t, column=2).value )
 					if(s1.cell(row=t, column=1).value=='error'):
@@ -1007,7 +1009,7 @@ try:
 					np.append(s1.cell(row=t, column=4).value)
 					r.append(s1.cell(row=t, column=5).value)
 					s_v.append(s1.cell(row=t, column=6).value)
-					we.append(s1.cell(row=t, column=7).value )
+					we.append(s1.cell(row=t, column=7).value)
 					ew.append(s1.cell(row=t, column=8).value)
 					e.append(s1.cell(row=t, column=9).value)
 					eo.append(s1.cell(row=t, column=10).value)
@@ -1017,6 +1019,8 @@ try:
 					ks.append(s1.cell(row=t, column=14).value)
 					sk.append(s1.cell(row=t, column=15).value)
 					dis.append(s1.cell(row=t, column=16).value)
+					utr.append(s1.cell(row=t, column=17).value)
+					utr_date.append(s1.cell(row=t, column=18).value)
 				#print(ks)
 		#insert
 				main_row_count = main_s1.max_row
@@ -1035,6 +1039,7 @@ try:
 					#main_s1.cell(row=i+main_row_count+1, column=12).value=ew[i]
 					main_s1.cell(row=i+main_row_count+1, column=14).value=e[i]
 					main_s1.cell(row=i+main_row_count+1, column=15).value=eo[i]
+					main_s1.cell(row=i+main_row_count+1, column=17).value=eo[i]
 					if(eo[i]!=None):
 						main_s1.cell(row=i+main_row_count+1, column=16).value=round(float(eo[i])/10)
 					main_s1.cell(row=i+main_row_count+1, column=67).value=ro[i]
@@ -1042,6 +1047,9 @@ try:
 					main_s1.cell(row=i+main_row_count+1, column=69).value=bp[i]
 					main_s1.cell(row=i+main_row_count+1, column=55).value=sk[i]
 					main_s1.cell(row=i+main_row_count+1, column=18).value=dis[i]
+					main_s1.cell(row=i + main_row_count + 1, column=50).value = utr_date[i]
+					main_s1.cell(row=i + main_row_count + 1, column=56).value = utr_date[i]
+					main_s1.cell(row=i + main_row_count + 1, column=13).value = utr[i]
 				ccn=[]
 				p=[]
 				np=[]

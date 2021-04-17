@@ -67,7 +67,8 @@ try:
         datadict['pname'] = temp_l[2]
         datadict['tpa'] = temp_l[3]
 
-
+    if 'FAMILY' in datadict['tpa']:
+        datadict['pname'] = datadict['pname'][1:-1]
 
     data = (datadict['advice_no'],
             datadict['insurer_name'],
