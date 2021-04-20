@@ -36,7 +36,6 @@ try:
     po=[]
     repeat=[]
     fg=[]
-    f=''
     wbk = openpyxl.Workbook()
     wbk.create_sheet('1')
     wbk.create_sheet('Sheet1')

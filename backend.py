@@ -289,7 +289,7 @@ def automate_processing():
     fromtime = today - timedelta(days=365)
     totime = today + timedelta(days=365)
     today = datetime.now().strftime("%d_%m_%Y")
-    hospital_list = ['ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah', 'ils_ho']
+    hospital_list = ['noble', 'ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah']
     try:
         for hosp in hospital_list:
             if os.path.exists(master_excel):
