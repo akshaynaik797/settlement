@@ -35,7 +35,7 @@ try:
         hosp_name = 'inamdar'
     ###########################################################
     wbkName = 'temp_files/' + 'fhpl' + hosp_name + '.xlsx'
-    t, wq =0, 0
+    t, wq,f =0, 0,0
     wbk = openpyxl.Workbook()
     wbk.create_sheet('1')
     wbk.create_sheet('Sheet3')
