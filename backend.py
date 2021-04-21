@@ -95,21 +95,19 @@ def get_hospital(filepath):
                 hospital = r[0]
     return hospital
 
-def get_row(filepath):
+def get_row(mid):
     fields = ("id","subject","date","sys_time","attach_path","completed","sender","sno","folder","process","hospital")
     temp = {}
     for i in fields:
         temp[i] = ""
-    if filepath != "":
-        filepath = os.path.split(filepath)[-1]
-        with mysql.connector.connect(**conn_data) as con:
-            cur = con.cursor()
-            q = "select * from settlement_mails where attach_path like %s limit 1"
-            cur.execute(q, ('%' + filepath + '%',))
-            r = cur.fetchone()
-            if r is not None:
-                for k, v in zip(fields, r):
-                    temp[k] = v
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        q = "select * from settlement_mails where id=%s order by sno desc limit 1"
+        cur.execute(q, (mid,))
+        r = cur.fetchone()
+        if r is not None:
+            for k, v in zip(fields, r):
+                temp[k] = v
     return temp
 
 def check_mid_in_master(mid):
@@ -124,12 +122,12 @@ def check_mid_in_master(mid):
 
 def mark_flag(flag, mid, **kwargs):
     time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    if not kwargs:
-        if flag == 'X':
-            if check_mid_in_master(mid):
-                pass
-            else:
-                return None
+    # if not kwargs:
+    #     if flag == 'X':
+    #         if check_mid_in_master(mid):
+    #             pass
+    #         else:
+    #             return None
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         q = "update settlement_mails set completed=%s, processed_time=%s where id=%s"
@@ -289,7 +287,8 @@ def automate_processing():
     fromtime = today - timedelta(days=365)
     totime = today + timedelta(days=365)
     today = datetime.now().strftime("%d_%m_%Y")
-    hospital_list = ['noble', 'ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah']
+    # hospital_list = ['ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah', 'ils_ho']
+    hospital_list = ['noble']
     try:
         for hosp in hospital_list:
             if os.path.exists(master_excel):

@@ -10,9 +10,9 @@ from backend import conn_data, mark_flag, get_hospital, get_row
 from make_log import log_exceptions
 
 try:
-    hospital = get_hospital(sys.argv[1])
-    row_data = get_row(sys.argv[1])
+    row_data = get_row(sys.argv[2])
     mail_id = row_data['id']
+    hospital = row_data['hospital']
     with open(sys.argv[1], "rb") as f:
         pdf = pdftotext.PDF(f)
     with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
@@ -88,6 +88,30 @@ try:
         sql = "insert into City_Records (`Advice_No`,`Insurer_name`,`City_Transaction_Reference`,`Payer_Reference_No`,`Payment_Amount`,`Processing_Date`,`City_Claim_No`,`City_Patient_name`,`City_Admission_Date`,`City_TPA`,`Payment_Details`,`NIA_Transaction_Reference`, `hospital`, mail_id) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         cur.execute(sql, data)
         con.commit()
+
+    if 'UIIC' in datadict['insurer_name']:
+        q = "insert into stgSettlement " \
+            "(`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
+            "`BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`," \
+            " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`) "
+        q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
+
+        params = [datadict['advice_no'], 'UIIC', 'City_TPA', datadict['pname'], datadict['pname'], '', '', '',
+                  datadict['transaction_reference'], '', datadict['payment_amount'], '', datadict['payment_amount'],
+                  datadict['procesing_date'], datadict['adminssion_date'], '', sys.argv[2], hospital]
+
+        q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
+             "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, `TDS`=%s," \
+             "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, `hospital`=%s"
+        q = q + q1
+
+        params = params + params[1:]
+
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            cur.execute(q, params)
+            con.commit()
+
     mark_flag('X', sys.argv[2], insurer='city')
 except:
     log_exceptions()
