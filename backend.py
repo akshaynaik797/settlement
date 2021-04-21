@@ -23,10 +23,7 @@ import openpyxl
 
 from movemaster import move_master_to_master_insurer
 from make_log import log_exceptions
-conn_data = {'host': "iclaimdev.caq5osti8c47.ap-south-1.rds.amazonaws.com",
-             'user': "admin",
-             'password': "Welcome1!",
-             'database': 'python'}
+
 
 directory = 'backups'
 
@@ -95,21 +92,6 @@ def get_hospital(filepath):
                 hospital = r[0]
     return hospital
 
-def get_row(mid):
-    fields = ("id","subject","date","sys_time","attach_path","completed","sender","sno","folder","process","hospital")
-    temp = {}
-    for i in fields:
-        temp[i] = ""
-    with mysql.connector.connect(**conn_data) as con:
-        cur = con.cursor()
-        q = "select * from settlement_mails where id=%s order by sno desc limit 1"
-        cur.execute(q, (mid,))
-        r = cur.fetchone()
-        if r is not None:
-            for k, v in zip(fields, r):
-                temp[k] = v
-    return temp
-
 def check_mid_in_master(mid):
     filepath = 'master_insurer.xlsx'
     if os.path.exists(filepath):
@@ -120,21 +102,6 @@ def check_mid_in_master(mid):
                 return True
     return False
 
-def mark_flag(flag, mid, **kwargs):
-    time_stamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    # if not kwargs:
-    #     if flag == 'X':
-    #         if check_mid_in_master(mid):
-    #             pass
-    #         else:
-    #             return None
-    with mysql.connector.connect(**conn_data) as con:
-        cur = con.cursor()
-        q = "update settlement_mails set completed=%s, processed_time=%s where id=%s"
-        cur.execute(q, (flag, time_stamp, mid))
-        q = "update utr_mails set completed='' where id=%s"
-        cur.execute(q, (mid,))
-        con.commit()
 
 def mark_utr_tables(filepath):
     filepath = os.path.split(filepath)[-1]

@@ -6,7 +6,7 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from backend import conn_data, mark_flag, get_hospital, get_row
+from common import conn_data, mark_flag, get_row
 from make_log import log_exceptions
 
 
@@ -15,7 +15,7 @@ try:
     mail_id = row_data['id']
     mail_date = row_data['date']
     fpath = sys.argv[1]
-    hospital = get_hospital(fpath)
+    hospital = row_data['hospital']
     start = now = datetime.datetime.now()
 
     with mysql.connector.connect(**conn_data) as conn:

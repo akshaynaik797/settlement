@@ -6,7 +6,7 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from backend import conn_data, mark_flag, get_hospital, get_row
+from common import conn_data, mark_flag, get_row
 from make_log import log_exceptions
 
 try:

@@ -11,18 +11,15 @@ import camelot
 import pdftotext
 import xlrd
 from make_log import log_exceptions
-from backend import mark_flag
+from common import mark_flag, get_row
 from movemaster import move_master_to_master_insurer
 
 try:
+    row_data = get_row(sys.argv[2])
+    mail_id = row_data['id']
+    hospital = row_data['hospital']
     pdfpath = sys.argv[1]
-    onlyfiles = [os.path.split(pdfpath)[1]]
-    mypath = os.path.dirname(pdfpath)+'/'
-
-    hosp_name = ''
-
-    with open(pdfpath, "rb") as f:
-        pdf = pdftotext.PDF(f)
+    pdf = pdftotext.PDF(sys.argv[1])
     with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
         f.write(" ".join(pdf))
     with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:

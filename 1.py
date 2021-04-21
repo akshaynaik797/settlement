@@ -1,8 +1,9 @@
 import subprocess
 import os
 
-ins = 'newindia'
+ins = 'temp'
 mid = '177fcf4b4c7f4602'
-filepath = '/home/akshay/temp/8422_PAYMENT_DETAIL_1000002023186414691.pdf'
+mid = 'AAMkAGMxMzcwMjVlLThjYjYtNGJlOC1iOWQzLTUzZjg5MTEwOTJiZABGAAAAAABg8S9egpbpQom_SYSQFJTABwA80npqDluGRIdxtgeTfSBNAAAAAAEMAAA80npqDluGRIdxtgeTfSBNAALeh3rnAAA='
+filepath = '/home/akshay/temp/86952040_.pdf'
 
 subprocess.run(["python", 'pdf_' + ins + ".py", filepath, mid])
