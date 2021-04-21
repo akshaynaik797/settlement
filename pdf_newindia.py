@@ -126,6 +126,46 @@ try:
                 print(query)
                 cur.execute(query)
                 conn.commit()
+
+
+    utrno, tran_date = "", ""
+    temp_q = "select City_Transaction_Reference,Processing_Date from City_Records " \
+             "where NIA_Transaction_Reference =%s"
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(temp_q, (refrenceNo,))
+        r = cur.fetchone()
+        if r:
+            utrno, tran_date = r
+
+    q = "insert into stgSettlement " \
+        "(`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
+        "`BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`," \
+        " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`) "
+    q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
+
+    params = [refrenceNo + ',' + claimNo, 'india', tpa, '', claimNo, patientName, '', '',
+              utrno, '', grossAmount, tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital]
+
+    for i, j in enumerate(params):
+        try:
+            params[i] = str(j)
+        except:
+            pass
+
+
+    q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
+         "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, `TDS`=%s," \
+         "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, `hospital`=%s"
+    q = q + q1
+
+    params = params + params[1:]
+
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(q, params)
+        con.commit()
+
     mark_flag('X', sys.argv[2], insurer='newindia')
 except:
     log_exceptions()
