@@ -1,3 +1,4 @@
+import re
 import sys
 
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
@@ -18,9 +19,10 @@ try:
         'DateofAdmission': [[r"(?<=Date of Admission).*(?=Date)"], [':'], r"^\S+(?: \S+)*$"],
         'DateofDischarge': [[r"(?<=Date of Discharge).*"], [':'], r"^\S+(?: \S+)*$"],
     }
-    data_dict = get_data_dict(regex_dict, f)
-    data_dict['unique_key'] = data_dict['ClaimNo']
-    ins_upd_data(mail_id, hospital, data_dict)
+    datadict = get_data_dict(regex_dict, f)
+    datadict['unique_key'] = datadict['ClaimNo']
+    datadict['InsurerID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+    ins_upd_data(mail_id, hospital, datadict)
     mark_flag('X', sys.argv[2])
 except Exception:
     log_exceptions()
