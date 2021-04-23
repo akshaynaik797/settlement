@@ -21,6 +21,7 @@ import re
 import mysql.connector
 import openpyxl
 
+from common import conn_data, mark_flag
 from movemaster import move_master_to_master_insurer
 from make_log import log_exceptions
 
@@ -243,29 +244,13 @@ def process_insurer_pdfs(folder_name, insname, files):
 
 
 def automate_processing():
-    zip_file = 'letters.zip'
-    dst = 'excels/'
-    if os.path.exists(dst):
-        remove_tree(dst)
-    Path(dst).mkdir(parents=True, exist_ok=True)
-    master_excel = 'master_insurer.xlsx'
-    letters_location = "../index/"
-    today = datetime.now()
-    fromtime = today - timedelta(days=365)
-    totime = today + timedelta(days=365)
-    today = datetime.now().strftime("%d_%m_%Y")
-    # hospital_list = ['ils', 'ils_dumdum', 'ils_agartala', 'ils_howrah', 'ils_ho']
-    hospital_list = ['noble']
     try:
-        for hosp in hospital_list:
-            if os.path.exists(master_excel):
-                os.remove(master_excel)
-            if os.path.exists(directory):
-                remove_tree(directory)
+        emails = ["NIC.Payments1@nicl.in"]
+        for i in emails:
             with mysql.connector.connect(**conn_data) as con:
                 cur = con.cursor()
-                q = "SELECT sno, attach_path, id FROM settlement_mails where hospital=%s and completed=''"
-                cur.execute(q, (hosp,))
+                q = "SELECT sno, attach_path, id FROM settlement_mails where sender=%s"
+                cur.execute(q, (i,))
                 result = cur.fetchall()
             for sno, filepath, mid in result:
                 try:
@@ -284,16 +269,6 @@ def automate_processing():
                         mark_flag('NO_ATTACH', mid)
                 except:
                     log_exceptions(filepath=filepath)
-                if os.path.exists(master_excel):
-                    copyfile(master_excel, os.path.join(dst, hosp + '.xlsx'))
-        zipf = zipfile.ZipFile(zip_file, 'w', zipfile.ZIP_DEFLATED)
-        zipdir(dst, zipf)
-        zipf.close()
-        date = datetime.now().strftime('%d-%b-%Y')
-        if os.path.exists(zip_file):
-            subject = f"settlement excels for {date}"
-            send_email(zip_file, subject)
-        return True
     except:
         log_exceptions()
 

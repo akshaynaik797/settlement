@@ -144,7 +144,7 @@ try:
         " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`) "
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
-    params = [refrenceNo + ',' + claimNo, 'india', tpa, '', claimNo, patientName, '', '',
+    params = [refrenceNo + ',' + claimNo, 'newindia', tpa, '', claimNo, patientName, '', '',
               utrno, '', grossAmount, tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital]
 
     for i, j in enumerate(params):
