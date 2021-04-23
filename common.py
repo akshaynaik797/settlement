@@ -6,7 +6,7 @@ import pdftotext
 conn_data = {'host': "iclaimdev.caq5osti8c47.ap-south-1.rds.amazonaws.com",
              'user': "admin",
              'password': "Welcome1!",
-             'database': 'python'}
+             'database': 'python_rep'}
 
 stg_sett_fields = (
     "srno", "InsurerID", "TPAID", "ALNO", "ClaimNo", "PatientName", "AccountNo", "BeneficiaryBank_Name", "UTRNo",

@@ -1,8 +1,8 @@
 import subprocess
 import os
 
-ins = 'national'
+ins = 'royal'
 mid = '177fbf009add6841'
-filepath = '/home/akshay/temp/2622_892411028018_mediclaim.noble_gmail.com.xls'
+filepath = '/home/akshay/Downloads/8758_CashlessClaimSettlementLetter_IH19020272CSL00.pdf'
 
 subprocess.run(["python", 'pdf_' + ins + ".py", filepath, mid])
