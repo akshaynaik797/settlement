@@ -22,8 +22,11 @@
     <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_royal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_royal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +77,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="backend" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="settlement" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="common" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,27 +111,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/common.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pdf_royal" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="settlement" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pdf_royal.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -161,10 +164,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.1" />
+        <item itemvalue="Python.backend" />
         <item itemvalue="Python.temp" />
         <item itemvalue="Python.pdf_temp" />
         <item itemvalue="Python.common" />
-        <item itemvalue="Python.pdf_royal" />
       </list>
     </recent_temporary>
   </component>
@@ -364,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619158938857</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="0.0.35&#10;done royal">
+      <created>1619160222210</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1619160222210</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -380,7 +390,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.6&#10;fixed all" />
     <MESSAGE value="0.0.7" />
     <MESSAGE value="0.0.8" />
     <MESSAGE value="0.0.9&#10;fixed newindia and city" />
@@ -405,7 +414,8 @@
     <MESSAGE value="0.0.32&#10;not done fhp into db" />
     <MESSAGE value="0.0.33&#10;done temp.py" />
     <MESSAGE value="0.0.34&#10;done national, mediassist, fhpl" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.34&#10;done national, mediassist, fhpl" />
+    <MESSAGE value="0.0.35&#10;done royal" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.35&#10;done royal" />
   </component>
   <component name="WindowStateProjectService">
     <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614071490460">
@@ -416,14 +426,14 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="710" y="190" width="170" height="496" key="#xdebugger.XInspectDialog/0.0.1600.900@0.0.1600.900" timestamp="1618320796271" />
-    <state x="605" y="18" width="881" height="656" key="CommitChangelistDialog2" timestamp="1619158938279">
+    <state x="604" y="0" width="881" height="656" key="CommitChangelistDialog2" timestamp="1619160222143">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state x="605" y="18" width="881" height="656" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1619158938279" />
-    <state width="1459" height="485" key="DebuggerActiveHint" timestamp="1619158503162">
+    <state x="604" y="0" width="881" height="656" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1619160222143" />
+    <state width="1459" height="485" key="DebuggerActiveHint" timestamp="1619174939512">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1459" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1619158503162" />
+    <state width="1459" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1619174939512" />
     <state x="800" y="7" width="800" height="893" key="DiffContextDialog" timestamp="1619068515994">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -432,38 +442,38 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1614071447746" />
-    <state width="1577" height="228" key="GridCell.Tab.0.bottom" timestamp="1619160150556">
+    <state width="1577" height="369" key="GridCell.Tab.0.bottom" timestamp="1619175032200">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1619160150556" />
-    <state width="1577" height="228" key="GridCell.Tab.0.center" timestamp="1619160150554">
+    <state width="1577" height="369" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1619175032200" />
+    <state width="1577" height="369" key="GridCell.Tab.0.center" timestamp="1619175032198">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1619160150554" />
-    <state width="1577" height="228" key="GridCell.Tab.0.left" timestamp="1619160150553">
+    <state width="1577" height="369" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1619175032198" />
+    <state width="1577" height="369" key="GridCell.Tab.0.left" timestamp="1619175032197">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1619160150553" />
-    <state width="1577" height="228" key="GridCell.Tab.0.right" timestamp="1619160150555">
+    <state width="1577" height="369" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1619175032197" />
+    <state width="1577" height="369" key="GridCell.Tab.0.right" timestamp="1619175032199">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1619160150555" />
-    <state width="1577" height="228" key="GridCell.Tab.1.bottom" timestamp="1619160113628">
+    <state width="1577" height="369" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1619175032199" />
+    <state width="1577" height="369" key="GridCell.Tab.1.bottom" timestamp="1619175032203">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1619160113628" />
-    <state width="1577" height="228" key="GridCell.Tab.1.center" timestamp="1619160113628">
+    <state width="1577" height="369" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1619175032203" />
+    <state width="1577" height="369" key="GridCell.Tab.1.center" timestamp="1619175032201">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1619160113628" />
-    <state width="1577" height="228" key="GridCell.Tab.1.left" timestamp="1619160113628">
+    <state width="1577" height="369" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1619175032201" />
+    <state width="1577" height="369" key="GridCell.Tab.1.left" timestamp="1619175032200">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1619160113628" />
-    <state width="1577" height="228" key="GridCell.Tab.1.right" timestamp="1619160113628">
+    <state width="1577" height="369" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1619175032200" />
+    <state width="1577" height="369" key="GridCell.Tab.1.right" timestamp="1619175032202">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1577" height="228" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1619160113628" />
+    <state width="1577" height="369" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1619175032202" />
     <state x="285" y="18" key="SettingsEditor" timestamp="1616239458789">
       <screen x="0" y="0" width="1600" height="900" />
     </state>

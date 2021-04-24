@@ -1,107 +1,35 @@
-import sys
 import re
+import sys
 
-import openpyxl
-import pandas as pd
-import pdftotext
-
-from backend import mark_flag
+from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
-from movemaster import move_master_to_master_insurer
+
 try:
-    _, file_path, mid = sys.argv
+    mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 
-    with open(file_path, "rb") as f:
-        pdf = pdftotext.PDF(f)
-    with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
-        f.write(" ".join(pdf))
-    with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
-        f = myfile.read()
-
-    sh1 = ['Sno', 'HospitalID', 'InsurerID', 'ALNO', 'ClaimNo', 'MemberID', 'PolicyNo', 'PatientName', 'InsuranceCompany',
-           'AccountNo', 'BeneficiaryBank Name', 'Diagnosis', 'UTRNo', 'BilledAmount', 'SettledAmount', 'TDS', 'NetPayable',
-           'DiscountAmt', 'COPay', 'PolicyHolder', 'IPNo', 'PrimaryBeneficiary', 'EmployeeID', 'InsurerClaimNo',
-           'InsurerMemberID', 'TaxDeductedatSource', 'Netamount payment', 'PaidbythePatient', 'ProrataBasis',
-           'PolicyExcessDeductible', 'BeneficiaryName', 'BalanceSumInsuredBeforeClaim', 'NetPayable',
-           'BalanceSumInsuredAfterClaim', 'TDS%', 'Remarks', 'PaymentTo', 'DateofAdmission', 'DateofDischarge',
-           'AmtPaidtoHospital', 'BillAmt', 'PayableAmt', 'SettledAmt', 'SumInsured', 'ALAmount	Approved', 'Amount',
-           'HospitalAmount', 'AmountUtilised', 'FinalAmountSettled', 'DateOfPayment', 'ServiceTax', 'TotalwithServiceTax',
-           'InsuredPerson', 'CorporateName', 'DeductibleAmt', 'Transactiondate', 'LOCALAmount', 'ChequeDate',
-           'UHCApprovedHospitalAmt', 'InsurerApprovedHospitalAmt', 'InsurerApprovedEmployeeAmt', 'PayableAmount',
-           'NEFTTransactionNumber', 'TransactionDate', 'CorporateName', 'Claimed', 'PreHospitalisationPayableAmount',
-           'PostHospitalisationPayableAmount', 'AddonBenefit', 'Claimed', 'Paid', 'BillAmount', 'PayableAmount(INR)',
-           'BillDate', 'BillNo', 'AmountSettled', 'ApprovedAmount', 'less', 'Excess of Defined / Ailment Limit',
-           'policy deduction', 'Limit exceed deduction', 'non payable deduction', 'Bill deduction', 'Other deduction']
-
-    sh2 = ['Sr. No.', 'HospitalID', 'InsurerID', 'Claim ID', 'Details', 'Bill amount', 'Payable Amount', 'Deducted Amt',
-           'Reason for Deduction', 'Discount']
-
-    data_dict = {'Sno': mid, 'HospitalID': 'inamdar', 'InsurerID': 'icici_lombard'}
     regex_dict = {
-        'ALNO': [[r"(?<=AL No).*"], [':']],
-        'ClaimNo': [[r"(?<=Claim No).*(?=AL)"], [':']],
-        'PolicyNo': [[r"(?<=Policy No :).*"], [':']],
-        'UTRNo': [[r"(?<=ref. no.).*(?=dated)"], []],
-        'MemberID': [[r"(?<=UHID NO :).*(?=Relationship)"], []],
-        'Diagnosis': [[r".*(?=\s*Diagnosis)", r"(?<=Diagnosis :).*"], []],
-        'PatientName': [[r"(?<=Name of the Patient :).*(?=Policy)"], [':']],
-        'DateofAdmission': [[r"(?<=Date Of Admission).*(?=Date)"], [':']],
-        'DateofDischarge': [[r"(?<=Date Of Discharge).*"], [':']],
-        'NetPayable': [[r"(?<=an amount of Rs.) *\d+(?=.)"], [':', 'Rs']],
-        'SettledAmt': [[r"(?<=Final Amount Settled in Rs.).*"], [':', 'Rs']],
-        'DateOfPayment': [[r"(?<=dated).*(?=towards)"], []],
-        'Transactiondate': [[r"(?<=dated).*(?=towards)"], []],
-        'BilledAmount': [[r"(?<=Requested Amount i! n Rs).*"], [':', 'Rs']],
-        'TDS%': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs']],
-        'TDS': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs']],
+        'ClaimNo': [[r"(?<=Claim No).*(?=AL)"], [':'], r"^\S+$"],
+        'PatientName': [[r"(?<=Name of the Patient :).*(?=Policy)"], [':'], r"^\S+(?: \S+)*$"],
+        'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
+        'UTRNo': [[r"(?<=ref. no.).*(?=dated)"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=dated).*(?=towards)"], [':'], ""],
+        'BilledAmount': [[r"(?<=Requested Amount i! n Rs).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
+        'SettledAmount': [[r"(?<=Final Amount Settled in Rs.).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=an amount of Rs.) *\d+(?=.)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
+        'DateofAdmission': [[r"(?<=Date Of Admission).*(?=Date)"], [':'], r"^\S+(?: \S+)*$"],
+        'DateofDischarge': [[r"(?<=Date Of Discharge).*"], [':'], r"^\S+(?: \S+)*$"],
+        'InsurerID': [[r"(?<=Name of Insurance co.).*(?=.)"], [':'], r"^.*$"],
+        'CorporateName': [[r"(?<=Group Name).*(?=Date)"], [':'], r"^.*$"],
+        'MemberID': [[r"(?<=UHID NO :).*(?=Relationship)"], ['.', ':'], r"^.*$"],
+        'Diagnosis': [[r".*(?=\s*Diagnosis)", r"(?<=Diagnosis :).*"], [':'], r"^.*$"],
+        'Discount': [[], [], r"^.*$"],
+        'TDS': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"]
     }
+    datadict = get_data_dict(regex_dict, f)
+    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+    datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
-    match_dict = {
-        "Diagnosis": r"^\w+(?: \w+)*$"
-    }
-    for i in regex_dict:
-        for reg in regex_dict[i][0]:
-            temp = re.compile(reg).search(f)
-            if temp is not None:
-                temp = temp.group().strip()
-                for j in regex_dict[i][1]:
-                    temp = temp.replace(j, '')
-                temp = temp.strip()
-                if i in match_dict:
-                    temp = re.compile(match_dict[i]).match(temp)
-                    if temp is not None:
-                        temp = temp.group().strip()
-                        break
-                    else:
-                        temp = ""
-        data_dict[i] = temp
-
-    data_dict['COPay'] = '0'
-    wbName = 'master.xlsx'
-    wb = openpyxl.Workbook()
-    wb.create_sheet('Sheet1')
-    wb.create_sheet('count')
-    wb.create_sheet('count_star')
-    wb.create_sheet('error_sheet')
-    main_s1 = wb.worksheets[0]
-    main_s2 = wb.worksheets[1]
-
-    for i in range(0, len(sh1)):
-        # main_s1.cell(row=1, column=i+1).value=i+1
-        main_s1.cell(row=1, column=i + 1).value = sh1[i]
-        if sh1[i] in data_dict:
-            main_s1.cell(row=2, column=i + 1).value = data_dict[sh1[i]]
-
-    for i in range(0, len(sh2)):
-        main_s2.cell(row=1, column=i + 1).value = sh2[i]
-
-
-    wb.save(wbName)
-    move_master_to_master_insurer(sys.argv[2], pdfpath=file_path)
+    ins_upd_data(mail_id, hospital, datadict, [])
     mark_flag('X', sys.argv[2])
-    print(f'processed')
-
-    pass
-except:
+except Exception:
     log_exceptions()
-    pass

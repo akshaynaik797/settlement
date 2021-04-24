@@ -245,7 +245,8 @@ def process_insurer_pdfs(folder_name, insname, files):
 
 def automate_processing():
     try:
-        emails = ["NIC.Payments1@nicl.in"]
+        emails = ['Healthclaims.support@royalsundaram.in', 'fasttrack.support@icicilombard.com',
+                  'ihealthcare@icicilombard.com']
         for i in emails:
             with mysql.connector.connect(**conn_data) as con:
                 cur = con.cursor()
