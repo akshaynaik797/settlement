@@ -16,7 +16,7 @@ stg_sett_fields = (
 
 stg_sett_deduct_fields = (
 "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",
-"Discount", "DeductionCategory", "MailID", "HospitalID")
+"Discount", "DeductionCategory", "MailID", "HospitalID", "stgsettlement_sno")
 
 regex_dict = {'InsurerID': [[], [], r"^.*$"],
               'ALNO': [[], [], r"^.*$"],
@@ -127,25 +127,33 @@ def ins_upd_data(mail_id, hospital, datadict, deductions):
 
     params = params + params[1:]
 
+    q2 = "select srno from stgSettlement where unique_key=%s limit 1"
+    q2_params = (datadict['unique_key'],)
+    last_id = -1
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         cur.execute(q, params)
         con.commit()
+        cur.execute(q2, q2_params)
+        r = cur.fetchone()
+        if r:
+            last_id = r[0]
 
     for num, row in enumerate(deductions):
         for i in stg_sett_deduct_fields:
             if i not in row:
                 row[i] = ""
         row["DeductionCategory"] = get_deduction_category(row["Details"], row["DeductionReason"])
+        row["stgsettlement_sno"] = last_id
         deductions[num] = row
 
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         for row in deductions:
-            p = "insert into stgSettlementDeduction (`TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
+            p = "insert into stgSettlementDeduction (`stgsettlement_sno`, `TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
                 "`DeductedAmt`, `DeductionReason`,`Discount`,`DeductionCategory`,`MailID`,`HospitalID`)"
             p = p + ' values (' + ('%s, ' * p.count(',')) + '%s) '
-            p_params = [row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
+            p_params = [last_id, row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
                         row['DeductedAmt'], row['DeductionReason'], row['Discount'], row['DeductionCategory'],
                         row['MailID'], row['HospitalID']]
             cur.execute(p, p_params)

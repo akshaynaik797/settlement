@@ -20,13 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/settlement.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/settlement.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2.py" beforeDir="false" afterPath="$PROJECT_DIR$/2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +79,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="settlement" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="backend" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,27 +113,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="common" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="settlement" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/common.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,13 +166,14 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.1" />
+        <item itemvalue="Python.2" />
+        <item itemvalue="Python.pdf_temp" />
         <item itemvalue="Python.backend" />
         <item itemvalue="Python.temp" />
-        <item itemvalue="Python.pdf_temp" />
-        <item itemvalue="Python.common" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
   </component>
@@ -416,88 +419,6 @@
     <MESSAGE value="0.0.34&#10;done national, mediassist, fhpl" />
     <MESSAGE value="0.0.35&#10;done royal" />
     <option name="LAST_COMMIT_MESSAGE" value="0.0.35&#10;done royal" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614071490460">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="257" y="95" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.900@0.0.1600.900" timestamp="1614071490460" />
-    <state x="710" y="190" width="170" height="496" key="#xdebugger.XInspectDialog" timestamp="1618320796271">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="710" y="190" width="170" height="496" key="#xdebugger.XInspectDialog/0.0.1600.900@0.0.1600.900" timestamp="1618320796271" />
-    <state x="604" y="0" width="881" height="656" key="CommitChangelistDialog2" timestamp="1619160222143">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="604" y="0" width="881" height="656" key="CommitChangelistDialog2/0.0.1600.900@0.0.1600.900" timestamp="1619160222143" />
-    <state width="1459" height="485" key="DebuggerActiveHint" timestamp="1619174939512">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1459" height="485" key="DebuggerActiveHint/0.0.1600.900@0.0.1600.900" timestamp="1619174939512" />
-    <state x="800" y="7" width="800" height="893" key="DiffContextDialog" timestamp="1619068515994">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="800" y="7" width="800" height="893" key="DiffContextDialog/0.0.1600.900@0.0.1600.900" timestamp="1619068515994" />
-    <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl" timestamp="1614071447746">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="576" y="158" width="426" height="501" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1614071447746" />
-    <state width="1577" height="369" key="GridCell.Tab.0.bottom" timestamp="1619175032200">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1619175032200" />
-    <state width="1577" height="369" key="GridCell.Tab.0.center" timestamp="1619175032198">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1619175032198" />
-    <state width="1577" height="369" key="GridCell.Tab.0.left" timestamp="1619175032197">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1619175032197" />
-    <state width="1577" height="369" key="GridCell.Tab.0.right" timestamp="1619175032199">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1619175032199" />
-    <state width="1577" height="369" key="GridCell.Tab.1.bottom" timestamp="1619175032203">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.1.bottom/0.0.1600.900@0.0.1600.900" timestamp="1619175032203" />
-    <state width="1577" height="369" key="GridCell.Tab.1.center" timestamp="1619175032201">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.1.center/0.0.1600.900@0.0.1600.900" timestamp="1619175032201" />
-    <state width="1577" height="369" key="GridCell.Tab.1.left" timestamp="1619175032200">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.1.left/0.0.1600.900@0.0.1600.900" timestamp="1619175032200" />
-    <state width="1577" height="369" key="GridCell.Tab.1.right" timestamp="1619175032202">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="1577" height="369" key="GridCell.Tab.1.right/0.0.1600.900@0.0.1600.900" timestamp="1619175032202" />
-    <state x="285" y="18" key="SettingsEditor" timestamp="1616239458789">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="285" y="18" key="SettingsEditor/0.0.1600.900@0.0.1600.900" timestamp="1616239458789" />
-    <state x="373" y="39" width="802" height="515" key="Vcs.Push.Dialog.v2" timestamp="1619158940969">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="373" y="39" width="802" height="515" key="Vcs.Push.Dialog.v2/0.0.1600.900@0.0.1600.900" timestamp="1619158940969" />
-    <state width="800" height="446" key="XDebugger.FullValuePopup" timestamp="1619099576780">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state width="800" height="446" key="XDebugger.FullValuePopup/0.0.1600.900@0.0.1600.900" timestamp="1619099576780" />
-    <state x="408" y="12" width="764" height="666" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1619157899529">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="408" y="12" width="764" height="666" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1600.900@0.0.1600.900" timestamp="1619157899529" />
-    <state x="322" y="-148" width="893" height="544" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1619097969988">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="322" y="-148" width="893" height="544" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1600.900@0.0.1600.900" timestamp="1619097969988" />
-    <state x="433" y="154" width="740" height="634" key="find.popup" timestamp="1619010387393">
-      <screen x="0" y="0" width="1600" height="900" />
-    </state>
-    <state x="433" y="154" width="740" height="634" key="find.popup/0.0.1600.900@0.0.1600.900" timestamp="1619010387393" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
