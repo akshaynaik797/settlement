@@ -3,6 +3,8 @@ import re
 import mysql.connector
 import pdftotext
 
+from make_log import log_exceptions
+
 conn_data = {'host': "iclaimdev.caq5osti8c47.ap-south-1.rds.amazonaws.com",
              'user': "admin",
              'password': "Welcome1!",
@@ -94,7 +96,7 @@ def get_data_dict(regex_dict, text):
                         data_dict[key] = data
                         break
     except:
-        pass
+        log_exceptions()
     finally:
         return data_dict
 
