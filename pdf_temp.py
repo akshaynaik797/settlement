@@ -15,26 +15,26 @@ try:
     #     "CorporateName", "MemberID", "Diagnosis", "Discount", "Copay")
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=CCN).*(?=\))"], [':'], r"^\S+$"],
-        'PatientName': [[r"(?<=Patient Name).*(?=Age)"], [':'], r"^\S+(?: \S+)*$"],
-        'POLICYNO': [[r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
-        'DateofAdmission': [[r"(?<=DOA).*(?=DOD)"], [':'], r"^\S+(?: \S+)*$"],
-        'DateofDischarge': [[r"(?<=DOD).*"], [':'], r"^\S+(?: \S+)*$"],
-        'InsurerID': [[r"(?<=Insurer Co.).*(?=Policy No)"], [':', '.'], r"^.*$"],
-        'CorporateName': [[r"(?<=Group Name).*(?=Date)"], [':'], r"^.*$"],
+        'ClaimNo': [[r"(?<=Claim Number).*"], [':'], r"^\S+$"],
+        'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
+        'POLICYNO': [[r"(?<=Policy Number).*"], [':', '.'], r"^\S+$"],
+        'DateofAdmission': [[r"(?<=Date of Admission -\n).*(?=-)"], [':'], r"^\S+(?: \S+)*$"],
+        'DateofDischarge': [[r"(?<=-).*(?=\n *Discharge)"], [':'], r"^\S+(?: \S+)*$"],
+        'InsurerID': [[r"(?<=Insurance Company).*"], [':', '.'], r"^.*$"],
+        'CorporateName': [[r"(?<=Corporate/Retail).*"], [':'], r"^.*$"],
         'MemberID': [[r"(?<=I-Card No).*(?=Relation)"], ['.', ':'], r"^.*$"],
-        'Diagnosis': [[r"(?<=Primary Diagnosis).*(?=ICD Code)"], [':'], r"^.*$"],
+        'Diagnosis': [[r"(?<=Ailment).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=NEFT No).*(?=Date)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Date of Transfer).*(?=Settled)"], [':'], ""],
+        'UTRNo': [[r"(?<=UTR No).*"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=UTR Date).*"], [':'], ""],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 
-        'BilledAmount': [[r"(?<=Amount Claimed).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
-        'SettledAmount': [[r"(?<=Settled Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Net Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'BilledAmount': [[r"(?<=Claim Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'SettledAmount': [[r"(?<=Approved Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=NEFT/Paid Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'Copay': [[], [':'], r"^\S+(?: \S+)*$"],
-        'TDS': [[r"(?<=TDS Deducted).*(?=Deducted)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'TDS': [[r"(?<=TDS Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'Discount': [[], [], r"^.*$"]
     }
     datadict = get_data_dict(regex_dict, f)
@@ -46,18 +46,14 @@ try:
     #     "Discount", "DeductionCategory", "MailID", "HospitalID", "stgsettlement_sno")
 
     x1 = ""
-    regex = r"(?<=Details of deductions:\n)[\s\S]*(?=\n.*MOU Discount)"
-    if data := re.search(regex, f):
-        data = data.group().strip().split('\n')
+    regex = r"\d+ {4,}\d+(?:\/\d+)+ *(\d+) *(\d+) *(\d+) *(.*)"
+    data = re.findall(regex, f)
 
-
-    for j, i in enumerate(data):
-        if tmp := re.search(r"((?<=Rs.) *\d+(?:.?\d+) )(.*)", i):
-            data[j] = tmp.groups()
     deductions = []
     for i in data:
         tmp = {}
-        tmp["DeductedAmt"], tmp["DeductionReason"] = i
+        for j, k in zip(["BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason"], i):
+            tmp[j] = k
         tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)

@@ -19,8 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.38&#10;done fgh">
-      <change afterPath="$PROJECT_DIR$/pdf_genins.py" afterDir="false" />
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.40&#10;done genins and health heritage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
@@ -394,7 +393,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619426536900</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="0.0.39&#10;done genins and health heritage">
+      <created>1619502773101</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1619502773101</updated>
+    </task>
+    <task id="LOCAL-00032" summary="0.0.40&#10;done genins and health heritage">
+      <created>1619502876909</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1619502876909</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -410,8 +423,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.10&#10;fixed city" />
-    <MESSAGE value="0.0.11" />
     <MESSAGE value="0.0.12" />
     <MESSAGE value="0.0.13" />
     <MESSAGE value="0.0.14" />
@@ -435,7 +446,9 @@
     <MESSAGE value="0.0.36&#10;done icici-lombard, bajaj" />
     <MESSAGE value="0.0.37&#10;done ericson" />
     <MESSAGE value="0.0.38&#10;done fgh" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.38&#10;done fgh" />
+    <MESSAGE value="0.0.39&#10;done genins and health heritage" />
+    <MESSAGE value="0.0.40&#10;done genins and health heritage" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.40&#10;done genins and health heritage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -462,8 +475,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_temp.py</url>
-          <line>65</line>
+          <line>61</line>
           <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/common.py</url>
+          <line>98</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_temp.py</url>
+          <line>50</line>
+          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
