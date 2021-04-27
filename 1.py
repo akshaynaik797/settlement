@@ -3,6 +3,6 @@ import os
 
 ins = 'temp'
 mid = '177fbf009add6841'
-filepath = '/home/akshay/temp/3282_MDI6143564_CPS_CashLess_09_03_2021_12_15_29.pdf'
+filepath = '/home/akshay/temp/3929_20210328B008CH18474.pdf'
 
 subprocess.run(["python", 'pdf_' + ins + ".py", filepath, mid])
