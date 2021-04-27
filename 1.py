@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-ins = 'temp'
+ins = 'Max_Bupa'
 mid = '177fbf009add6841'
 filepath = '/home/akshay/temp/7398_ClaimSettlementVoucher#645626.pdf'
 
