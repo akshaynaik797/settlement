@@ -230,7 +230,6 @@ def get_deduction_category(details, reasons):
     else:
         if reasons != None and reasons.lower().find('other') != -1:
             category = '4'
-            print(reasons, details)
         else:
             category = '5'
     return category
