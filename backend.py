@@ -245,31 +245,30 @@ def process_insurer_pdfs(folder_name, insname, files):
 
 def automate_processing():
     try:
-        emails = ['Healthclaims.support@royalsundaram.in', 'fasttrack.support@icicilombard.com',
-                  'ihealthcare@icicilombard.com']
-        for i in emails:
-            with mysql.connector.connect(**conn_data) as con:
-                cur = con.cursor()
-                q = "SELECT sno, attach_path, id FROM settlement_mails where sender=%s"
-                cur.execute(q, (i,))
-                result = cur.fetchall()
-            for sno, filepath, mid in result:
-                try:
-                    if os.path.exists(filepath):
-                        mark_flag('p', mid)
-                        tmp = re.compile(r"(?<=letters\/)[a-zA-Z_]+(?=_)").search(filepath)
-                        if tmp is not None:
-                            tmp = tmp.group()
-                            if os.path.exists('pdf_' + tmp + ".py"):
-                                subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
-                            else:
-                                mark_flag('NO_INS_FILE', mid)
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            format = '%d/%m/%Y %H:%i:%s'
+            q = "SELECT sno, attach_path, id FROM settlement_mails where hospital like '%ils%' " \
+                "and STR_TO_DATE(date, %s) > STR_TO_DATE('01/04/2021 00:00:01', %s)"
+            cur.execute(q, (format, format))
+            result = cur.fetchall()
+        for sno, filepath, mid in result:
+            try:
+                if os.path.exists(filepath):
+                    mark_flag('p', mid)
+                    tmp = re.compile(r"(?<=letters\/)[a-zA-Z_]+(?=_)").search(filepath)
+                    if tmp is not None:
+                        tmp = tmp.group()
+                        if os.path.exists('pdf_' + tmp + ".py"):
+                            subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
                         else:
-                            mark_flag('NO_INS_EXIST', mid)
+                            mark_flag('NO_INS_FILE', mid)
                     else:
-                        mark_flag('NO_ATTACH', mid)
-                except:
-                    log_exceptions(filepath=filepath)
+                        mark_flag('NO_INS_EXIST', mid)
+                else:
+                    mark_flag('NO_ATTACH', mid)
+            except:
+                log_exceptions(filepath=filepath)
     except:
         log_exceptions()
 

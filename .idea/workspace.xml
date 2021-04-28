@@ -19,10 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.52&#10;done big">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.53&#10;done hdfc">
+      <change afterPath="$PROJECT_DIR$/pdf_hdfcbank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +53,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.1">
+  <component name="RunManager" selected="Python.backend">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -160,10 +161,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.backend" />
         <item itemvalue="Python.1" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.pdf_temp" />
-        <item itemvalue="Python.backend" />
         <item itemvalue="Python.temp" />
       </list>
     </recent_temporary>
@@ -470,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619601683848</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="0.0.53&#10;done hdfc">
+      <created>1619610275455</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1619610275455</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -486,7 +494,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.22&#10;done nic and royal" />
     <MESSAGE value="0.0.24&#10;done icici abd religare" />
     <MESSAGE value="0.0.26&#10;done paramount and bajaj" />
     <MESSAGE value="Revert &quot;0.0.28 changes in f, blank&quot;&#10;&#10;This reverts commit bde995c1" />
@@ -511,7 +518,8 @@
     <MESSAGE value="0.0.50&#10;done vidal" />
     <MESSAGE value="0.0.51&#10;done vipul" />
     <MESSAGE value="0.0.52&#10;done big" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.52&#10;done big" />
+    <MESSAGE value="0.0.53&#10;done hdfc" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.53&#10;done hdfc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -564,13 +572,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_temp.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="110" />
+          <line>73</line>
+          <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_temp.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="111" />
+          <url>file://$PROJECT_DIR$/pdf_hdfcbank.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_hdfcbank.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_hdfcbank.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend.py</url>
+          <line>252</line>
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
