@@ -19,10 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.49&#10;done sompo">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.50&#10;done vidal">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_vidal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vidal.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -449,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619592210228</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="0.0.50&#10;done vidal">
+      <created>1619594740616</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1619594740616</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -465,7 +473,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.19" />
     <MESSAGE value="0.0.20&#10;done all changes" />
     <MESSAGE value="0.0.21" />
     <MESSAGE value="0.0.22&#10;done nic and royal" />
@@ -490,7 +497,8 @@
     <MESSAGE value="0.0.47&#10;done religare" />
     <MESSAGE value="0.0.48&#10;done united" />
     <MESSAGE value="0.0.49&#10;done sompo" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.49&#10;done sompo" />
+    <MESSAGE value="0.0.50&#10;done vidal" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.50&#10;done vidal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -540,11 +548,21 @@
           <line>51</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="'NetPayable' in key" language="Python" />
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <condition expression="'Copay' in key" language="Python" />
           <url>file://$PROJECT_DIR$/common.py</url>
           <line>90</line>
-          <option name="timeStamp" value="99" />
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_temp.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_temp.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -26,18 +26,18 @@ try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim No).*(?=Claim)"], [':', '.'], r"^\S+$"],
-        'PatientName': [[r"(?<=Claimant Name).*"], [':', '"'], r"^\S+(?: \S+)*$"],
+        'ClaimNo': [[r"(?<=File No).*"], [':', '.'], r"^\S+$"],
+        'PatientName': [[r"(?<=Patient Name).*(?=Admin)"], [':', '"'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
-        'DateofAdmission': [[r"(?<=DOA) *:? *\w+(?:/\w+)+"], [':'], r"^\S+(?: \S+)*$"],
-        'DateofDischarge': [[r"(?<=DOD) *:? *\w+(?:/\w+)+"], [':'], r"^\S+(?: \S+)*$"],
+        'DateofAdmission': [[r"(?<=Admin Date).*(?=Emp)"], [':'], r"^\S+(?: \S+)*$"],
+        'DateofDischarge': [[r"(?<=Dis Date).*(?=File)"], [':'], r"^\S+(?: \S+)*$"],
         'InsurerID': [[r"(?<=Insurance Company).*"], [':', '.'], r"^.*$"],
         'CorporateName': [[r"(?<=Corporate Name).*(?=Payee)"], [':'], r"^.*$"],
         'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Final Diagnosis).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=EFT No).*(?=dated)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=dated).*(?=to the provided)"], [':'], ""],
+        'UTRNo': [[r"(?<=UTR/Cheque No).*(?=dated)"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=dated).*(?=\.)"], [':'], ""],
         'AccountNo': [[r"(?<=Beneficiary Acc No).*(?=UTR)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 
@@ -49,6 +49,10 @@ try:
         'Discount': [[r"(?<=Discount allowed).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    regex = r"(\d+) +(?P<BilledAmount>\d+) +(\d+) +(?P<Copay>\d+) +(\d+) +(\d+) +(?P<Discount>\d+) +(?P<SettledAmount>\d+) +(?P<TDS>\d+) +(?P<NetPayable>\d+)"
+    if tmp := re.search(regex, f):
+        tmp = tmp.groupdict()
+        datadict = {**tmp,**datadict}
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 

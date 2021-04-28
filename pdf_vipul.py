@@ -1,192 +1,81 @@
-import os
-import subprocess
+import re
 import sys
 
 import camelot
 import openpyxl
-import pdftotext
-import xlrd
 
+from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
-from backend import mark_flag
-from movemaster import move_master_to_master_insurer
 
 try:
-    pdfpath = sys.argv[1]
-    onlyfiles = [os.path.split(pdfpath)[1]]
-    mypath = os.path.dirname(pdfpath) + '/'
+    # tables = camelot.read_pdf(sys.argv[1], pages='all')
+    # flag = None
+    # if tables.n > 0:
+    #     tables.export('temp_files/foo1.xlsx', f='excel')
+    #     flag = True
+    # if flag:
+    #     wb = openpyxl.load_workbook('temp_files/foo1.xlsx')
+    #     sheet = wb.worksheets[-1]
+    #     data = []
+    #     for row in sheet.rows:
+    #         tmp = [i.value for i in row]
+    #         data.append(tmp)
+    #     data = data[3:]
+    #     data = [["" if j is None else j for j in i] for i in data]
 
-    hosp_name = ''
+    mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 
-    with open(pdfpath, "rb") as f:
-        pdf = pdftotext.PDF(f)
-    with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
-        f.write(" ".join(pdf))
-    with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
-        f = myfile.read()
-    if 'Balaji Medical' in f:
-        op = 'Tpappg@maxhealthcare.com May@2020 outlook.office365.com Max PPT'
-        hosp_name = 'Max'
-    else:
-        op = 'mediclaim@inamdarhospital.org Mediclaim@2019 imap.gmail.com inamdar hospital'
-        hosp_name = 'inamdar'
-    ###########################################################
-    wbkName = 'temp_files/' + 'vipul' + hosp_name + '.xlsx'
-    t, wq = 0, 0
-    wbk = openpyxl.Workbook()
-    wbk.create_sheet('1')
-    # wbk.create_sheet('Sheet3')
-    s1 = wbk.worksheets[0]
-    s2 = wbk.worksheets[1]
-    for t in range(0, len(onlyfiles)):
-        sh1 = ['Sr. No.', 'File No', 'Patient Name', 'Admin Date', 'Emp Code', 'Dis Date', 'Claim Amt',
-               'Total Bill Amt', 'Deduction', 'Co-Pay Deduction', 'Excess Pay Deduction', 'Approved Amount', 'Discount',
-               'Settled Amt', 'TDS Amount', 'Net Amount']
-        sh2 = ['S.no', 'File No.', 'Deducted Amount', 'Deduction Reason']
-        for i in range(0, len(sh2)):
-            s2.cell(row=1, column=i + 1).value = sh2[i]
-        for i in range(0, len(sh1)):
-            s1.cell(row=1, column=i + 1).value = sh1[i]
-        tables = camelot.read_pdf(mypath + onlyfiles[t], pages='all', line_scale=90)
-        tables.export('temp_files/foo1.xlsx', f='excel')
-        loc = "temp_files/foo1.xlsx"
-        wb = openpyxl.load_workbook(loc)
-        with open(mypath + onlyfiles[t], "rb") as f:
-            pdf = pdftotext.PDF(f)
-        with open('temp_files/output.txt', 'w', encoding='utf-8') as f:
-            f.write(" ".join(pdf))
-        with open('temp_files/output.txt', 'r',  encoding='utf-8') as myfile:
-            f = myfile.read()
+    regex_dict = {
+        'ClaimNo': [[r"(?<=File No).*"], [':', '.'], r"^\S+$"],
+        'PatientName': [[r"(?<=Patient Name).*(?=Admin)"], [':', '"'], r"^\S+(?: \S+)*$"],
+        'POLICYNO': [[r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
+        'DateofAdmission': [[r"(?<=Admin Date).*(?=Emp)"], [':'], r"^\S+(?: \S+)*$"],
+        'DateofDischarge': [[r"(?<=Dis Date).*(?=File)"], [':'], r"^\S+(?: \S+)*$"],
+        'InsurerID': [[r"(?<=Insurance Company).*"], [':', '.'], r"^.*$"],
+        'CorporateName': [[r"(?<=Corporate Name).*(?=Payee)"], [':'], r"^.*$"],
+        'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
+        'Diagnosis': [[r"(?<=Final Diagnosis).*"], [':'], r"^.*$"],
 
-        gh = []
-        # print(f)
-        w4 = f.find('Patient') + 12
-        u2 = f.find('Admin Date')
-        gh.append(f[w4:u2])
-        if gh[-1] == ' ':
-            print(f)
-        w5 = f.find('Admin Date') + 11
-        u3 = f.find('Emp Code')
-        gh.append(f[w5:u3])
+        'UTRNo': [[r"(?<=UTR/Cheque No).*(?=dated)"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=dated).*(?=\.)"], [':'], ""],
+        'AccountNo': [[r"(?<=Beneficiary Acc No).*(?=UTR)"], [':'], r"^\S+(?: \S+)*$"],
+        'BeneficiaryBank_Name': [[r"(?<=Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 
-        w5 = f.find('Emp Code') + 8
-        g = f[w5:]
-        u3 = g.find('\n') + w5
-        gh.append(f[w5:u3])
+        'BilledAmount': [[r"(?<=Approval Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'SettledAmount': [[r"(?<=Total Approved).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=payment of).*(?=vide EFT No)"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'Copay': [[r"(?<=Total Co-pay Amt.).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'TDS': [[r"(?<=TDS Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'Discount': [[r"(?<=Discount allowed).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"]
+    }
+    datadict = get_data_dict(regex_dict, f)
+    regex = r"(\d+) +(?P<BilledAmount>\d+) +(\d+) +(?P<Copay>\d+) +(\d+) +(\d+) +(?P<Discount>\d+) +(?P<SettledAmount>\d+) +(?P<TDS>\d+) +(?P<NetPayable>\d+)"
+    if tmp := re.search(regex, f):
+        tmp = tmp.groupdict()
+        datadict = {**tmp,**datadict}
+    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+    datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
-        w1 = f.find('Dis') + 9
-        u1 = f.find('File No')
-        gh.append(f[w1:u1])
+    deductions = []
 
-        w1 = f.find('File No') + 8
-        g = f[w1:]
-        u1 = g.find('\n') + w1
-        ccn = f[w1:u1]
-        ccn = ccn.replace('  ', '')
-        # print(gh)
+    # stg_sett_deduct_fields = (
+    #     "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",
+    #     "Discount", "DeductionCategory", "MailID", "HospitalID", "stgsettlement_sno")
 
-        gh = [sub.replace('  ', '') for sub in gh]
-        if gh[0] == ' ' or gh[0] == '':
-            w4 = f.find('information.') + 12
-            u2 = f.find('Patient')
-            gh[0] = f[w4:u2]
-        # print(gh[0])
-        gh = [sub.replace('\n', '') for sub in gh]
-        gh = [sub.replace('  ', '') for sub in gh]
+    # x1 = ""
+    # regex = r"(?<=REMARKS\n)[\s\S]+(?=\n *DISCOUNT DETAILS)"
+    # if data := re.search(regex, f):
+    #     data = [re.split(r" {3,}", i)[-2:] for i in data.group().split('\n')]
 
-        sheet_1 = wb.worksheets[0]
-        sheet_1.cell(1, 1)
-        max_row = sheet_1.max_row
-        # print(max_row)
-        max_col = sheet_1.max_column
-        hg = []
-        b = []
-        p = []
-        np = []
-        r = []
-        rt = []
-        mh = []
-        ro = []
-        bo = []
-        po = []
-        no = []
-        for i in range(1, max_row):
-            ro.append(sheet_1.cell_value(i, 1))
-            hg.append(sheet_1.cell_value(i, 2))
-            b.append(sheet_1.cell_value(i, 3))
-            p.append(sheet_1.cell_value(i, 4))
-            np.append(sheet_1.cell_value(i, 5))
-            r.append(sheet_1.cell_value(i, 6))
-            rt.append(sheet_1.cell_value(i, 7))
-            mh.append(sheet_1.cell_value(i, 8))
-            bo.append(sheet_1.cell_value(i, 9))
-            po.append(sheet_1.cell_value(i, 10))
-            no.append(sheet_1.cell_value(i, 11))
-            pass
+    # for i in data:
+    #     tmp = {}
+    #     for j, k in zip(["Details", "DeductedAmt", "DeductionReason"], i[1:]):
+    #         tmp[j] = k
+    #     tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+    #     tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+    #     deductions.append(tmp)
 
-        pass
-        hg = [sub.replace('  ', '') for sub in hg]
-        b = [sub.replace('  ', '') for sub in b]
-        p = [sub.replace('  ', '') for sub in p]
-        np = [sub.replace('  ', '') for sub in np]
-        r = [sub.replace('  ', '') for sub in r]
-        rt = [sub.replace('  ', '') for sub in rt]
-        mh = [sub.replace('  ', '') for sub in mh]
-        ro = [sub.replace('  ', '') for sub in ro]
-        bo = [sub.replace('  ', '') for sub in bo]
-        po = [sub.replace('  ', '') for sub in po]
-        no = [sub.replace('\n', ' ') for sub in no]
-        no = [sub.replace('\t', ' ') for sub in no]
-        # print(no)
-        xt = no[-1]
-        op1 = xt.split(';')
-        # print(op)
-        s1.cell(row=t + 2, column=1).value = t + 1
-        s1.cell(row=t + 2, column=2).value = ccn
-        ph = ro[-1] + ' ' + hg[-1] + ' ' + b[-1] + ' ' + p[-1] + ' ' + np[-1] + ' ' + r[-1] + ' ' + rt[-1] + ' ' + mh[
-            -1] + ' ' + bo[-1] + ' ' + po[-1]
-        temp = [int(s) for s in ph.split() if s.isdigit()]
-        # print(temp)
-        for i in range(0, len(gh)):
-            s1.cell(row=t + 2, column=2).value = ccn
-            s1.cell(row=t + 2, column=i + 3).value = gh[i]
-        for i in range(0, len(temp)):
-            s1.cell(row=t + 2, column=len(gh) + 3 + i).value = temp[i]
-        for i in op1:
-            row_num = s2.max_row + 1
-            wq += 1
-            s2.cell(row=row_num, column=1).value = wq
-            s2.cell(row=row_num, column=2).value = ccn
-            w5 = i.find('Rs.') + 3
-            g = i[w5:]
-            u3 = g.find(' ') + w5
-            # print(i[w5:u3])
-            s2.cell(row=row_num, column=3).value = (i[w5:u3])
-            s2.cell(row=row_num, column=4).value = (i[u3:])
-        tr = []
-        w5 = f.find('UTR') + 14
-        g = f[w5:]
-        u3 = g.find('dated') + w5
-        tr.append(f[w5:u3])
-        u1 = g.find('.') + w5
-        tr.append(f[u3 + 5:u1])
-        tr = [sub.replace('NEFT-', '') for sub in tr]
-        for i in range(0, len(tr)):
-            s1.cell(row=t + 2, column=len(gh) + len(temp) + 3 + i).value = tr[i]
-
-    print("Done")
-    wbk.save(wbkName)
-    wbk.close()
-    subprocess.run(["python", "make_master.py", 'vipul', op, '', wbkName])
-    ###########################################################
-    move_master_to_master_insurer(sys.argv[2], pdfpath=pdfpath)
+    ins_upd_data(mail_id, hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
-    print(f'processed {wbkName}')
-except SystemExit as e:
-    v = e.code
-    if 'exit' in v:
-        a =1
-        os._exit(0)
-except:
+except Exception:
     log_exceptions()
-    pass

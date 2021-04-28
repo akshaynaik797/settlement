@@ -33,7 +33,7 @@ try:
         'DateofDischarge': [[r"(?<=DOD) *:? *\w+(?:/\w+)+"], [':'], r"^\S+(?: \S+)*$"],
         'InsurerID': [[r"(?<=Insurance Company).*"], [':', '.'], r"^.*$"],
         'CorporateName': [[r"(?<=Corporate Name).*(?=Payee)"], [':'], r"^.*$"],
-        'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
+        'MemberID': [[r"(?<=Enrollment No).*(?=Relationship)"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Final Diagnosis).*"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=EFT No).*(?=dated)"], [':', '.'], r"^\S+$"],
