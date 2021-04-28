@@ -8,25 +8,25 @@ from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
 
 try:
-    tables = camelot.read_pdf(sys.argv[1], pages='all')
-    flag = None
-    if tables.n > 0:
-        tables.export('temp_files/foo1.xlsx', f='excel')
-        flag = True
-    if flag:
-        wb = openpyxl.load_workbook('temp_files/foo1.xlsx')
-        sheet = wb.worksheets[0]
-        data = []
-        for row in sheet.rows:
-            tmp = [i.value for i in row]
-            data.append(tmp)
-        data = data[3:]
-        data = [["" if j is None else j for j in i] for i in data]
+    # tables = camelot.read_pdf(sys.argv[1], pages='all')
+    # flag = None
+    # if tables.n > 0:
+    #     tables.export('temp_files/foo1.xlsx', f='excel')
+    #     flag = True
+    # if flag:
+    #     wb = openpyxl.load_workbook('temp_files/foo1.xlsx')
+    #     sheet = wb.worksheets[0]
+    #     data = []
+    #     for row in sheet.rows:
+    #         tmp = [i.value for i in row]
+    #         data.append(tmp)
+    #     data = data[3:]
+    #     data = [["" if j is None else j for j in i] for i in data]
 
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Intimation No).*(?=Bill)"], [':', '.'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=INTIMATION NO).*"], [':', '.'], r"^\S+$"],
         'PatientName': [[r"(?<=Claimant Name).*(?=Product)"], [':', '"'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
         'DateofAdmission': [[r"(?<=DOA).*"], [':'], r"^\S+(?: \S+)*$"],
@@ -36,14 +36,14 @@ try:
         'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Final Diagnosis).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=UTR/Cheque No).*(?=dated)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=dated).*(?=\.)"], [':'], ""],
-        'AccountNo': [[r"(?<=Beneficiary Acc No).*(?=UTR)"], [':'], r"^\S+(?: \S+)*$"],
-        'BeneficiaryBank_Name': [[r"(?<=Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
+        'UTRNo': [[r"(?<=Chq /DD/Ft No).*(?=Value)"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=Value Date).*"], [':'], ""],
+        'AccountNo': [[r"(?<=Credit A/c No).*(?=Your)"], [':'], r"^\S+(?: \S+)*$"],
+        'BeneficiaryBank_Name': [[r"(?<=with).*(?=on)"], [':'], r"^\S+(?: \S+)*$"],
 
         'BilledAmount': [[r"(?<=Total amount claimed).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
-        'SettledAmount': [[r"(?<=Total Claim Payable Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Total Claim Payable Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'SettledAmount': [[r"(?<=Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
         'Copay': [[r"(?<=Total Co-pay Amt.).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
         'TDS': [[r"(?<=TDS Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"],
         'Discount': [[r"(?<=Discount allowed).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"]
@@ -63,13 +63,13 @@ try:
     # if data := re.search(regex, f):
     #     data = [re.split(r" {3,}", i)[-2:] for i in data.group().split('\n')]
 
-    for i in data:
-        tmp = {}
-        for j, k in zip(["Details", "BillAmount", "DeductedAmt", "PayableAmount", "DeductionReason"], [i[2], i[5], i[6], i[8] ,i[9]]):
-            tmp[j] = k
-        tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-        tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-        deductions.append(tmp)
+    # for i in data:
+    #     tmp = {}
+    #     for j, k in zip(["Details", "BillAmount", "DeductedAmt", "PayableAmount", "DeductionReason"], [i[2], i[5], i[6], i[8] ,i[9]]):
+    #         tmp[j] = k
+    #     tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+    #     tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+    #     deductions.append(tmp)
 
     ins_upd_data(mail_id, hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
