@@ -151,6 +151,8 @@ def ins_upd_data(mail_id, hospital, datadict, deductions):
 
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
+        q = "delete from stgSettlementDeduction where stgsettlement_sno=%s"
+        cur.execute(q, (last_id,))
         for row in deductions:
             p = "insert into stgSettlementDeduction (`stgsettlement_sno`, `TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
                 "`DeductedAmt`, `DeductionReason`,`Discount`,`DeductionCategory`,`MailID`,`HospitalID`)"
