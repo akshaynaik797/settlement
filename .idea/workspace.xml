@@ -22,7 +22,6 @@
     <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.52&#10;done big">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_small.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_small.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
