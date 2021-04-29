@@ -10,7 +10,7 @@ try:
         'ClaimNo': [[r"(?<=Cashless Claim Reference Number).*(?=\))"], [':', '('], r"^\S+$"],
         'PatientName': [[r"(?<=Claim Of).*(?=Insured)", r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No.).*"], [':', '.'], r"^\S+$"],
-        'UTRNo': [[r"(?<=UTR Number).*"], [':'], r"^\S+$"],
+        'UTRNo': [[r"(?<=UTR Number).*"], [':', 'XXXXXXX', 'NFT-'], r"^\S+$"],
         'Transactiondate': [[r"(?<=Settlement Date).*(?=00)"], [':'], ""],
         'BilledAmount': [[r"(?<=Total) *\d+"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Settled Amount \(INR\)).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
