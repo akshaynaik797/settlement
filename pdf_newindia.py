@@ -11,7 +11,7 @@ from make_log import log_exceptions
 
 
 try:
-    row_data = get_row(sys.argv[1])
+    row_data = get_row(sys.argv[2])
     mail_id = row_data['id']
     mail_date = row_data['date']
     fpath = sys.argv[1]

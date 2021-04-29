@@ -248,7 +248,7 @@ def automate_processing():
         with mysql.connector.connect(**conn_data) as con:
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
-            q = "SELECT settlement_mails.sno, settlement_mails.attach_path, settlement_mails.id  FROM stgSettlement  INNER JOIN settlement_mails  ON stgSettlement.mail_id = settlement_mails.id where stgSettlement.UTRNo = '';"
+            q = "SELECT settlement_mails.sno, settlement_mails.attach_path, settlement_mails.id  FROM stgSettlement  INNER JOIN settlement_mails  ON stgSettlement.mail_id = settlement_mails.id where stgSettlement.hospital='';"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:
