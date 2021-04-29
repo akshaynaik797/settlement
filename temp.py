@@ -1,7 +1,5 @@
+from common import get_from_ins_big_utr_date
 
-tt = ["CorporateName", "MemberID", "Diagnosis", "Discount", "Copay"]
-
-tmp = []
-for i in tt:
-    tmp.append(f"datadict['{i}']")
+mail_id = 'AAMkAGMxMzcwMjVlLThjYjYtNGJlOC1iOWQzLTUzZjg5MTEwOTJiZABGAAAAAABg8S9egpbpQom_SYSQFJTABwA80npqDluGRIdxtgeTfSBNAAAAAAEMAAA80npqDluGRIdxtgeTfSBNAAK0NhgvAAA='
+a = get_from_ins_big_utr_date(mail_id)
 pass

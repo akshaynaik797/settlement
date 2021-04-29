@@ -164,6 +164,7 @@ def ins_upd_data(mail_id, hospital, datadict, deductions):
         con.commit()
     print("processed ", hospital, ' ', mail_id)
 
+
 def get_deduction_category(details, reasons):
     category = ''
     if details == None and reasons == None:
@@ -235,3 +236,15 @@ def get_deduction_category(details, reasons):
         else:
             category = '5'
     return category
+
+
+def get_from_ins_big_utr_date(mail_id):
+    q = "select utr, date from ins_big_utr_date where `id`=%s"
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(q, (mail_id,))
+        if r := cur.fetchone():
+            return r
+        return ("", "")
+
+

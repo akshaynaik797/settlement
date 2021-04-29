@@ -4,10 +4,11 @@ import sys
 import camelot
 import openpyxl
 
-from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
+from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data, get_from_ins_big_utr_date
 from make_log import log_exceptions
 
 try:
+    mail_id = sys.argv[2]
     tables = camelot.read_pdf(sys.argv[1], pages='all')
     flag = None
     if tables.n > 0:
@@ -49,6 +50,8 @@ try:
         'Discount': [[r"(?<=Discount allowed).*"], [':', 'Rs.', 'INR', '/-', 'Rs', ',', '(', ')'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if 'UTRNo' not in datadict:
+        datadict['UTRNo'], datadict['Transactiondate'] = get_from_ins_big_utr_date(mail_id)
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 

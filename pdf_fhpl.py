@@ -10,7 +10,7 @@ try:
         'ClaimNo': [[r"(?<=Claim ID).*", r"(?<=Claim Number).*"], [':'], r"^\S+$"],
         'PatientName': [[r"(?<=Claim Of).*(?=Insured)", r"(?<=Patient Name).*", r"(?<=Claim Of).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No).*(?=Card)", r"(?<=Policy Number).*", r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
-        'UTRNo': [[r"(?<=NEFT transaction number\n).*(?=dated)", r"(?<=NEFT transaction number).*(?=dated)", r"(?<=NEFT number).*(?=dated)"], [':'], r"^\S+$"],
+        'UTRNo': [[r"(?<=NEFT)[\s\S]*(?=dated)"], [':', 'transaction', 'number', '.'], r"^\S+$"],
         'Transactiondate': [[r"(?<=dated).*(?=towards)", r"(?<=dated\n)\S+", r"(?<=dated).*"], [':'], ""],
         'BilledAmount': [[r"(?<=Billed).*(?=Dis)", r"(?<=Billed).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Settled).*(?=Less)", r"(?<=settled for).*(?=\/-)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],

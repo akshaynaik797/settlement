@@ -36,7 +36,7 @@ try:
         'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Ailment).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=No).*(?=and Transaction Date)"], [':', '.'], r"^\S+$"],
+        'UTRNo': [[r"(?<=UTR)[\s\S]*?(?=and)"], [':', '.', 'No'], r"^\S+$"],
         'Transactiondate': [[r"(?<=and Transaction Date).*"], [':'], ""],
         'AccountNo': [[r"(?<=Account No).*(?=with)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=with).*(?=and IFSC Code)"], [':'], r"^\S+(?: \S+)*$"],

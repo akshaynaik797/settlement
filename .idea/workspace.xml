@@ -19,11 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.53&#10;done hdfc">
-      <change afterPath="$PROJECT_DIR$/pdf_hdfcbank.py" afterDir="false" />
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.54&#10;done hdfcbank">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_hdfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/temp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,9 +167,9 @@
       <list>
         <item itemvalue="Python.backend" />
         <item itemvalue="Python.1" />
+        <item itemvalue="Python.temp" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.pdf_temp" />
-        <item itemvalue="Python.temp" />
       </list>
     </recent_temporary>
   </component>
@@ -478,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619610275455</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="0.0.54&#10;done hdfcbank">
+      <created>1619621983424</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1619621983424</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -494,7 +505,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.24&#10;done icici abd religare" />
     <MESSAGE value="0.0.26&#10;done paramount and bajaj" />
     <MESSAGE value="Revert &quot;0.0.28 changes in f, blank&quot;&#10;&#10;This reverts commit bde995c1" />
     <MESSAGE value="0.0.29&#10;blanls" />
@@ -519,7 +529,8 @@
     <MESSAGE value="0.0.51&#10;done vipul" />
     <MESSAGE value="0.0.52&#10;done big" />
     <MESSAGE value="0.0.53&#10;done hdfc" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.53&#10;done hdfc" />
+    <MESSAGE value="0.0.54&#10;done hdfcbank" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.54&#10;done hdfcbank" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -559,12 +570,6 @@
           <line>77</line>
           <option name="timeStamp" value="83" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <condition expression="'Copay' in key" language="Python" />
-          <url>file://$PROJECT_DIR$/common.py</url>
-          <line>90</line>
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_temp.py</url>
           <line>74</line>
@@ -591,9 +596,24 @@
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/backend.py</url>
-          <line>252</line>
-          <option name="timeStamp" value="121" />
+          <url>file://$PROJECT_DIR$/pdf_Paramount.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/temp.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_hdfc.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_newindia.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="133" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
