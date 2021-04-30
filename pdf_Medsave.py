@@ -27,7 +27,7 @@ try:
         'Diagnosis': [[r"(?<=treatment of).*(?=at)"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=ECS/ NEFT).*(?=in your)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=on).*(?=against)"], [':'], ""],
+        'Transactiondate': [[r"(?<=on).*(?=against)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
         'AccountNo': [[r"(?<=Bank Account No).*(?=on)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Beneficiary Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 

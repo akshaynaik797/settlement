@@ -9,22 +9,22 @@ try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
     f = f.replace('***', '')
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim Number).*"], [':'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*", r"(?<=Payment Details).*"], [':', 'Claim No'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
-        'UTRNo': [[r"(?<=UTR No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Approval Date).*"], [':'], ""],
-        'BilledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'UTRNo': [[r"(?<=UTR No).*", r"(?<=UTR Reference).*"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=Approval Date).*", r"(?<=We have on).*(?=made)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
+        'BilledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)", r"(?<=Bill Amount).*", r"(?<=GROSS AMOUNT)\s*\S+", r"(?<=Billed Amount)\s*\w+"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Paid Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=Paid Amount).*", r".*(?=as instructed by)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'DateofAdmission': [[r"(?<=Date Of Admission).*"], [':'], r"^\S+(?: \S+)*$"],
         'DateofDischarge': [[r"(?<=Date Of Discharge).*"], [':'], r"^\S+(?: \S+)*$"],
         'InsurerID': [[r"(?<=Name of Insurance co.).*(?=.)"], [':'], r"^.*$"],
         'CorporateName': [[r"(?<=Group Name).*(?=Date)"], [':'], r"^.*$"],
         'MemberID': [[r"(?<=ID Card No).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r".*(?=\s*Diagnosis)", r"(?<=Diagnosis :).*"], [':'], r"^.*$"],
-        'Discount': [[], [], r"^.*$"],
-        'TDS': [[r"(?<=TDS Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"]
+        'Discount': [[r"(?<=Discount).*"], [], r"^.*$"],
+        'TDS': [[r"(?<=TDS Amount).*", r"(?<=TDS Amount).*", r"(?<=TDS)\s*\w+", r"(?<=TDS).*(?=\/)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']

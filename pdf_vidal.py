@@ -37,7 +37,7 @@ try:
         'Diagnosis': [[r"(?<=Final Diagnosis).*"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=EFT No).*(?=dated)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=dated).*(?=to the provided)"], [':'], ""],
+        'Transactiondate': [[r"(?<=dated).*(?=to the provided)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
         'AccountNo': [[r"(?<=Beneficiary Acc No).*(?=UTR)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 

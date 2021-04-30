@@ -11,7 +11,7 @@ try:
         'PatientName': [[r"(?<=Claim Of).*(?=Insured)", r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No.).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=UTR Number).*"], [':', 'XXXXXXX', 'NFT-'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Settlement Date).*(?=00)"], [':'], ""],
+        'Transactiondate': [[r"(?<=Settlement Date).*?(?=00)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
         'BilledAmount': [[r"(?<=Total) *\d+"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Settled Amount \(INR\)).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'NetPayable': [[r"(?<=Settled Amount \(INR\)).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],

@@ -12,7 +12,7 @@ try:
         'PatientName': [[r"(?<=Name of the Patient :).*(?=Policy)"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=ref. no.).*(?=dated)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=dated).*(?=towards)"], [':'], ""],
+        'Transactiondate': [[r"(?<=dated).*(?=towards)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
         'BilledAmount': [[r"(?<=Requested Amount i! n Rs).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Final Amount Settled in Rs.).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'NetPayable': [[r"(?<=an amount of Rs.) *\d+(?=.)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],

@@ -22,7 +22,7 @@ try:
         'Diagnosis': [[r"(?<=Ailment).*"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=Chq /DD/Ft No) *:? *\S+", r"(?<=Bank Reference No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Date).*"], [':'], ""],
+        'Transactiondate': [[r"(?<=Date).*"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
         'AccountNo': [[r"(?<=Account No).*(?=with)", r"(?<=Account Number).*(?=with)", r"(?<=Account Number).*(?=for)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Beneficiary Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 

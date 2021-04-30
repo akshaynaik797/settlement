@@ -26,7 +26,7 @@ try:
         'Diagnosis': [[r"(?<=Ailment).*"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=UTR No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=UTR Date).*"], [':'], ""],
+        'Transactiondate': [[r"(?<=UTR Date).*"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 
