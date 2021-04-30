@@ -11,7 +11,7 @@ try:
         'PatientName': [[r"(?<=Claim Of).*(?=Insured)", r"(?<=Patient Name).*", r"(?<=Claim Of).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No).*(?=Card)", r"(?<=Policy Number).*", r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=NEFT)[\s\S]*(?=dated)"], [':', 'transaction', 'number', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=dated).*(?=towards)", r"(?<=dated\n)\S+", r"(?<=dated).*"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
+        'Transactiondate': [[r"(?<=dated).*(?=towards)", r"(?<=dated\n)\S+", r"(?<=dated).*"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Billed).*(?=Dis)", r"(?<=Billed).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Settled).*(?=Less)", r"(?<=settled for).*(?=\/-)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'NetPayable': [[r"(?<=Net Paid Amount).*", r"(?<=Net Settled Amount after TDS).*", r"(?<=Net Paid Amount).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
@@ -61,7 +61,7 @@ try:
         deductions.append(tmp)
 
 
-    ins_upd_data(mail_id, hospital, datadict, deductions)
+    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:
     log_exceptions()

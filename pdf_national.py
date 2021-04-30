@@ -49,7 +49,7 @@ try:
         datadict['unique_key'] = datadict['ALNO']
         datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
         deductions = []
-        ins_upd_data(mail_id, hospital, datadict, deductions)
+        ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except:
     log_exceptions()

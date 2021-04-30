@@ -12,7 +12,7 @@ try:
         'ClaimNo': [[r"(?<=Settlement of claim number:).*"], [':'], r"^\S+$"],
         'POLICYNO': [[r"(?<=Policy Number).*(?=Patient Name)"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=Transaction Refernce number:).*(?=towards)"], [':'], r"^\S+$"],
-        'Transactiondate': [[r"\S*(?=vide\n*Transaction Refernce number)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
+        'Transactiondate': [[r"\S*(?=vide\n*Transaction Refernce number)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Billed Amount).*"], [':', 'Rs', '/-'], r"^\d+(?:\.\d+)*$"],
         'NetPayable': [[r"(?<=Amount Paid).*(?=\()"], [':', 'Rs', '/-'], r"^\d+(?:\.\d+)*$"],
         'DateofAdmission': [[r"(?<=Period of Hospitalization:).*(?=to)"], [':'], r"^\S+(?: \S+)*$"],

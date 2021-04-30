@@ -10,8 +10,8 @@ try:
     if hosp != '':
         shutil.rmtree('temp_files', ignore_errors=True)
         os.mkdir('temp_files')
-        insname, fpath, mid = sys.argv[1], sys.argv[2], sys.argv[3]
-        subprocess.run(["python", 'pdf_' + insname + ".py", fpath, mid])
+        insname, fpath, mid, sno = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+        subprocess.run(["python", 'pdf_' + insname + ".py", fpath, mid, sno])
         mark_utr_tables(fpath)
 except:
     log_exceptions()

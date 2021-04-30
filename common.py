@@ -14,7 +14,7 @@ stg_sett_fields = (
     "srno", "InsurerID", "TPAID", "ALNO", "ClaimNo", "PatientName", "AccountNo", "BeneficiaryBank_Name", "UTRNo",
     "BilledAmount", "SettledAmount", "TDS", "NetPayable", "Transactiondate", "DateofAdmission",
     "DateofDischarge", "cdate", "processing_time", "unique_key", "mail_id", "hospital", "POLICYNO",
-    "CorporateName", "MemberID", "Diagnosis", "Discount", "Copay")
+    "CorporateName", "MemberID", "Diagnosis", "Discount", "Copay", "sett_table_sno")
 
 stg_sett_deduct_fields = (
 "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",
@@ -101,8 +101,8 @@ def get_data_dict(regex_dict, text):
         return data_dict
 
 
-def ins_upd_data(mail_id, hospital, datadict, deductions):
-    datadict["mail_id"], datadict["hospital"] = mail_id, hospital
+def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
+    datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:
             datadict[i] = ""
@@ -110,7 +110,7 @@ def ins_upd_data(mail_id, hospital, datadict, deductions):
     q = "insert into stgSettlement (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
         "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
         "`Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `POLICYNO`, " \
-        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`)"
+        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `sett_table_sno`)"
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
     params = [datadict['unique_key'], datadict['InsurerID'], datadict['TPAID'], datadict['ALNO'], datadict['ClaimNo'],
@@ -118,13 +118,13 @@ def ins_upd_data(mail_id, hospital, datadict, deductions):
               datadict['BilledAmount'], datadict['SettledAmount'], datadict['TDS'], datadict['NetPayable'],
               datadict['Transactiondate'], datadict['DateofAdmission'], datadict['DateofDischarge'],
               datadict['mail_id'], datadict['hospital'], datadict['POLICYNO'], datadict['CorporateName'],
-              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay']]
+              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay'], datadict['sett_table_sno']]
 
     q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
          "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, " \
          "`TDS`=%s, `NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, " \
          "`mail_id`=%s, `hospital`=%s, `POLICYNO`=%s, `CorporateName`=%s, `MemberID`=%s, `Diagnosis`=%s, " \
-         "`Discount`=%s, `Copay`=%s"
+         "`Discount`=%s, `Copay`=%s, `sett_table_sno`=%s"
     q = q + q1
 
     params = params + params[1:]

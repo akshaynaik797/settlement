@@ -26,7 +26,7 @@ try:
         'Diagnosis': [[r"(?<=Ailment).*"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=UTR No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=UTR Date).*"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
+        'Transactiondate': [[r"(?<=UTR Date).*"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 
@@ -58,7 +58,7 @@ try:
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)
 
-    ins_upd_data(mail_id, hospital, datadict, deductions)
+    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:
     log_exceptions()

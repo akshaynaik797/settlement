@@ -8,12 +8,28 @@ from make_log import log_exceptions
 try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
     f = f.replace('***', '')
+
+    insurer = re.compile(r"(?<=as instructed by).*").search(f)
+    if insurer is not None:
+        insurer = insurer.group().strip()
+    else:
+        insurer = ""
+    ins_list = (
+        ('chola', 'CHOLAMANDALAM'),
+        ('bajaj', 'BAJAJ'),
+        ('Max_Bupa', 'MAX BUPA')
+    )
+    for i, j in ins_list:
+        if j in insurer:
+            insurer = i
+            break
+
     regex_dict = {
         'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*", r"(?<=Payment Details).*"], [':', 'Claim No'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=UTR No).*", r"(?<=UTR Reference).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Approval Date).*", r"(?<=We have on).*(?=made)"], [':'], r"^\w+(?:[\/ -]?\w+){0,2}$"],
+        'Transactiondate': [[r"(?<=Approval Date).*", r"(?<=We have on).*(?=made)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)", r"(?<=Bill Amount).*", r"(?<=GROSS AMOUNT)\s*\S+", r"(?<=Billed Amount)\s*\w+"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'NetPayable': [[r"(?<=Paid Amount).*", r".*(?=as instructed by)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
@@ -29,6 +45,7 @@ try:
     datadict = get_data_dict(regex_dict, f)
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+    datadict['InsurerID'] = insurer
 
     x1 = ""
     regexe = r"\w+(?: ?\w+) +\d+ + \d+ +\d+.*"
@@ -51,7 +68,7 @@ try:
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)
 
-    ins_upd_data(mail_id, hospital, datadict, deductions)
+    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:
     log_exceptions()

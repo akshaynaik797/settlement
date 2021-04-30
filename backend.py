@@ -254,13 +254,14 @@ def automate_processing():
             result = cur.fetchall()
         for sno, filepath, mid in result:
             try:
+                sno = str(sno)
                 if os.path.exists(filepath):
                     mark_flag('p', mid)
                     tmp = re.compile(r"(?<=letters\/)[a-zA-Z_]+(?=_)").search(filepath)
                     if tmp is not None:
                         tmp = tmp.group()
                         if os.path.exists('pdf_' + tmp + ".py"):
-                            subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid])
+                            subprocess.run(["python", "make_insurer_excel.py", tmp, filepath, mid, sno])
                         else:
                             mark_flag('NO_INS_FILE', mid)
                     else:
