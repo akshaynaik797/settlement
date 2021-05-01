@@ -248,9 +248,9 @@ def automate_processing():
         with mysql.connector.connect(**conn_data) as con:
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
-            q = "SELECT sno, attach_path, id FROM settlement_mails where hospital like '%ils%' " \
-                "and STR_TO_DATE(date, %s) > STR_TO_DATE('01/04/2021 00:00:01', %s)"
-            cur.execute(q, (format, format))
+            # q = "SELECT sno, attach_path, id FROM settlement_mails where hospital like 'ils%' and date like '%/04/2021%';"
+            q = "SELECT sno, attach_path, id FROM settlement_mails where STR_TO_DATE(date, '%d/%m/%Y %H:%i:%s') > STR_TO_DATE('01/02/2021 00:00:00', '%d/%m/%Y %H:%i:%s');"
+            cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:
             try:

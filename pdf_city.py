@@ -6,7 +6,7 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from common import conn_data, mark_flag, get_row
+from common import conn_data, mark_flag, get_row, date_formatting
 from make_log import log_exceptions
 
 try:
@@ -63,12 +63,18 @@ try:
         temp = re.compile(r'\d+').search(temp_l[1])
         if temp is not None:
             ad_date = temp.group()
-        datadict['adminssion_date'] = ad_date
+        try:
+            datadict['adminssion_date'] = ad_date[0:2] + '-' + ad_date[2:4] + '-' + ad_date[4:]
+        except:
+            datadict['adminssion_date'] = ""
         datadict['pname'] = temp_l[2]
         datadict['tpa'] = temp_l[3]
 
     if 'FAMILY' in datadict['tpa']:
         datadict['pname'] = datadict['pname'][1:-1]
+
+    datadict['procesing_date'] = date_formatting(datadict['procesing_date'])
+    datadict['adminssion_date'] = date_formatting(datadict['adminssion_date'])
 
     data = (datadict['advice_no'],
             datadict['insurer_name'],
@@ -112,6 +118,12 @@ try:
             cur.execute(q, params)
             con.commit()
 
-    mark_flag('X', sys.argv[2], insurer='city')
+    mark_flag('X', sys.argv[2])
+
+    q = "update City_Records set stg_flag='MOVED' where mail_id=%s"
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(q, (sys.argv[2],))
+        con.commit()
 except:
     log_exceptions()

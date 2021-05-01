@@ -6,7 +6,7 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from common import conn_data, mark_flag, get_row
+from common import conn_data, mark_flag, get_row, date_formatting
 from make_log import log_exceptions
 
 
@@ -144,6 +144,7 @@ try:
         " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`) "
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
+    tran_date = date_formatting(tran_date)
     params = [refrenceNo + ',' + claimNo, 'newindia', tpa, '', claimNo, patientName, '', '',
               utrno, '', grossAmount, tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital]
 
@@ -166,7 +167,7 @@ try:
         cur.execute(q, params)
         con.commit()
 
-    mark_flag('X', sys.argv[2], insurer='newindia')
+    mark_flag('X', sys.argv[2])
 except:
     log_exceptions()
     pass

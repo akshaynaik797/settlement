@@ -1,3 +1,4 @@
+import datetime
 import re
 
 import mysql.connector
@@ -102,10 +103,15 @@ def get_data_dict(regex_dict, text):
 
 
 def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
+
     datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:
             datadict[i] = ""
+
+    datadict['Transactiondate'] = date_formatting(datadict['Transactiondate'])
+    datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])
+    datadict['DateofDischarge'] = date_formatting(datadict['DateofDischarge'])
 
     q = "insert into stgSettlement (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
         "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
@@ -248,3 +254,19 @@ def get_from_ins_big_utr_date(mail_id):
         return ("", "")
 
 
+def date_formatting(date):
+    # d b m Y
+    #30/12/2121
+    # 30-12-3202
+    # 30-Feb-1232
+    # 12 Feb 2021
+    formats = ['%d/%m/%Y', '%d-%m-%Y', '%d-%b-%Y', '%d %b %Y']
+    date = date.strip()
+    for i in formats:
+        try:
+            date = datetime.datetime.strptime(date, i)
+            date = date.strftime('%d/%m/%Y')
+            break
+        except:
+            pass
+    return date

@@ -19,39 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.58">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.59">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/make_insurer_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_insurer_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Ericson.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Ericson.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_MDINDIA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_MDINDIA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_Max_Bupa.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Max_Bupa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Medi_Assist.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medi_Assist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Medsave.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medsave.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Universal_Sompo.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Universal_Sompo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_fgh.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fgh.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_genins.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_genins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_city.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_hdfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_hdfcbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfcbank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_health_heritage.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_heritage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_health_india.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_india.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_health_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_insurance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_national.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_national.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_newindia.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_newindia.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_religare.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_religare.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_royal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_royal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_small.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_small.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_united.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_united.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_vidal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vidal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_vipul.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vipul.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/temp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +62,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.1">
+  <component name="RunManager" selected="Python.backend">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,8 +170,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.1" />
         <item itemvalue="Python.backend" />
+        <item itemvalue="Python.1" />
         <item itemvalue="Python.temp" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.pdf_temp" />
@@ -534,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619763401080</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="0.0.59">
+      <created>1619766380479</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1619766380479</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -550,7 +538,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.30&#10;done city into db" />
     <MESSAGE value="0.0.31&#10;done newindia into db" />
     <MESSAGE value="0.0.32&#10;not done fhp into db" />
     <MESSAGE value="0.0.33&#10;done temp.py" />
@@ -575,7 +562,8 @@
     <MESSAGE value="0.0.56" />
     <MESSAGE value="0.0.57" />
     <MESSAGE value="0.0.58" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.58" />
+    <MESSAGE value="0.0.59" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.59" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -589,6 +577,11 @@
           <url>file://$PROJECT_DIR$/pdf_Paramount.py</url>
           <line>8</line>
           <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend.py</url>
+          <line>253</line>
+          <option name="timeStamp" value="142" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

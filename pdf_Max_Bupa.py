@@ -50,6 +50,7 @@ try:
     datadict = {**tmp, **datadict}
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+    datadict['InsurerID'] = datadict['TPAID']
 
     # stg_sett_deduct_fields = (
     #     "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",

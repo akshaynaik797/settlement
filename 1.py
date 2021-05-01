@@ -1,8 +1,8 @@
 import subprocess
 import os
 
-ins = 'Medi_Assist'
+ins = 'Paramount'
 mid = 'AAMkAGMxMzcwMjVlLThjYjYtNGJlOC1iOWQzLTUzZjg5MTEwOTJiZABGAAAAAABg8S9egpbpQom_SYSQFJTABwA80npqDluGRIdxtgeTfSBNAAAAAAEtAAA80npqDluGRIdxtgeTfSBNAALeh6nVAAA='
-filepath = '/home/akshay/temp/8789_24088023.pdf'
+filepath = '/home/akshay/temp/17057712_.pdf'
 sett_sno = '777'
 subprocess.run(["python", 'pdf_' + ins + ".py", filepath, mid, sett_sno])

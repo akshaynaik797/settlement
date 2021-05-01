@@ -54,6 +54,7 @@ try:
         datadict['UTRNo'], datadict['Transactiondate'] = get_from_ins_big_utr_date(mail_id)
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+    datadict['InsurerID'] = 'star'
 
     deductions = []
 

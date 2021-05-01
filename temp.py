@@ -1,5 +1,5 @@
-from common import get_from_ins_big_utr_date
+from common import date_formatting
 
-mail_id = 'AAMkAGMxMzcwMjVlLThjYjYtNGJlOC1iOWQzLTUzZjg5MTEwOTJiZABGAAAAAABg8S9egpbpQom_SYSQFJTABwA80npqDluGRIdxtgeTfSBNAAAAAAEMAAA80npqDluGRIdxtgeTfSBNAAK0NhgvAAA='
-a = get_from_ins_big_utr_date(mail_id)
+date = ''
+a = date_formatting(date)
 pass

@@ -25,7 +25,7 @@ try:
             break
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*", r"(?<=Payment Details).*"], [':', 'Claim No'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*", r"(?<=Payment Details).*", r"(?<=Payment Details) *:? *\w+"], [':', 'Claim No'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=UTR No).*", r"(?<=UTR Reference).*"], [':', '.'], r"^\S+$"],
