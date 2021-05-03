@@ -43,10 +43,11 @@ regex_dict = {'InsurerID': [[], [], r"^.*$"],
               'Copay': [[], [], []]
               }
 
-def update_date_utr_nic_city(tranref):
+def update_date_utr_nic_city(unique_key):
+    tranref = unique_key.split(',')[0]
     q1 = "select `Date_Of_Mail` from `NIC` where `Transaction_Reference_No`=%s limit 1"
     q2 = "select `City_Transaction_Reference` from `City_Records` where `NIA_Transaction_Reference`=%s limit 1"
-    trandate, utrno = None, None
+    trandate, utrno = "", ""
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         cur.execute(q1, [tranref])
@@ -58,10 +59,9 @@ def update_date_utr_nic_city(tranref):
         if r := cur.fetchone():
             utrno = r[0]
 
-        if trandate is not None and utrno is not None:
-            q = "update stgSettlement set Transactiondate=%s, UTRNo=%s where unique_key like %s"
-            cur.execute(q, [trandate, utrno, '%' + tranref + '%'])
-            con.commit()
+        q = "update stgSettlement set Transactiondate=%s, UTRNo=%s where unique_key like %s"
+        cur.execute(q, [trandate, utrno, '%' + tranref + '%'])
+        con.commit()
 
 
 def get_from_db_and_pdf(mail_id, file):
