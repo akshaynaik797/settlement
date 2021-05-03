@@ -118,12 +118,28 @@ try:
             cur.execute(q, params)
             con.commit()
 
+    if 'india' in datadict['insurer_name'] or 'INDIA' in datadict['insurer_name']:
+        # Date_on_attachment, Transaction_Reference_No, Claim_Number datadict['transaction_reference'] NIC_Records
+        q = "select Date_on_attachment from NIC where Transaction_Reference_No=%s limit 1"
+        q1 = "select Transaction_Reference_No, Claim_Number from NIC_Records where Transaction_Reference_No=%s limit 1"
+        trandate, utrno, claimno = "", "", ""
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+
+            cur.execute(q, [datadict['nia_transaction_reference']])
+            if r := cur.fetchone():
+                trandate = r[0]
+                trandate = date_formatting(trandate)
+
+            cur.execute(q1, [datadict['nia_transaction_reference']])
+            if r := cur.fetchone():
+                utrno, claimno = r
+
+            q = "update stgSettlement set Transactiondate=%s, UTRNo=%s where unique_key=%s"
+            cur.execute(q, [trandate,utrno, claimno])
+            con.commit()
+
     mark_flag('X', sys.argv[2])
 
-    q = "update City_Records set stg_flag='MOVED' where mail_id=%s"
-    with mysql.connector.connect(**conn_data) as con:
-        cur = con.cursor()
-        cur.execute(q, (sys.argv[2],))
-        con.commit()
 except:
     log_exceptions()

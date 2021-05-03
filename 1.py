@@ -1,8 +1,8 @@
 import subprocess
 import os
 
-ins = 'Paramount'
+ins = 'city'
 mid = 'AAMkAGMxMzcwMjVlLThjYjYtNGJlOC1iOWQzLTUzZjg5MTEwOTJiZABGAAAAAABg8S9egpbpQom_SYSQFJTABwA80npqDluGRIdxtgeTfSBNAAAAAAEtAAA80npqDluGRIdxtgeTfSBNAALeh6nVAAA='
-filepath = '/home/akshay/temp/17057712_.pdf'
+filepath = '/home/akshay/temp/16513888_.pdf'
 sett_sno = '777'
 subprocess.run(["python", 'pdf_' + ins + ".py", filepath, mid, sett_sno])

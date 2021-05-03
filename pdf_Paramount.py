@@ -26,6 +26,10 @@ try:
         'Copay': [[r"(?<=Copay).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    for i,j in [("Transactiondate", r"(?<=Payment to).*?(?=Hospital)"), ("UTRNo", r"(?<=Insurer).*?(?=No\.)")]:
+        if i not in datadict:
+            if tmp := re.search(j, f, re.DOTALL):
+                datadict[i] = tmp.group().strip()
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
@@ -50,7 +54,7 @@ try:
     deductions = []
     for row in table:
         tmp = {}
-        tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["DeductionReason"] = row[2:]
+        tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["DeductionReason"] = row[2:6]
         tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)

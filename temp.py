@@ -1,5 +1,3 @@
-from common import date_formatting
+from common import update_date_utr_nic_city
 
-date = ''
-a = date_formatting(date)
-pass
+update_date_utr_nic_city('TP00315040520900009304')
