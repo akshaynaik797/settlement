@@ -43,18 +43,12 @@ regex_dict = {'InsurerID': [[], [], r"^.*$"],
               'Copay': [[], [], []]
               }
 
-def update_date_utr_nic_city(claimno):
-    q = "select `Transaction_Reference_No` from `NIC_Records` where `Claim_Number`=%s limit 1"
+def update_date_utr_nic_city(tranref):
     q1 = "select `Date_Of_Mail` from `NIC` where `Transaction_Reference_No`=%s limit 1"
     q2 = "select `City_Transaction_Reference` from `City_Records` where `NIA_Transaction_Reference`=%s limit 1"
-    tranref, trandate, utrno = None, None, None
+    trandate, utrno = None, None
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
-        cur.execute(q, [claimno])
-
-        if r := cur.fetchone():
-            tranref = r[0]
-
         cur.execute(q1, [tranref])
         if r := cur.fetchone():
             trandate = r[0]
@@ -65,8 +59,8 @@ def update_date_utr_nic_city(claimno):
             utrno = r[0]
 
         if trandate is not None and utrno is not None:
-            q = "update stgSettlement set Transactiondate=%s, UTRNo=%s where ClaimNo=%s"
-            cur.execute(q, [trandate, utrno, claimno])
+            q = "update stgSettlement set Transactiondate=%s, UTRNo=%s where unique_key like %s"
+            cur.execute(q, [trandate, utrno, '%' + tranref + '%'])
             con.commit()
 
 

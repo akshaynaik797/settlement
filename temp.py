@@ -1,3 +1,3 @@
 from common import update_date_utr_nic_city
 
-update_date_utr_nic_city('TP00315040520900009304')
+update_date_utr_nic_city('1000002122193144826')

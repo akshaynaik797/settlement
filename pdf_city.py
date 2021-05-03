@@ -136,7 +136,7 @@ try:
                 utrno, claimno = r
 
             q = "update stgSettlement set Transactiondate=%s, UTRNo=%s where unique_key=%s"
-            cur.execute(q, [trandate,utrno, claimno])
+            cur.execute(q, [trandate,utrno, utrno + ',' + claimno])
             con.commit()
 
     mark_flag('X', sys.argv[2])
