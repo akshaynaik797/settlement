@@ -27,7 +27,7 @@ try:
         'Diagnosis': [[r"(?<=Diagnosis).*(?=Policy)"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=Neft/Cheque number).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Neft/Cheque Date).*(?=Neft)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
+        'Transactiondate': [[r"(?<=Neft/Cheque Date).*(?=Neft)", r"(?<=Date).*"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 

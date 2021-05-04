@@ -14,7 +14,7 @@ try:
         'Transactiondate': [[r"(?<=dated).*(?=towards)", r"(?<=dated\n)\S+", r"(?<=dated).*"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Billed).*(?=Dis)", r"(?<=Billed).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Settled).*(?=Less)", r"(?<=settled for).*(?=\/-)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Net Paid Amount).*", r"(?<=Net Settled Amount after TDS).*", r"(?<=Net Paid Amount).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=Net Paid Amount).*", r"(?<=Net Settled Amount after TDS).*", r"(?<=Net Paid Amount).*"], [':', 'Rs.', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'DateofAdmission': [[r"(?<=Date of Admission).*(?=Date)"], [':'], r"^\S+(?: \S+)*$"],
         'DateofDischarge': [[r"(?<=Date of Discharge).*"], [':'], r"^\S+(?: \S+)*$"],
         'InsurerID': [[r"(?<=issued by).*(?=has)"], [], r"^.*$"],

@@ -123,11 +123,13 @@ def get_data_dict(regex_dict, text):
 
 
 def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
-
     datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:
             datadict[i] = ""
+
+    if datadict['Transactiondate'] == '':
+        datadict['Transactiondate'] = get_row(mail_id)['date'].split(' ')[0]
 
     datadict['Transactiondate'] = date_formatting(datadict['Transactiondate'])
     datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])

@@ -41,14 +41,14 @@ try:
         'MemberID': [[r"(?<=Member Id).*(?=Policy)"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Diagnosis of).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=Neft-Ref/Cheque No).*(?=Payment)"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Neft-Ref/Cheque Date).*(?=Diagnosis)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
+        'UTRNo': [[r"(?<=Neft-Ref/Cheque No).*(?=Payment)", r"(?<=Neft-Ref/Cheque No).*"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=Neft-Ref/Cheque Date).*(?=Diagnosis)", r"(?<=Neft-Ref/Cheque Date).*"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[r"(?<=Bank Account No).*(?=on)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Beneficiary Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 
         'BilledAmount': [[r"(?<=Claim Amount).*(?=Deduction)"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Net Payable Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Net Payable Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=Net Payable Amount).*", r"(?<=Net Payable Amount).*(?=Neft)"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'Copay': [[r"(?<=Co-payment).*"], [':', 'Rs'], r"^\S+(?: \S+)*$"],
         'TDS': [[r"(?<=TDS Amt).*(?=Final)"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'Discount': [[r"(?<=Discount Amt).*"], ['Rs', ':'], r"^.*$"]

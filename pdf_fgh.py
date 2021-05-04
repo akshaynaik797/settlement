@@ -26,7 +26,7 @@ try:
         'Diagnosis': [[r"(?<=Primary Diagnosis).*(?=ICD Code)"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=Reference/UTR No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[], [':'], ""],
+        'Transactiondate': [[r"(?<=Date).*"], [':'], ""],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 

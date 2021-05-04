@@ -38,6 +38,8 @@ try:
         'Discount': [[], [], r"^.*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if 'UTRNo' in datadict:
+        datadict['UTRNo'] = datadict['UTRNo'].split('/')[0]
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 

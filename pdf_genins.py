@@ -25,8 +25,8 @@ try:
         'MemberID': [[r"(?<=ID Card Number).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Primary Diagnosis).*(?=ICD Code)"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=Reference/UTR No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[], [':'], ""],
+        'UTRNo': [[r"(?<=Cheque/DD No).*?(?=for)"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?=dated).*?(?=towards)"], [':'], ""],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 

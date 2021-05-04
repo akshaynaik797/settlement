@@ -31,13 +31,13 @@ try:
         'POLICYNO': [[r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
         'DateofAdmission': [[r"(?<=DOA).*(?=-)"], [':'], r"^\S+(?: \S+)*$"],
         'DateofDischarge': [[r"(?<=DOD).*"], [':'], r"^\S+(?: \S+)*$"],
-        'InsurerID': [[r"(?<=policy issued by).*(?=has been)"], [':', '.'], r"^.*$"],
+        'InsurerID': [[r"(?<=policy issued by).*(?=has been)", r"(?<=policyholder of the)[\s\S]*?(?=\.)"], [':', '.', '\n'], r"^.*$"],
         'CorporateName': [[], [':'], r"^.*$"],
         'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Disease).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=EFT Transfer Code).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Instrument/ NEFT) *\w+(?:-\w+)+"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
+        'UTRNo': [[r"(?<=EFT Transfer Code).*"], [':', '.', 'Â'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=Instrument/ NEFT) *\w+(?:-\w+)+", r"(?<=Cheque No\/Date).*?(?=-)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[r"(?<=Bank Account No).*(?=on)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 

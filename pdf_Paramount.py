@@ -26,10 +26,14 @@ try:
         'Copay': [[r"(?<=Copay).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+
     for i,j in [("Transactiondate", r"(?<=Payment to).*?(?=Hospital)"), ("UTRNo", r"(?<=Insurer).*?(?=No\.)")]:
         if i not in datadict:
             if tmp := re.search(j, f, re.DOTALL):
-                datadict[i] = tmp.group().strip()
+                datadict[i] = tmp.group()
+                for bad in [':', '.', '\n']:
+                    datadict[i] = datadict[i].replace(bad, '').strip()
+
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
