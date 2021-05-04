@@ -13,7 +13,7 @@ try:
     if insurer is not None:
         insurer = insurer.group().strip()
     else:
-        insurer = ""
+        insurer = "bajaj"
     ins_list = (
         ('chola', 'CHOLAMANDALAM'),
         ('bajaj', 'BAJAJ'),
@@ -25,7 +25,7 @@ try:
             break
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*", r"(?<=Payment Details).*", r"(?<=Payment Details) *:? *\w+"], [':', 'Claim No'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*"], [':', 'Claim No'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=UTR No).*", r"(?<=UTR Reference).*"], [':', '.'], r"^\S+$"],
@@ -43,6 +43,16 @@ try:
         'TDS': [[r"(?<=TDS Amount).*", r"(?<=TDS Amount).*", r"(?<=TDS)\s*\w+", r"(?<=TDS).*(?=\/)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if 'ClaimNo' not in datadict:
+        try:
+            regex = r"(?<=No\.\n).*?(?=\n *Page 1)"
+            if tmp := re.search(regex, f, re.DOTALL):
+                tmp = [re.split(r" +", i) for i in tmp.group().split('\n')]
+                datadict['ClaimNo'] = tmp[0][3] + tmp[1][-1]
+                datadict['SettledAmount'], datadict['TDS'], datadict['NetPayable'] = tmp[0][4], tmp[0][6], tmp[0][7]
+        except:
+            pass
+
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
     datadict['InsurerID'] = insurer
