@@ -32,7 +32,7 @@ try:
         'Transactiondate': [[r"(?<=Approval Date).*", r"(?<=We have on).*(?=made)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)", r"(?<=Bill Amount).*", r"(?<=GROSS AMOUNT)\s*\S+", r"(?<=Billed Amount)\s*\w+"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Bill Amount).*(?=\nPaid Amount)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Paid Amount).*", r".*(?=as instructed by)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=Paid Amount).*", r".*(?=as instructed by)", r"(?<=NET Amount Paid).*"], [':', 'Rs.', 'INR', '/-', ','], r"^\d+(?:\.\d+)*$"],
         'DateofAdmission': [[r"(?<=Date Of Admission).*"], [':'], r"^\S+(?: \S+)*$"],
         'DateofDischarge': [[r"(?<=Date Of Discharge).*"], [':'], r"^\S+(?: \S+)*$"],
         'InsurerID': [[r"(?<=Name of Insurance co.).*(?=.)"], [':'], r"^.*$"],
@@ -47,11 +47,16 @@ try:
         try:
             regex = r"(?<=No\.\n).*?(?=\n *Page 1)"
             if tmp := re.search(regex, f, re.DOTALL):
-                tmp = [re.split(r" +", i) for i in tmp.group().split('\n')]
+                tmp = [re.split(r" {2,}", i) for i in tmp.group().split('\n')]
                 datadict['ClaimNo'] = tmp[0][3] + tmp[1][-1]
                 datadict['SettledAmount'], datadict['TDS'], datadict['NetPayable'] = tmp[0][4], tmp[0][6], tmp[0][7]
         except:
             pass
+
+    for k, v in regex_dict.items():
+        if k in datadict:
+            for i in v[1]:
+                datadict[k] = datadict[k].replace(i, '')
 
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()

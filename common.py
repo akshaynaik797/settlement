@@ -282,7 +282,8 @@ def date_formatting(date):
     # 30-12-3202
     # 30-Feb-1232
     # 12 Feb 2021
-    formats = ['%d/%m/%Y', '%d-%m-%Y', '%d-%b-%Y', '%d %b %Y']
+    # 12 Feb 21
+    formats = ['%d/%m/%Y', '%d-%m-%Y', '%d-%b-%Y', '%d-%b-%y', '%d %b %Y', '%d %b %y']
     date = date.strip()
     for i in formats:
         try:
