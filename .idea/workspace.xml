@@ -19,12 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.65">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.67">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_MDINDIA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_MDINDIA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_united.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_united.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,8 +163,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.1" />
-        <item itemvalue="Python.backend" />
         <item itemvalue="Python.temp" />
+        <item itemvalue="Python.backend" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.pdf_temp" />
       </list>
@@ -184,20 +184,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00005" summary="0.0.9&#10;fixed newindia and city">
-      <created>1615190778368</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1615190778369</updated>
-    </task>
-    <task id="LOCAL-00006" summary="0.0.10&#10;fixed city">
-      <created>1615296484823</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1615296484823</updated>
     </task>
     <task id="LOCAL-00007" summary="0.0.11">
       <created>1615638432667</created>
@@ -528,7 +514,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620132383900</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="0.0.66">
+      <created>1620202065708</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1620202065709</updated>
+    </task>
+    <task id="LOCAL-00055" summary="0.0.67">
+      <created>1620203334738</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1620203334738</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -544,8 +544,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.37&#10;done ericson" />
-    <MESSAGE value="0.0.38&#10;done fgh" />
     <MESSAGE value="0.0.39&#10;done genins and health heritage" />
     <MESSAGE value="0.0.40&#10;done genins and health heritage" />
     <MESSAGE value="0.0.41&#10;done health india" />
@@ -569,21 +567,17 @@
     <MESSAGE value="0.0.63" />
     <MESSAGE value="0.0.64" />
     <MESSAGE value="0.0.65" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.65" />
+    <MESSAGE value="0.0.66" />
+    <MESSAGE value="0.0.67" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.67" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <condition expression="'Transactiondate' in key" language="Python" />
-          <url>file://$PROJECT_DIR$/common.py</url>
-          <line>110</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/common.py</url>
-          <line>134</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/pdf_fhpl.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

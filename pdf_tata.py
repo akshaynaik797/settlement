@@ -26,7 +26,7 @@ try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=\d/).*(?=Loc No)"], [':', '.'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim Number).*"], [':', '.'], r"^\S+$"],
         'PatientName': [[r"(?<=Claimant/Patient).*"], [':', '"'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
         'DateofAdmission': [[r"(?<=DOA).*(?=-)"], [':'], r"^\S+(?: \S+)*$"],
@@ -36,14 +36,14 @@ try:
         'MemberID': [[r"(?<=Loc No).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Disease).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=EFT Transfer Code).*"], [':', '.', 'Â'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Instrument/ NEFT) *\w+(?:-\w+)+", r"(?<=Cheque No\/Date).*?(?=-)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
+        'UTRNo': [[r"(?<=transaction number).*(?=dated)"], [':', '.', 'Â'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=dated).*(?=towards)", r"(?<=Cheque No\/Date).*?(?=-)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[r"(?<=Bank Account No).*(?=on)"], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[r"(?<=Bank Name).*"], [':'], r"^\S+(?: \S+)*$"],
 
         'BilledAmount': [[r"(?<=Claim Amount).*"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Amt).*(?=\[TDS)"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Amt).*(?=\[TDS)"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=settled for INR).*(?=\()"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'Copay': [[r"(?<=Co pay).*(?=Deductible)"], [':', 'Rs'], r"^\S+(?: \S+)*$"],
         'TDS': [[r"(?<=TDS).*(?=\])"], [':', 'Rs.', 'INR', '/-', 'Rs'], r"^\d+(?:\.\d+)*$"],
         'Discount': [[r"(?<=Discount Amt).*"], ['Rs', ':'], r"^.*$"]
@@ -51,7 +51,6 @@ try:
     datadict = get_data_dict(regex_dict, f)
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
-    datadict['InsurerID'] = datadict['InsurerID'].split(',')[0].strip()
 
     deductions = []
 

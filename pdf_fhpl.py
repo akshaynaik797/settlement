@@ -7,7 +7,7 @@ from make_log import log_exceptions
 try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim ID).*", r"(?<=Claim Number).*"], [':'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim ID).*", r"(?<=Claim Number).*", r"(?<=Claim No.).*"], [':'], r"^\S+$"],
         'PatientName': [[r"(?<=Claim Of).*(?=Insured)", r"(?<=Patient Name).*", r"(?<=Claim Of).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No).*(?=Card)", r"(?<=Policy Number).*", r"(?<=Policy No).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=NEFT)[\s\S]*?(?=dated)"], [':', 'transaction', 'number', '.'], r"^\S+$"],

@@ -50,15 +50,14 @@ try:
     regex = r"(?<=REMARKS\n)[\s\S]+(?=\n *DISCOUNT DETAILS)"
     if data := re.search(regex, f):
         data = [re.split(r" {3,}", i)[-2:] for i in data.group().split('\n')]
-
-    deductions = []
-    for i in data:
-        tmp = {}
-        for j, k in zip(["DeductedAmt", "DeductionReason"], i):
-            tmp[j] = k
-        tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-        tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-        deductions.append(tmp)
+        deductions = []
+        for i in data:
+            tmp = {}
+            for j, k in zip(["DeductedAmt", "DeductionReason"], i):
+                tmp[j] = k
+            tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+            tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+            deductions.append(tmp)
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:
