@@ -10,7 +10,7 @@ try:
         'ClaimNo': [[r"(?<=CCN No).? *:? *\S+"], [':', '(', '.'], r"^\S+$"],
         'PatientName': [[r"(?<=Name of the Patient).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No.).*"], [':', '.'], r"^\S+$"],
-        'UTRNo': [[r"(?<=Insurer UTR No).*", r"(?<=Insurer\n).*(?=\n.*UTR)"], [':', '.'], r"^\S+$"],
+        'UTRNo': [[r"(?<=Insurer UTR No).*", r"(?<=Insurer\n).*(?=\n.*UTR)"], [':', '.', 'UTR'], r"^\S+$"],
         'Transactiondate': [[r"\S+(?=\n *Hospital)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Amount Claimed).*", r"(?<=claimed for)[\s\S]+?(?=Towards)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Claim Amt Settled).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
@@ -31,9 +31,17 @@ try:
         if i not in datadict:
             if tmp := re.search(j, f, re.DOTALL):
                 datadict[i] = tmp.group()
-                for bad in [':', '.', '\n']:
+                for bad in [':', '.', '\n', 'UTR']:
                     datadict[i] = datadict[i].replace(bad, '').strip()
 
+    if tmp := re.search(r"\d+(?:\/\d+){2}", datadict['Transactiondate']):
+        datadict['Transactiondate'] = tmp.group().strip()
+    if 'Employee No' in datadict['UTRNo']:
+        if tmp := re.search(r"^\w+", datadict['UTRNo']):
+            datadict['UTRNo'] = tmp.group().strip()
+    if 'Policy No' in datadict['UTRNo']:
+        if tmp := re.search(r"\w+$", datadict['UTRNo']):
+            datadict['UTRNo'] = tmp.group().strip()
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
