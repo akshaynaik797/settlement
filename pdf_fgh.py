@@ -55,15 +55,19 @@ try:
         data = data.group().split('\n')
         for i, j in enumerate(data):
             data[i] = re.split(r" {3,}", j)
+    else:
+        data = []
 
     deductions = []
-    for i in data:
-        tmp = {}
-        tmp["Details"], _, tmp["BillAmount"], tmp["DeductedAmt"], tmp["PayableAmount"], tmp["DeductionReason"] = i
-        tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-        tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-        deductions.append(tmp)
-
+    try:
+        for i in data:
+            tmp = {}
+            tmp["Details"], _, tmp["BillAmount"], tmp["DeductedAmt"], tmp["PayableAmount"], tmp["DeductionReason"] = i
+            tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+            tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+            deductions.append(tmp)
+    except:
+        pass
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:

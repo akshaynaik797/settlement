@@ -45,7 +45,7 @@ try:
     #     "CorporateName", "MemberID", "Diagnosis", "Discount", "Copay")
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim No).*(?=Insurance)"], [':'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim No).*(?=Insurance)", r"(?<=Claim No).*(?=Member)"], [':'], r"^\S+$"],
         'PatientName': [[r"(?<=Claimant/Patient).*(?=Corporate)"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy Number).*"], [':', '.'], r"^\S+$"],
         'DateofAdmission': [[r"(?<=DOA).*(?=DOD)"], [':'], r"^\S+(?: \S+)*$"],
