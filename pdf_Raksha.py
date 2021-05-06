@@ -10,13 +10,31 @@ from make_log import log_exceptions
 try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
     if 'details of Electronic Fund transfer processed' in f:
-        if tmp := re.search(r"(?<=Date\n).*(?=\nRegards)", f, re.DOTALL):
+        tables = camelot.read_pdf(sys.argv[1], pages='all')
+        flag = None
+        if tables.n > 0:
+            tables.export('temp_files/foo1.xlsx', f='excel')
+            flag = True
+        if flag:
+            wb = openpyxl.load_workbook('temp_files/foo1.xlsx')
+            sheet = wb.worksheets[-1]
+            data = []
+            for row in sheet.rows:
+                tmp = [i.value for i in row]
+                data.append(tmp)
+            data = data[3:]
+            data = [["" if j is None else j for j in i] for i in data]
+            data = [[str(j).replace('\n', ' ').replace('\t', ' ') for j in i[2:]] for i in data]
+        elif tmp := re.search(r"(?<=Date\n).*(?=\nRegards)", f, re.DOTALL):
             data = [re.split(r" +", i) for i in tmp.group().split('\n')]
             for j, i in enumerate(data):
-                if len(i) > 4:
+                if len(i) > 10:
+                    k = -1
+                    if 'Hospital' in i:
+                        k = 0
                     datadict = {}
-                    datadict['ClaimNo'], datadict['UTRNo'] = i[4], i[-2]
-                    datadict['Transactiondate'], datadict['NetPayable'] = i[-1] + data[j+1][-1], i[5]
+                    datadict['ClaimNo'], datadict['UTRNo'] = i[4+k], i[-2+k]
+                    datadict['Transactiondate'], datadict['NetPayable'] = i[-1+k] + data[j+1][-1], i[5+k]
                     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
                     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
