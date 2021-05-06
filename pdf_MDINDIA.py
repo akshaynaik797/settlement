@@ -47,10 +47,10 @@ try:
     #     "Discount", "DeductionCategory", "MailID", "HospitalID", "stgsettlement_sno")
 
     x1 = ""
+    deductions = []
     regex = r"(?<=REMARKS\n)[\s\S]+(?=\n *DISCOUNT DETAILS)"
     if data := re.search(regex, f):
         data = [re.split(r" {3,}", i)[-2:] for i in data.group().split('\n')]
-        deductions = []
         for i in data:
             tmp = {}
             for j, k in zip(["DeductedAmt", "DeductionReason"], i):

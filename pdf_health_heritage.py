@@ -49,6 +49,8 @@ try:
     regex = r"(?<=Details of deductions:\n)[\s\S]*(?=\n.*MOU Discount)"
     if data := re.search(regex, f):
         data = data.group().strip().split('\n')
+    else:
+        data = []
 
 
     for j, i in enumerate(data):

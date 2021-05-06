@@ -11,7 +11,7 @@ try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Client Ref No).*"], [':', '.', '|'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Client Ref No).*", r"(?<=Claim No).*"], [':', '.', '|'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*(?=Main)"], [':', '"'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=policy number).*(?=,)"], [':', '.'], r"^\S+$"],
         'DateofAdmission': [[r"(?<=From :).*(?=To)"], [':'], r"^\S+(?: \S+)*$"],
