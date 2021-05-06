@@ -19,12 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.67">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.68">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_MDINDIA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_MDINDIA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_united.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_united.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_aditya.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_aditya.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_reliance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_reliance.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,8 +164,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.1" />
-        <item itemvalue="Python.temp" />
         <item itemvalue="Python.backend" />
+        <item itemvalue="Python.temp" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.pdf_temp" />
       </list>
@@ -184,13 +185,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00007" summary="0.0.11">
-      <created>1615638432667</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1615638432667</updated>
     </task>
     <task id="LOCAL-00008" summary="0.0.12">
       <created>1615640185394</created>
@@ -528,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620203334738</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="0.0.68">
+      <created>1620217592920</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1620217592920</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -544,7 +545,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.39&#10;done genins and health heritage" />
     <MESSAGE value="0.0.40&#10;done genins and health heritage" />
     <MESSAGE value="0.0.41&#10;done health india" />
     <MESSAGE value="0.0.42&#10;done health insurence" />
@@ -569,7 +569,8 @@
     <MESSAGE value="0.0.65" />
     <MESSAGE value="0.0.66" />
     <MESSAGE value="0.0.67" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.67" />
+    <MESSAGE value="0.0.68" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.68" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -578,6 +579,26 @@
           <url>file://$PROJECT_DIR$/pdf_fhpl.py</url>
           <line>28</line>
           <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_reliance.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_big.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_aditya.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend.py</url>
+          <line>254</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

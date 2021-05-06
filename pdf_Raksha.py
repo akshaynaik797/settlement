@@ -8,6 +8,20 @@ from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
 
 try:
+    mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
+    if 'details of Electronic Fund transfer processed' in f:
+        if tmp := re.search(r"(?<=Date\n).*(?=\nRegards)", f, re.DOTALL):
+            data = [re.split(r" +", i) for i in tmp.group().split('\n')]
+            for j, i in enumerate(data):
+                if len(i) > 4:
+                    datadict = {}
+                    datadict['ClaimNo'], datadict['UTRNo'] = i[4], i[-2]
+                    datadict['Transactiondate'], datadict['NetPayable'] = i[-1] + data[j+1][-1], i[5]
+                    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+                    datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                    mark_flag('X', sys.argv[2])
+        exit()
     tables = camelot.read_pdf(sys.argv[1], pages='all')
     flag = None
     if tables.n > 0:
@@ -22,7 +36,7 @@ try:
             data.append(tmp)
         data = data[2:]
         data = [["" if j is None else j for j in i] for i in data]
-    mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
+
 
     # stg_sett_fields = (
     #     "srno", "InsurerID", "TPAID", "ALNO", "ClaimNo", "PatientName", "AccountNo", "BeneficiaryBank_Name", "UTRNo",
