@@ -19,13 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.71.2">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.71.3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_hdfcbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfcbank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/temp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +61,7 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.1">
+  <component name="RunManager" selected="Python.temp">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -172,9 +169,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.temp" />
         <item itemvalue="Python.1" />
         <item itemvalue="Python.backend" />
-        <item itemvalue="Python.temp" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.pdf_temp" />
       </list>
@@ -194,13 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00013" summary="0.0.17">
-      <created>1616248178397</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1616248178397</updated>
     </task>
     <task id="LOCAL-00014" summary="0.0.19">
       <created>1616677729342</created>
@@ -538,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620367840691</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="0.0.71.3">
+      <created>1620376791558</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1620376791558</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -554,7 +551,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.48&#10;done united" />
     <MESSAGE value="0.0.49&#10;done sompo" />
     <MESSAGE value="0.0.50&#10;done vidal" />
     <MESSAGE value="0.0.51&#10;done vipul" />
@@ -579,7 +575,8 @@
     <MESSAGE value="0.0.71" />
     <MESSAGE value="0.0.71.1" />
     <MESSAGE value="0.0.71.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.71.2" />
+    <MESSAGE value="0.0.71.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.71.3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -620,14 +617,9 @@
           <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/common.py</url>
-          <line>303</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/common.py</url>
-          <line>195</line>
-          <option name="timeStamp" value="89" />
+          <url>file://$PROJECT_DIR$/pdf_icici_lombard.py</url>
+          <line>37</line>
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

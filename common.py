@@ -194,7 +194,7 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
             cur.execute(p, p_params)
         con.commit()
     attach_path = get_row(mail_id)['attach_path']
-    move_attachment(datadict['ClaimNo'], attach_path)
+    move_attachment(datadict['ALNO'], attach_path, hospital)
     print("processed ", hospital, ' ', mail_id)
 
 
@@ -300,13 +300,18 @@ def date_formatting(date):
     return date
 
 
-def move_attachment(claimno, pdfpath):
-    f_dst = "../index/Attachments/"
-    if claimno == '':
+def move_attachment(alno, pdfpath, hospital):
+    f_dst = f"../index/Attachments/{hospital}/"
+    if alno == '':
         copyfile(pdfpath, path.join(f_dst, path.split(pdfpath)[-1]))
         return True
     Path(f_dst).mkdir(parents=True, exist_ok=True)
-    claimno = claimno.replace('/', '-').strip()
+    alno = alno.replace('/', '-').strip()
     ext = path.splitext(pdfpath)
-    f_dst = path.join(f_dst, claimno + ext[-1])
+    f_dst = path.join(f_dst, alno + ext[-1])
     copyfile(pdfpath, f_dst)
+    q = "update stgSettlement set attachment='X' where ALNO=%s"
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(q, (alno,))
+        con.commit()
