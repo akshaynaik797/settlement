@@ -25,14 +25,14 @@ try:
         'MemberID': [[r"(?<=I-Card No).*(?=Relation)"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Primary Diagnosis).*(?=ICD Code)"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=NEFT No).*(?=Date)"], [':', '.'], r"^\S+$"],
+        'UTRNo': [[r"(?<=NEFT No).*(?=Date)", r"(?<=NEFT No).*?(?=Â)", r"(?<=NEFT No).*"], [':', '.'], r"^\S+$"],
         'Transactiondate': [[r"(?<=Date of Transfer).*(?=Settled)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 
         'BilledAmount': [[r"(?<=Amount Claimed).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Settled Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=Net Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=Net Amount).*", r"(?<=Amount:Â).*(?=In Favour)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'Copay': [[], [':'], r"^\S+(?: \S+)*$"],
         'TDS': [[r"(?<=TDS Deducted).*(?=Deducted)"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'Discount': [[], [], r"^.*$"]
