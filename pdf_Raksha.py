@@ -25,6 +25,14 @@ try:
             data = data[3:]
             data = [["" if j is None else j for j in i] for i in data]
             data = [[str(j).replace('\n', ' ').replace('\t', ' ') for j in i[2:]] for i in data]
+            for i in data:
+                datadict = {}
+                datadict['ClaimNo'], datadict['NetPayable'] = i[2].split(' ')
+                datadict['UTRNo'] = i[-2].split(' ')[0]
+                datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+                datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+                ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                mark_flag('X', sys.argv[2])
         elif tmp := re.search(r"(?<=Date\n).*(?=\nRegards)", f, re.DOTALL):
             data = [re.split(r" +", i) for i in tmp.group().split('\n')]
             for j, i in enumerate(data):
