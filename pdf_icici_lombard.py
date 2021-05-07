@@ -26,7 +26,12 @@ try:
         'TDS': [[r"(?<=TDS is) *\d+(?=.)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
-    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+    if 'UTRNo' not in datadict:
+        if tmp := re.search(r"(?<=ref. no.).*?(?=\ndated)", f, re.DOTALL):
+            datadict['UTRNo'] = tmp.group().strip()
+    if tmp := re.search(r"(?<=" + datadict['ClaimNo'] + ") *\w+", f, re.DOTALL):
+        datadict['ALNO'] = tmp.group().strip()
+    datadict['unique_key'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])

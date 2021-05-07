@@ -19,10 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.71.1">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.71.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_hdfcbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfcbank.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +55,7 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -190,13 +194,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00012" summary="0.0.16">
-      <created>1616072545688</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1616072545688</updated>
     </task>
     <task id="LOCAL-00013" summary="0.0.17">
       <created>1616248178397</created>
@@ -534,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620313118207</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="0.0.71.2">
+      <created>1620367840691</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1620367840691</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -550,7 +554,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.47&#10;done religare" />
     <MESSAGE value="0.0.48&#10;done united" />
     <MESSAGE value="0.0.49&#10;done sompo" />
     <MESSAGE value="0.0.50&#10;done vidal" />
@@ -575,7 +578,8 @@
     <MESSAGE value="0.0.70" />
     <MESSAGE value="0.0.71" />
     <MESSAGE value="0.0.71.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.71.1" />
+    <MESSAGE value="0.0.71.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.71.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -607,18 +611,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
-          <line>58</line>
+          <line>72</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="68" />
+          <url>file://$PROJECT_DIR$/pdf_hdfcbank.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="83" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="75" />
+          <url>file://$PROJECT_DIR$/common.py</url>
+          <line>303</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/common.py</url>
+          <line>195</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

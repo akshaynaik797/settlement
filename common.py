@@ -1,5 +1,8 @@
 import datetime
 import re
+from pathlib import Path
+from os import path
+from shutil import copyfile
 
 import mysql.connector
 import pdftotext
@@ -190,6 +193,8 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
                         row['MailID'], row['HospitalID']]
             cur.execute(p, p_params)
         con.commit()
+    attach_path = get_row(mail_id)['attach_path']
+    move_attachment(datadict['ClaimNo'], attach_path)
     print("processed ", hospital, ' ', mail_id)
 
 
@@ -293,3 +298,15 @@ def date_formatting(date):
         except:
             pass
     return date
+
+
+def move_attachment(claimno, pdfpath):
+    f_dst = "../index/Attachments/"
+    if claimno == '':
+        copyfile(pdfpath, path.join(f_dst, path.split(pdfpath)[-1]))
+        return True
+    Path(f_dst).mkdir(parents=True, exist_ok=True)
+    claimno = claimno.replace('/', '-').strip()
+    ext = path.splitext(pdfpath)
+    f_dst = path.join(f_dst, claimno + ext[-1])
+    copyfile(pdfpath, f_dst)
