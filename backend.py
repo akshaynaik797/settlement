@@ -248,7 +248,7 @@ def automate_processing():
         with mysql.connector.connect(**conn_data) as con:
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
-            q = "SELECT sno, attach_path, id FROM settlement_mails  where hospital = 'noble'  and date like '%2021%' and attach_path like '%icici_lombard%'"
+            q = "SELECT sno, attach_path, id FROM settlement_mails  where hospital = 'noble' and attach_path like '%Good%'"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:

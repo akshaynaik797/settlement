@@ -1,11 +1,10 @@
-from common import date_formatting, conn_data, get_row, move_attachment
+from common import update_date_utr_nic_city, conn_data
 import mysql.connector
 
-q = "select ALNO, mail_id from stgSettlement"
+q = "select unique_key from stgSettlement where UTRNo = '' and unique_key like '%,%'"
 with mysql.connector.connect(**conn_data) as con:
     cur = con.cursor()
     cur.execute(q)
     r = cur.fetchall()
-    for alno, mail_id in r:
-        attach_path = get_row(mail_id)['attach_path']
-        move_attachment(alno, attach_path, 'noble')
+    for unique_key in r:
+        update_date_utr_nic_city(unique_key[0])
