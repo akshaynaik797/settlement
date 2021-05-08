@@ -306,12 +306,13 @@ def move_attachment(alno, pdfpath, hospital):
         copyfile(pdfpath, path.join(f_dst, path.split(pdfpath)[-1]))
         return True
     Path(f_dst).mkdir(parents=True, exist_ok=True)
-    alno = alno.replace('/', '-').strip()
     ext = path.splitext(pdfpath)
-    f_dst = path.join(f_dst, alno + ext[-1])
+    f_dst = path.join(f_dst, alno.replace('/', '-') + ext[-1])
     copyfile(pdfpath, f_dst)
     q = "update stgSettlement set attachment='X' where ALNO=%s"
+    q1 = "update stgSettlement set attachment='X' where ClaimNo=%s"
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         cur.execute(q, (alno,))
+        cur.execute(q1, (alno,))
         con.commit()

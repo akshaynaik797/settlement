@@ -25,19 +25,22 @@ try:
         'MemberID': [[r"(?<=I-Card No).*(?=Relation)"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Ailment).*"], [':'], r"^.*$"],
 
-        'UTRNo': [[r"(?<=UTR No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=UTR Date).*"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
+        'UTRNo': [[r"(?<=UTR No).*", r"(?<=Cheque No).*"], [':', '.'], r"^\S+$"],
+        'Transactiondate': [[r"(?<=UTR Date).*", r"(?<=dated).*?(?=for)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 
         'BilledAmount': [[r"(?<=Claim Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Approved Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
-        'NetPayable': [[r"(?<=NEFT/Paid Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
+        'NetPayable': [[r"(?<=NEFT/Paid Amount).*", r"(?<=for).*(?=in full)"], [':', 'Rs.', 'INR', '/-', ','], r"^\d+(?:\.\d+)*$"],
         'Copay': [[], [':'], r"^\S+(?: \S+)*$"],
         'TDS': [[r"(?<=TDS Amount).*"], [':', 'Rs.', 'INR', '/-'], r"^\d+(?:\.\d+)*$"],
         'Discount': [[], [], r"^.*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if tmp := re.search(r"(?<=Payable\n).*(?=\n *Deduction Details)", f):
+        tmp = re.split(r" {2,}", tmp.group().strip())
+        datadict['BilledAmount'], datadict['SettledAmount'], datadict['TDS'] = tmp[1], tmp[3], tmp[6]
     if 'UTRNo' in datadict:
         datadict['UTRNo'] = datadict['UTRNo'].split('/')[0]
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']

@@ -249,6 +249,7 @@ def automate_processing():
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
             q = "SELECT sno, attach_path, id FROM settlement_mails  where hospital = 'noble' and date like '%2021%' and attach_path like '%health_heritage%'"
+            q = "SELECT sno, attach_path, id FROM settlement_mails where sno in (select sett_table_sno from stgSettlement where TPAID='vipul' and UTRNo like '%NEFT%' and hospital = 'noble')"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:
