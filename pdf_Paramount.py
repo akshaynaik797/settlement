@@ -1,3 +1,4 @@
+import random
 import re
 import sys
 
@@ -29,6 +30,7 @@ try:
 
     for i,j in [("Transactiondate", r"(?<=Payment to).*?(?=Hospital)"), ("UTRNo", r"(?<=Insurer).*?(?=No\.)")]:
         if i not in datadict:
+            datadict[i] = ""
             if tmp := re.search(j, f, re.DOTALL):
                 datadict[i] = tmp.group()
                 for bad in [':', '.', '\n', 'UTR']:
@@ -42,6 +44,8 @@ try:
     if 'Policy No' in datadict['UTRNo']:
         if tmp := re.search(r"\w+$", datadict['UTRNo']):
             datadict['UTRNo'] = tmp.group().strip()
+    if 'ClaimNo' not in datadict:
+        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 

@@ -1,3 +1,4 @@
+import random
 import sys
 import re
 
@@ -22,10 +23,12 @@ try:
         'Copay': [[r"(?<=Co-payment).*"], [':', 'Rs', '/-'], r"^\d+(?:\.\d+)*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if 'ClaimNo' not in datadict:
+        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
-    ins_upd_data(mail_id, hospital, datadict, [])
+    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
     mark_flag('X', sys.argv[2])
 except:
     log_exceptions()

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value=".py files" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,12 +23,41 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.71.7">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.72.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Ericson.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Ericson.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Good_health.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Good_health.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_MDINDIA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_MDINDIA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_national.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_national.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Max_Bupa.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Max_Bupa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Medi_Assist.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medi_Assist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Medsave.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medsave.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Universal_Sompo.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Universal_Sompo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_aditya.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_aditya.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_east_west.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_east_west.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_fgh.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fgh.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_genins.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_genins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_hdfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_heritage.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_heritage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_india.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_india.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_insurance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_reliance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_reliance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_religare.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_religare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_royal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_royal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_small.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_small.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_tata.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_tata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_united.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_united.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_vidal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vidal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_vipul.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vipul.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +82,12 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="NamedScopeManager">
+    <scope name=".py files" pattern="file[settlement]:*.py" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="3" />
+  </component>
   <component name="ProjectId" id="1osN0LqvZSbUgDHTXqzg1FzrZJh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -61,9 +100,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../utr_search" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.1">
+  <component name="RunManager" selected="Python.backend">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,8 +211,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.1" />
         <item itemvalue="Python.backend" />
+        <item itemvalue="Python.1" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.temp" />
         <item itemvalue="Python.pdf_temp" />
@@ -193,13 +233,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00018" summary="0.0.24&#10;done icici abd religare">
-      <created>1618302816387</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1618302816387</updated>
     </task>
     <task id="LOCAL-00019" summary="0.0.26&#10;done paramount and bajaj">
       <created>1618486531700</created>
@@ -537,7 +570,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620456430485</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="0.0.72.1">
+      <created>1620738919807</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1620738919809</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -553,7 +593,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.53&#10;done hdfc" />
     <MESSAGE value="0.0.54&#10;done hdfcbank" />
     <MESSAGE value="0.0.56" />
     <MESSAGE value="0.0.57" />
@@ -578,34 +617,30 @@
     <MESSAGE value="0.0.71.5" />
     <MESSAGE value="0.0.71.6" />
     <MESSAGE value="0.0.71.7" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.71.7" />
+    <MESSAGE value="0.0.72.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.72.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_reliance.py</url>
-          <line>61</line>
+          <line>64</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_big.py</url>
-          <line>81</line>
+          <line>84</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_aditya.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_health_heritage.py</url>
-          <line>55</line>
+          <line>58</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
-          <line>72</line>
+          <line>77</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -620,7 +655,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_health_heritage.py</url>
-          <line>40</line>
+          <line>43</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -634,14 +669,24 @@
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/backend.py</url>
-          <line>255</line>
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_national.py</url>
           <line>37</line>
           <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_royal.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="131" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

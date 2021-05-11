@@ -1,3 +1,4 @@
+import random
 import re
 import sys
 
@@ -38,6 +39,8 @@ try:
         'Discount': [[], [], r"^.*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if 'ClaimNo' not in datadict:
+        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 

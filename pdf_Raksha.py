@@ -1,3 +1,4 @@
+import random
 import re
 import sys
 
@@ -29,6 +30,8 @@ try:
                 datadict = {}
                 datadict['ClaimNo'], datadict['NetPayable'] = i[2].split(' ')
                 datadict['UTRNo'] = i[-2].split(' ')[0]
+                if 'ClaimNo' not in datadict:
+                    datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
                 datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
                 datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
                 ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
@@ -43,6 +46,8 @@ try:
                     datadict = {}
                     datadict['ClaimNo'], datadict['UTRNo'] = i[4+k], i[-2+k]
                     datadict['Transactiondate'], datadict['NetPayable'] = i[-1+k] + data[j+1][-1], i[5+k]
+                    if 'ClaimNo' not in datadict:
+                        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
                     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
                     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
@@ -94,6 +99,8 @@ try:
         'Discount': [[r"(?<=Discount Amt).*"], ['Rs', ':'], r"^.*$"]
     }
     datadict = get_data_dict(regex_dict, f)
+    if 'ClaimNo' not in datadict:
+        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 

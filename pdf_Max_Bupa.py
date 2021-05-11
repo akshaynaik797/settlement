@@ -1,3 +1,4 @@
+import random
 import re
 import sys
 
@@ -48,6 +49,8 @@ try:
     tmp = {**tmp, **tmp1}
     tmp = {i: j.replace(',', '') for i, j in tmp.items()}
     datadict = {**tmp, **datadict}
+    if 'ClaimNo' not in datadict:
+        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
     datadict['InsurerID'] = datadict['TPAID']

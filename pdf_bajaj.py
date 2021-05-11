@@ -1,6 +1,6 @@
 import re
 import sys
-
+import random
 
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
@@ -25,7 +25,7 @@ try:
             break
 
     regex_dict = {
-        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*"], [':', 'Claim No'], r"^\S+$"],
+        'ClaimNo': [[r"(?<=Claim Number).*", r"(?<=Claim No).*", r"(?<=Customer Ref).*(?=_)", r"(?<=Customer Ref).*"], [':', 'Claim No'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No :).*"], [':', '.'], r"^\S+$"],
         'UTRNo': [[r"(?<=UTR No).*", r"(?<=UTR Reference).*"], [':', '.'], r"^\S+$"],
@@ -58,6 +58,8 @@ try:
             for i in v[1]:
                 datadict[k] = datadict[k].replace(i, '')
 
+    if 'ClaimNo' not in datadict:
+        datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
     datadict['InsurerID'] = insurer
