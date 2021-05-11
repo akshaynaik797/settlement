@@ -7,9 +7,8 @@ import pandas as pd
 from backend import mark_flag
 from common import get_row, ins_upd_data
 from make_log import log_exceptions
-from movemaster import move_master_to_master_insurer
 try:
-    _, file_path, mid = sys.argv
+    _, file_path, mid, _ = sys.argv
     row_data = get_row(mid)
     mail_id, hospital = row_data['id'], row_data['hospital']
 
