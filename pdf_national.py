@@ -1,11 +1,12 @@
+import random
 import re
 import sys
 
-import openpyxl
+import mysql.connector
 import pandas as pd
 
 from backend import mark_flag
-from common import get_row, ins_upd_data
+from common import get_row, ins_upd_data, conn_data
 from make_log import log_exceptions
 try:
     _, file_path, mid, _ = sys.argv
@@ -20,23 +21,27 @@ try:
         data.append(temp)
 
 
-    sh1_fields = [('ALNO', 'Remarks'), ('ClaimNo', 'Settlement No'), ('POLICYNO', 'Policy No'),
-                  ('PatientName', 'Claimant Name'), ('InsurerID', 'Tpa Branch Name'),
-                  ('AccountNo', 'Payee Bank Acc No'), ('UTRNo', 'Utr No'), ('SettledAmount', 'GrossPaidAmount'),
-                  ('TDS', 'TDS'), ('NetPayable', 'Net Paid Amount'), ('Transactiondate', 'Payment Date')]
+    sh1_fields = [('ALNO', ['Remarks']), ('ClaimNo', ['Settlement No']), ('POLICYNO', ['Policy No']),
+                  ('PatientName', ['Claimant Name']), ('InsurerID', ['Tpa Branch Name']),
+                  ('AccountNo', ['Payee Bank Acc No']), ('UTRNo', ['Utr No', 'UTR Number']), ('SettledAmount', ['GrossPaidAmount']),
+                  ('TDS', ['TDS']), ('NetPayable', ['Net Paid Amount', 'Net Amount']), ('Transactiondate', ['Payment Date'])]
 
     temp = {}
     for j, i in enumerate(data[0]):
-        for field in sh1_fields:
-            if field[1] in i:
-                t_list = []
-                for k in range(1, len(data)):
-                    t_list.append(data[k][j])
-                temp[field[0]] = t_list
+        for k, v in sh1_fields:
+            for m in v:
+                if m in i:
+                    t_list = []
+                    for n in range(1, len(data)):
+                        t_list.append(str(data[n][j]))
+                    temp[k] = t_list
+                    break
 
     table = []
-    for i in range(len(temp['ALNO'])):
-        table.append({})
+    for i in temp:
+        for j in temp[i]:
+            table.append({})
+        break
 
     for i, j in enumerate(table):
         for k in temp:
@@ -44,11 +49,35 @@ try:
 
 
     for datadict in table:
-        datadict['ALNO'] = datadict['ALNO'].replace('-', '')
+        if 'ALNO' in datadict:
+            datadict['ALNO'] = datadict['ALNO'].strip('-')
+            for i in ['MD India', 'Medi assist', 'United Healthcare']:
+                if i in datadict['InsurerID']:
+                    datadict['ALNO'] = datadict['ALNO'].split("-")[0]
+            if 'Heritage health' in datadict['InsurerID']:
+                datadict['ALNO'] = datadict['ALNO'].strip('CL')
+            if 'Family Health' in datadict['InsurerID']:
+                datadict['ALNO'] = datadict['ALNO'][1:].split('/')[0]
+        else:
+            datadict['ALNO'] = 'not_found_' + str(random.randint(9999999, 999999999))
+        if 'Paramount health' in datadict['InsurerID']:
+            tmp = re.findall(r"\d+", datadict['ALNO'])
+            if len(tmp) > 0:
+                datadict['MemberID'] = tmp[0]
+                datadict['ALNO'] = 'not_found_' + str(random.randint(9999999, 999999999))
         datadict['unique_key'] = datadict['ALNO']
         datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+        datadict['UTRNo'] = '' if datadict['UTRNo'] == 'nan' else datadict['UTRNo']
         deductions = []
-        ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
+        if 'Vidal Health' not in datadict['InsurerID']:
+            ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
+        else:
+            q = "update stgSettlement set ALNO=%s where UTRNo=%s and NetPayable like %s"
+            params = [datadict['ALNO'], datadict['UTRNo'], "%" + datadict['NetPayable'].split('.')[0] + "%"]
+            with mysql.connector.connect(**conn_data) as con:
+                cur = con.cursor()
+                cur.execute(q, params)
+                con.commit()
     mark_flag('X', sys.argv[2])
 except:
     log_exceptions()
