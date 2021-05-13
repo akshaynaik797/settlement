@@ -160,7 +160,49 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
 
     params = params + params[1:]
 
-    q2 = "select srno from stgSettlement where unique_key=%s limit 1"
+    with mysql.connector.connect(**conn_data) as con:
+        cur = con.cursor()
+        cur.execute(q, params)
+        con.commit()
+
+    print("processed ", hospital, ' ', mail_id)
+
+def ins_upd_data_copy(mail_id, sett_sno, hospital, datadict, deductions):
+    datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
+    for i in stg_sett_fields:
+        if i not in datadict:
+            datadict[i] = ""
+
+    if datadict['Transactiondate'] == '':
+        datadict['Transactiondate'] = get_row(mail_id)['date'].split(' ')[0]
+
+    datadict['Transactiondate'] = date_formatting(datadict['Transactiondate'])
+    datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])
+    datadict['DateofDischarge'] = date_formatting(datadict['DateofDischarge'])
+
+    q = "insert into stgSettlement_copy (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
+        "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
+        "`Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `POLICYNO`, " \
+        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `sett_table_sno`)"
+    q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
+
+    params = [datadict['unique_key'], datadict['InsurerID'], datadict['TPAID'], datadict['ALNO'], datadict['ClaimNo'],
+              datadict['PatientName'], datadict['AccountNo'], datadict['BeneficiaryBank_Name'], datadict['UTRNo'],
+              datadict['BilledAmount'], datadict['SettledAmount'], datadict['TDS'], datadict['NetPayable'],
+              datadict['Transactiondate'], datadict['DateofAdmission'], datadict['DateofDischarge'],
+              datadict['mail_id'], datadict['hospital'], datadict['POLICYNO'], datadict['CorporateName'],
+              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay'], datadict['sett_table_sno']]
+
+    q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
+         "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, " \
+         "`TDS`=%s, `NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, " \
+         "`mail_id`=%s, `hospital`=%s, `POLICYNO`=%s, `CorporateName`=%s, `MemberID`=%s, `Diagnosis`=%s, " \
+         "`Discount`=%s, `Copay`=%s, `sett_table_sno`=%s"
+    q = q + q1
+
+    params = params + params[1:]
+
+    q2 = "select srno from stgSettlement_copy where unique_key=%s limit 1"
     q2_params = (datadict['unique_key'],)
     last_id = -1
     with mysql.connector.connect(**conn_data) as con:

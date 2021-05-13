@@ -6,7 +6,7 @@ import mysql.connector
 import pandas as pd
 
 from backend import mark_flag
-from common import get_row, ins_upd_data, conn_data
+from common import get_row, ins_upd_data, conn_data, ins_upd_data_copy
 from make_log import log_exceptions
 try:
     _, file_path, mid, _ = sys.argv
@@ -77,7 +77,16 @@ try:
         datadict['UTRNo'] = '' if datadict['UTRNo'] == 'nan' else datadict['UTRNo']
         deductions = []
         if 'Vidal' not in datadict['InsurerID']:
-            ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
+            q = "select * from stgSettlement where ALNO=%s and UTRNo=%s limit 1"
+            params = [datadict['ALNO'], datadict['UTRNo']]
+            with mysql.connector.connect(**conn_data) as con:
+                cur = con.cursor()
+                cur.execute(q, params)
+                r = cur.fetchone()
+                if r is None:
+                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
+                else:
+                    ins_upd_data_copy(mail_id, sys.argv[3], hospital, datadict, deductions)
         else:
             q = "update stgSettlement set ALNO=%s where UTRNo=%s and SettledAmount like %s"
             params = [datadict['ALNO'], datadict['UTRNo'], "%" + datadict['SettledAmount'].split('.')[0] + "%"]

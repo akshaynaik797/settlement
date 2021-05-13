@@ -1,16 +1,11 @@
-import os
 import random
 import re
-import shutil
 import sys
 
-import camelot
-import openpyxl
-import pandas as pd
 import mysql.connector
 import xlrd
 
-from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data, get_row, conn_data
+from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data, get_row, conn_data, ins_upd_data_copy
 from make_log import log_exceptions
 
 try:
@@ -24,18 +19,22 @@ try:
         for j, i in enumerate(sh):
             if j != 0:
                 tmp = {i: j for i, j in zip(fields, [str(j.value) for j in i])}
+                datadict = {}
+                for k, v in [("UTRNo", 'CHEQUENO'), ("Transactiondate", 'CHEQUEDATE'), ("NetPayable", 'TOTALSETTLED'),
+                             ("TDS", 'TDS_AMT')]:
+                    datadict[k] = tmp[v]
+                datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo'] = tmp['CCN']
+                datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+                q = "select * from stgSettlement where ALNO=%s and UTRNo=%s limit 1"
+                params = [datadict['ALNO'], datadict['UTRNo']]
                 with mysql.connector.connect(**conn_data) as con:
                     cur = con.cursor()
-                    q = "select ClaimNo from stgSettlement where ClaimNo=%s limit 1"
-                    cur.execute(q, (tmp['CCN'],))
+                    cur.execute(q, params)
                     r = cur.fetchone()
                     if r is None:
-                        datadict = {}
-                        for k, v in [("UTRNo", 'CHEQUENO'), ("Transactiondate", 'CHEQUEDATE'), ("NetPayable", 'TOTALSETTLED'), ("TDS", 'TDS_AMT')]:
-                            datadict[k] = tmp[v]
-                        datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo'] = tmp['CCN']
-                        datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
                         ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                    else:
+                        ins_upd_data_copy(mail_id, sys.argv[3], hospital, datadict, [])
         mark_flag('X', sys.argv[2])
         exit()
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
