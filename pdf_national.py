@@ -24,7 +24,7 @@ try:
     sh1_fields = [('ALNO', ['Remarks']), ('ClaimNo', ['Settlement No']), ('POLICYNO', ['Policy No']),
                   ('PatientName', ['Claimant Name']), ('InsurerID', ['Tpa Branch Name']),
                   ('AccountNo', ['Payee Bank Acc No']), ('UTRNo', ['Utr No', 'UTR Number']), ('SettledAmount', ['GrossPaidAmount']),
-                  ('TDS', ['TDS']), ('NetPayable', ['Net Paid Amount', 'Net Amount']), ('Transactiondate', ['Payment Date'])]
+                  ('TDS', ['TDS']), ('NetPayable', ['Net Paid Amount', 'Net Amount']), ('Transactiondate', ['Payment Date', 'Settlement Date'])]
 
     temp = {}
     for j, i in enumerate(data[0]):
@@ -51,16 +51,23 @@ try:
     for datadict in table:
         if 'ALNO' in datadict:
             datadict['ALNO'] = datadict['ALNO'].strip('-')
-            for i in ['MD India', 'Medi assist', 'United Healthcare']:
+            for i in ['MD', 'Medi', 'United']:
                 if i in datadict['InsurerID']:
                     datadict['ALNO'] = datadict['ALNO'].split("-")[0]
-            if 'Heritage health' in datadict['InsurerID']:
-                datadict['ALNO'] = datadict['ALNO'].strip('CL')
-            if 'Family Health' in datadict['InsurerID']:
+            if 'Heritage' in datadict['InsurerID']:
+                datadict['ALNO'] = datadict['ALNO'].strip('CL').strip('00')
+            if 'Family' in datadict['InsurerID']:
                 datadict['ALNO'] = datadict['ALNO'][1:].split('/')[0]
+            if 'Ericson' in datadict['InsurerID']:
+                tmp = re.findall(r"\d+", datadict['ALNO'])
+                if len(tmp) > 0:
+                    datadict['ALNO'] = tmp[0]
+            if datadict['ALNO'] == '':
+                datadict['ALNO'] = 'not_found_' + str(random.randint(9999999, 999999999))
+
         else:
             datadict['ALNO'] = 'not_found_' + str(random.randint(9999999, 999999999))
-        if 'Paramount health' in datadict['InsurerID']:
+        if 'Paramount' in datadict['InsurerID']:
             tmp = re.findall(r"\d+", datadict['ALNO'])
             if len(tmp) > 0:
                 datadict['MemberID'] = tmp[0]
@@ -69,11 +76,11 @@ try:
         datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
         datadict['UTRNo'] = '' if datadict['UTRNo'] == 'nan' else datadict['UTRNo']
         deductions = []
-        if 'Vidal Health' not in datadict['InsurerID']:
+        if 'Vidal' not in datadict['InsurerID']:
             ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
         else:
-            q = "update stgSettlement set ALNO=%s where UTRNo=%s and NetPayable like %s"
-            params = [datadict['ALNO'], datadict['UTRNo'], "%" + datadict['NetPayable'].split('.')[0] + "%"]
+            q = "update stgSettlement set ALNO=%s where UTRNo=%s and SettledAmount like %s"
+            params = [datadict['ALNO'], datadict['UTRNo'], "%" + datadict['SettledAmount'].split('.')[0] + "%"]
             with mysql.connector.connect(**conn_data) as con:
                 cur = con.cursor()
                 cur.execute(q, params)

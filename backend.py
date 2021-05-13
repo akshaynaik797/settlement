@@ -251,7 +251,7 @@ def automate_processing():
             # q = "SELECT sno, attach_path, id FROM settlement_mails where sno='9792'"
             # q = "SELECT sno, attach_path, id FROM settlement_mails where sno in (select sett_table_sno from stgSettlement where TPAID='MDINDIA' and UTRNo='' and hospital = 'noble')"
             # q = "SELECT sno, attach_path, id FROM settlement_mails where hospital = 'noble' and completed != 'X' and date like '%2021%' and attach_path like '%national%';"
-            q = "SELECT sno, attach_path, id FROM settlement_mails where hospital = 'noble' and completed not in ('X', '') and date like '%2021%';"
+            q = "SELECT sno, attach_path, id FROM settlement_mails where hospital = 'noble' and attach_path like '%national%' and date like '%2021%';"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:

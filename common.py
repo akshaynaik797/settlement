@@ -194,7 +194,8 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
             cur.execute(p, p_params)
         con.commit()
     attach_path = get_row(mail_id)['attach_path']
-    move_attachment(datadict['ALNO'], attach_path, hospital)
+    if not path.exists('sftp_folder'):
+        move_attachment(datadict['ALNO'], attach_path, hospital)
     print("processed ", hospital, ' ', mail_id)
 
 
