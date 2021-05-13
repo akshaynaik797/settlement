@@ -249,13 +249,15 @@ def automate_processing():
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
             # q = "SELECT sno, attach_path, id FROM settlement_mails where sno='9792'"
-            # q = "SELECT sno, attach_path, id FROM settlement_mails where sno in (select sett_table_sno from stgSettlement where TPAID='MDINDIA' and UTRNo='' and hospital = 'noble')"
-            # q = "SELECT sno, attach_path, id FROM settlement_mails where hospital = 'noble' and completed != 'X' and date like '%2021%' and attach_path like '%national%';"
-            q = "SELECT sno, attach_path, id FROM settlement_mails where hospital = 'noble' and attach_path like '%national%' and date like '%2021%';"
+            q = "SELECT sno, attach_path, id FROM settlement_mails INNER JOIN stgSettlement ON settlement_mails.id = stgSettlement.mail_id where TPAID='City_TPA' or TPAID='bajaj' and settlement_mails.hospital='noble';"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:
             try:
+                with mysql.connector.connect(**conn_data) as con:
+                    cur = con.cursor()
+                    q = "delete from stgSettlement where mail_id=%s"
+                    cur.execute(q, (mid,))
                 sno = str(sno)
                 if os.path.exists(filepath):
                     mark_flag('p', mid)

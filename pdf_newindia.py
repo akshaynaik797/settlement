@@ -6,11 +6,12 @@ import mysql.connector
 import pdftotext
 import tabula
 
-from common import conn_data, mark_flag, get_row, date_formatting
+from common import conn_data, mark_flag, get_row, date_formatting, move_attachment
 from make_log import log_exceptions
 
 
 try:
+    sno = sys.argv[3]
     row_data = get_row(sys.argv[2])
     mail_id = row_data['id']
     mail_date = row_data['date']
@@ -141,12 +142,12 @@ try:
     q = "insert into stgSettlement " \
         "(`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
         "`BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`," \
-        " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`) "
+        " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `sett_table_sno`) "
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
     tran_date = date_formatting(tran_date)
     params = [refrenceNo + ',' + claimNo, 'newindia', tpa, '', claimNo, patientName, '', '',
-              utrno, '', grossAmount, tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital]
+              utrno, '', grossAmount, tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital, sno]
 
     for i, j in enumerate(params):
         try:
@@ -157,7 +158,8 @@ try:
 
     q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
          "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, `TDS`=%s," \
-         "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, `hospital`=%s"
+         "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, " \
+         "`hospital`=%s, `sett_table_sno`=%s"
     q = q + q1
 
     params = params + params[1:]
@@ -167,7 +169,9 @@ try:
         cur.execute(q, params)
         con.commit()
 
+    move_attachment(claimNo, sys.argv[1], hospital)
     mark_flag('X', sys.argv[2])
+    print("processed ", hospital, ' ', mail_id)
 except:
     log_exceptions()
     pass

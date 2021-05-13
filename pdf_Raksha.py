@@ -54,8 +54,7 @@ try:
                     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
                     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
                     pass
-                    ####for test purpose
-                    # ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
         mark_flag('X', sys.argv[2])
         exit()
     tables = camelot.read_pdf(sys.argv[1], pages='all')

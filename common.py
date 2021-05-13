@@ -125,7 +125,7 @@ def get_data_dict(regex_dict, text):
         return data_dict
 
 
-def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
+def ins_upd_data_copy(mail_id, sett_sno, hospital, datadict, deductions):
     datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:
@@ -167,7 +167,7 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
 
     print("processed ", hospital, ' ', mail_id)
 
-def ins_upd_data_copy(mail_id, sett_sno, hospital, datadict, deductions):
+def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
     datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:

@@ -6,11 +6,11 @@ import datetime
 import pdftotext
 from dateutil import parser as date_parser
 
-from common import conn_data, mark_flag, get_row, date_formatting
+from common import conn_data, mark_flag, get_row, date_formatting, move_attachment
 from make_log import log_exceptions
 
 try:
-    row_data = get_row(sys.argv[2])
+    row_data, sno = get_row(sys.argv[2]), sys.argv[3]
     mail_id = row_data['id']
     hospital = row_data['hospital']
     with open(sys.argv[1], "rb") as f:
@@ -37,7 +37,10 @@ try:
 
     for i in regexdict:
         for j in regexdict[i]:
-            data = re.compile(j).search(f)
+            if i == 'payment_details':
+                data = re.compile(j, re.DOTALL).search(f)
+            else:
+                data = re.compile(j).search(f)
             if data is not None:
                 temp = data.group().strip()
                 for k in badchars:
@@ -67,9 +70,18 @@ try:
             datadict['adminssion_date'] = ad_date[0:2] + '-' + ad_date[2:4] + '-' + ad_date[4:]
         except:
             datadict['adminssion_date'] = ""
-        datadict['pname'] = temp_l[2]
+        datadict['ALNO'] = temp_l[2]
         datadict['tpa'] = temp_l[3]
-
+    else:
+        temp_l = ' '.join(temp_l)
+        datadict['claim_no'] = temp_l.split(' ')[0].strip('CLAIM')
+        datadict['ALNO'] = ""
+        # if tmp := re.search(r"(?:^\W*)\d+ |(?: +)\d+", temp_l):
+        #     ad_date = tmp.group().strip()
+        #     try:
+        #         datadict['adminssion_date'] = ad_date[0:2] + '-' + ad_date[2:4] + '-' + ad_date[4:]
+        #     except:
+        #         datadict['adminssion_date'] = ""
     if 'FAMILY' in datadict['tpa']:
         datadict['pname'] = datadict['pname'][1:-1]
 
@@ -99,16 +111,17 @@ try:
         q = "insert into stgSettlement " \
             "(`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
             "`BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`," \
-            " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`) "
+            " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `sett_table_sno`) "
         q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
-        params = [datadict['advice_no'], 'UIIC', 'City_TPA', datadict['pname'], datadict['pname'], '', '', '',
+        params = [datadict['advice_no'], 'UIIC', 'City_TPA', datadict['claim_no'], datadict['ALNO'], '', '', '',
                   datadict['transaction_reference'], '', datadict['payment_amount'], '', datadict['payment_amount'],
-                  datadict['procesing_date'], datadict['adminssion_date'], '', sys.argv[2], hospital]
+                  datadict['procesing_date'], datadict['adminssion_date'], '', sys.argv[2], hospital, sno]
 
         q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
              "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, `TDS`=%s," \
-             "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, `hospital`=%s"
+             "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, " \
+             "`hospital`=%s, `sett_table_sno`=%s"
         q = q + q1
 
         params = params + params[1:]
@@ -139,7 +152,8 @@ try:
             cur.execute(q, [trandate,utrno, utrno + ',' + claimno])
             con.commit()
 
+    move_attachment(datadict['claim_no'], sys.argv[1], hospital)
     mark_flag('X', sys.argv[2])
-
+    print("processed ", hospital, ' ', mail_id)
 except:
     log_exceptions()
