@@ -23,14 +23,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.74.1">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.74.2">
+      <change afterPath="$PROJECT_DIR$/excel_api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_city.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_newindia.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_newindia.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +74,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.backend">
+  <component name="RunManager" selected="Python.excel_api">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,7 +138,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pdf_temp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="excel_api" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -152,7 +150,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pdf_temp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/excel_api.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,11 +182,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.excel_api" />
         <item itemvalue="Python.backend" />
         <item itemvalue="Python.1" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.temp" />
-        <item itemvalue="Python.pdf_temp" />
       </list>
     </recent_temporary>
   </component>
@@ -206,13 +204,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00023" summary="0.0.31&#10;done newindia into db">
-      <created>1619006467833</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1619006467833</updated>
     </task>
     <task id="LOCAL-00024" summary="0.0.32&#10;not done fhp into db">
       <created>1619018998395</created>
@@ -550,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620891157642</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="0.0.74.2">
+      <created>1620915851722</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1620915851722</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -566,7 +564,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.59" />
     <MESSAGE value="0.0.60" />
     <MESSAGE value="0.0.61" />
     <MESSAGE value="0.0.62" />
@@ -591,7 +588,8 @@
     <MESSAGE value="0.0.73" />
     <MESSAGE value="0.0.74" />
     <MESSAGE value="0.0.74.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.74.1" />
+    <MESSAGE value="0.0.74.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.74.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -643,11 +641,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
-          <line>87</line>
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
           <line>9</line>
           <option name="timeStamp" value="131" />
         </line-breakpoint>
@@ -690,6 +683,21 @@
           <url>file://$PROJECT_DIR$/backend.py</url>
           <line>254</line>
           <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="157" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/excel_api.py</url>
+          <line>134</line>
+          <option name="timeStamp" value="158" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

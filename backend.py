@@ -249,7 +249,7 @@ def automate_processing():
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
             # q = "SELECT sno, attach_path, id FROM settlement_mails where sno='9792'"
-            q = "SELECT sno, attach_path, id FROM settlement_mails INNER JOIN stgSettlement ON settlement_mails.id = stgSettlement.mail_id where TPAID='City_TPA' or TPAID='bajaj' and settlement_mails.hospital='noble';"
+            q = "SELECT sno, attach_path, id from settlement_mails where id not in (select mail_id from stgSettlement where TPAID='bajaj') and attach_path like '%bajaj%' and date like '%2020%'"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:

@@ -114,7 +114,7 @@ try:
             " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `sett_table_sno`) "
         q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
-        params = [datadict['advice_no'], 'UIIC', 'City_TPA', datadict['claim_no'], datadict['ALNO'], '', '', '',
+        params = [datadict['advice_no'], 'UIIC', 'City_TPA', datadict['ALNO'], datadict['claim_no'], '', '', '',
                   datadict['transaction_reference'], '', datadict['payment_amount'], '', datadict['payment_amount'],
                   datadict['procesing_date'], datadict['adminssion_date'], '', sys.argv[2], hospital, sno]
 
