@@ -18,11 +18,11 @@ stg_sett_fields = (
     "srno", "InsurerID", "TPAID", "ALNO", "ClaimNo", "PatientName", "AccountNo", "BeneficiaryBank_Name", "UTRNo",
     "BilledAmount", "SettledAmount", "TDS", "NetPayable", "Transactiondate", "DateofAdmission",
     "DateofDischarge", "cdate", "processing_time", "unique_key", "mail_id", "hospital", "POLICYNO",
-    "CorporateName", "MemberID", "Diagnosis", "Discount", "Copay", "sett_table_sno")
+    "CorporateName", "MemberID", "Diagnosis", "Discount", "Copay", "sett_table_sno", "file_name")
 
 stg_sett_deduct_fields = (
 "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",
-"Discount", "DeductionCategory", "MailID", "HospitalID", "stgsettlement_sno")
+"Discount", "DeductionCategory", "MailID", "HospitalID", "settlement_sno")
 
 regex_dict = {'InsurerID': [[], [], r"^.*$"],
               'ALNO': [[], [], r"^.*$"],
@@ -125,7 +125,7 @@ def get_data_dict(regex_dict, text):
         return data_dict
 
 
-def ins_upd_data_copy(mail_id, sett_sno, hospital, datadict, deductions):
+def ins_upd_data_excel(mail_id, sett_sno, hospital, datadict):
     datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:
@@ -138,33 +138,31 @@ def ins_upd_data_copy(mail_id, sett_sno, hospital, datadict, deductions):
     datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])
     datadict['DateofDischarge'] = date_formatting(datadict['DateofDischarge'])
 
-    q = "insert into stgSettlement_copy (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
+    q = "insert into stgSettlementExcel (`sett_table_sno`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
         "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
         "`Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `POLICYNO`, " \
-        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `sett_table_sno`)"
+        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `unique_key`, `file_name`)"
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
-    params = [datadict['unique_key'], datadict['InsurerID'], datadict['TPAID'], datadict['ALNO'], datadict['ClaimNo'],
+    params = [datadict['sett_table_sno'], datadict['InsurerID'], datadict['TPAID'], datadict['ALNO'], datadict['ClaimNo'],
               datadict['PatientName'], datadict['AccountNo'], datadict['BeneficiaryBank_Name'], datadict['UTRNo'],
               datadict['BilledAmount'], datadict['SettledAmount'], datadict['TDS'], datadict['NetPayable'],
               datadict['Transactiondate'], datadict['DateofAdmission'], datadict['DateofDischarge'],
               datadict['mail_id'], datadict['hospital'], datadict['POLICYNO'], datadict['CorporateName'],
-              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay'], datadict['sett_table_sno']]
+              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay'],
+              datadict['unique_key'], datadict['file_name']]
 
     q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
          "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, " \
          "`TDS`=%s, `NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, " \
          "`mail_id`=%s, `hospital`=%s, `POLICYNO`=%s, `CorporateName`=%s, `MemberID`=%s, `Diagnosis`=%s, " \
-         "`Discount`=%s, `Copay`=%s, `sett_table_sno`=%s"
+         "`Discount`=%s, `Copay`=%s, `unique_key`=%s, `file_name`=%s"
     q = q + q1
-
     params = params + params[1:]
-
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         cur.execute(q, params)
         con.commit()
-
     print("processed ", hospital, ' ', mail_id)
 
 def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
@@ -180,31 +178,32 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
     datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])
     datadict['DateofDischarge'] = date_formatting(datadict['DateofDischarge'])
 
-    q = "insert into stgSettlement (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
+    q = "insert into stgSettlement (`sett_table_sno`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
         "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
         "`Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `POLICYNO`, " \
-        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `sett_table_sno`)"
+        "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `unique_key`, `file_name`)"
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
-    params = [datadict['unique_key'], datadict['InsurerID'], datadict['TPAID'], datadict['ALNO'], datadict['ClaimNo'],
+    params = [datadict['sett_table_sno'], datadict['InsurerID'], datadict['TPAID'], datadict['ALNO'], datadict['ClaimNo'],
               datadict['PatientName'], datadict['AccountNo'], datadict['BeneficiaryBank_Name'], datadict['UTRNo'],
               datadict['BilledAmount'], datadict['SettledAmount'], datadict['TDS'], datadict['NetPayable'],
               datadict['Transactiondate'], datadict['DateofAdmission'], datadict['DateofDischarge'],
               datadict['mail_id'], datadict['hospital'], datadict['POLICYNO'], datadict['CorporateName'],
-              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay'], datadict['sett_table_sno']]
+              datadict['MemberID'], datadict['Diagnosis'], datadict['Discount'], datadict['Copay'],
+              datadict['unique_key'], datadict['file_name']]
 
     q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
          "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, " \
          "`TDS`=%s, `NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, " \
          "`mail_id`=%s, `hospital`=%s, `POLICYNO`=%s, `CorporateName`=%s, `MemberID`=%s, `Diagnosis`=%s, " \
-         "`Discount`=%s, `Copay`=%s, `sett_table_sno`=%s"
+         "`Discount`=%s, `Copay`=%s, `unique_key`=%s, `file_name`=%s"
     q = q + q1
 
     params = params + params[1:]
 
-    q2 = "select srno from stgSettlement_copy where unique_key=%s limit 1"
-    q2_params = (datadict['unique_key'],)
-    last_id = -1
+    q2 = "select sett_table_sno from stgSettlement where sett_table_sno=%s limit 1"
+    q2_params = (datadict['sett_table_sno'],)
+    sett_table_sno = -1
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
         cur.execute(q, params)
@@ -212,30 +211,30 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
         cur.execute(q2, q2_params)
         r = cur.fetchone()
         if r:
-            last_id = r[0]
+            sett_table_sno = r[0]
 
     for num, row in enumerate(deductions):
         for i in stg_sett_deduct_fields:
             if i not in row:
                 row[i] = ""
         row["DeductionCategory"] = get_deduction_category(row["Details"], row["DeductionReason"])
-        row["stgsettlement_sno"] = last_id
+        row["settlement_sno"] = sett_table_sno
         deductions[num] = row
 
     with mysql.connector.connect(**conn_data) as con:
         cur = con.cursor()
-        q = "delete from stgSettlementDeduction where stgsettlement_sno=%s"
-        cur.execute(q, (last_id,))
+        q = "delete from stgSettlementDeduction where settlement_sno=%s"
+        cur.execute(q, (sett_table_sno,))
         for row in deductions:
-            p = "insert into stgSettlementDeduction (`stgsettlement_sno`, `TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
-                "`DeductedAmt`, `DeductionReason`,`Discount`,`DeductionCategory`,`MailID`,`HospitalID`)"
+            p = "insert into stgSettlementDeduction (`settlement_sno`, `TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
+                "`DeductedAmt`, `DeductionReason`,`Discount`,`DeductionCategory`,`MailID`,`HospitalID`, `file_name`)"
             p = p + ' values (' + ('%s, ' * p.count(',')) + '%s) '
-            p_params = [last_id, row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
+            p_params = [sett_table_sno, row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
                         row['DeductedAmt'], row['DeductionReason'], row['Discount'], row['DeductionCategory'],
-                        row['MailID'], row['HospitalID']]
+                        row['MailID'], row['HospitalID'], datadict['file_name']]
             cur.execute(p, p_params)
-        q = "update stgSettlement set deduction_processed='X' where srno=%s"
-        params = [last_id]
+        q = "update stgSettlement set deduction_processed='X' where sett_table_sno=%s"
+        params = [sett_table_sno]
         cur.execute(q, params)
         con.commit()
     attach_path = get_row(mail_id)['attach_path']

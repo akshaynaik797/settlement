@@ -6,7 +6,7 @@ import mysql.connector
 import pandas as pd
 
 from backend import mark_flag
-from common import get_row, ins_upd_data, conn_data, ins_upd_data_copy
+from common import get_row, ins_upd_data, conn_data, ins_upd_data_excel
 from make_log import log_exceptions
 try:
     _, file_path, mid, _ = sys.argv
@@ -74,26 +74,17 @@ try:
                 datadict['ALNO'] = 'not_found_' + str(random.randint(9999999, 999999999))
         datadict['unique_key'] = datadict['ALNO']
         datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+        datadict['file_name'] = sys.argv[0]
         datadict['UTRNo'] = '' if datadict['UTRNo'] == 'nan' else datadict['UTRNo']
         deductions = []
-        if 'Vidal' not in datadict['InsurerID']:
-            q = "select * from stgSettlement where ALNO=%s and UTRNo=%s limit 1"
-            params = [datadict['ALNO'], datadict['UTRNo']]
-            with mysql.connector.connect(**conn_data) as con:
-                cur = con.cursor()
-                cur.execute(q, params)
-                r = cur.fetchone()
-                if r is None:
-                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
-                else:
-                    ins_upd_data_copy(mail_id, sys.argv[3], hospital, datadict, deductions)
-        else:
-            q = "update stgSettlement set ALNO=%s where UTRNo=%s and SettledAmount like %s"
-            params = [datadict['ALNO'], datadict['UTRNo'], "%" + datadict['SettledAmount'].split('.')[0] + "%"]
-            with mysql.connector.connect(**conn_data) as con:
-                cur = con.cursor()
-                cur.execute(q, params)
-                con.commit()
+        q = "select * from stgSettlement where ALNO=%s and UTRNo=%s limit 1"
+        params = [datadict['ALNO'], datadict['UTRNo']]
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            cur.execute(q, params)
+            r = cur.fetchone()
+            if r is None:
+                ins_upd_data_excel(mail_id, sys.argv[3], hospital, datadict)
     mark_flag('X', sys.argv[2])
 except:
     log_exceptions()

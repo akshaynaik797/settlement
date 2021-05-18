@@ -109,19 +109,20 @@ try:
 
     if 'UIIC' in datadict['insurer_name']:
         q = "insert into stgSettlement " \
-            "(`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
+            "(`sett_table_sno`, `unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
             "`BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`," \
-            " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `sett_table_sno`) "
+            " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `file_name`) "
         q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
-        params = [datadict['advice_no'], 'UIIC', 'City_TPA', datadict['ALNO'], datadict['claim_no'], '', '', '',
+        params = [sno, datadict['advice_no'], 'UIIC', 'City_TPA', datadict['ALNO'], datadict['claim_no'], '', '', '',
                   datadict['transaction_reference'], '', datadict['payment_amount'], '', datadict['payment_amount'],
-                  datadict['procesing_date'], datadict['adminssion_date'], '', sys.argv[2], hospital, sno]
+                  datadict['procesing_date'], datadict['adminssion_date'], '', sys.argv[2], hospital, sys.argv[0]]
 
-        q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
+        q1 = "ON DUPLICATE KEY UPDATE `unique_key`=%s, `InsurerID`=%s, `TPAID`=%s, " \
+             "`ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
              "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, `TDS`=%s," \
              "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, " \
-             "`hospital`=%s, `sett_table_sno`=%s"
+             "`hospital`=%s, `file_name`=%s"
         q = q + q1
 
         params = params + params[1:]

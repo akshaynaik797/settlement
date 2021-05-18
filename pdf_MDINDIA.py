@@ -5,7 +5,7 @@ import sys
 import mysql.connector
 import xlrd
 
-from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data, get_row, conn_data, ins_upd_data_copy
+from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data, get_row, conn_data, ins_upd_data_excel
 from make_log import log_exceptions
 
 try:
@@ -25,16 +25,8 @@ try:
                     datadict[k] = tmp[v]
                 datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo'] = tmp['CCN']
                 datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
-                q = "select * from stgSettlement where ALNO=%s and UTRNo=%s limit 1"
-                params = [datadict['ALNO'], datadict['UTRNo']]
-                with mysql.connector.connect(**conn_data) as con:
-                    cur = con.cursor()
-                    cur.execute(q, params)
-                    r = cur.fetchone()
-                    if r is None:
-                        ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
-                    else:
-                        ins_upd_data_copy(mail_id, sys.argv[3], hospital, datadict, [])
+                datadict['file_name'] = sys.argv[0]
+                ins_upd_data_excel(mail_id, sys.argv[3], hospital, datadict)
         mark_flag('X', sys.argv[2])
         exit()
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
@@ -74,6 +66,7 @@ try:
         datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+    datadict['file_name'] = sys.argv[0]
 
     # stg_sett_deduct_fields = (
     #     "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",

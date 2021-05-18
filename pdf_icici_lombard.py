@@ -33,7 +33,7 @@ try:
         datadict['ALNO'] = tmp.group().strip()
     datadict['unique_key'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
-
+    datadict['file_name'] = sys.argv[0]
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
     mark_flag('X', sys.argv[2])
 except Exception:
