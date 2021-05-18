@@ -23,46 +23,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.76">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.76.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Ericson.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Ericson.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Good_health.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Good_health.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_MDINDIA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_MDINDIA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Max_Bupa.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Max_Bupa.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Medi_Assist.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medi_Assist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Medsave.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medsave.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Raksha.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Raksha.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Universal_Sompo.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Universal_Sompo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_aditya.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_aditya.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_apollo.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_bajaj.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_bajaj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_city.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_east_west.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_fgh.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fgh.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_fhpl.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_fhpl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_genins.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_genins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_hdfc.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_hdfcbank.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_hdfcbank.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_health_heritage.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_heritage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_health_india.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_india.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_health_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_insurance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_icici_lombard.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_icici_lombard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_national.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_national.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pdf_newindia.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_newindia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_reliance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_reliance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_religare.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_religare.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_royal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_royal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_safeway.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_safeway.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_small.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_small.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_tata.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_tata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_united.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_united.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_vidal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vidal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_vipul.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vipul.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,13 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00026" summary="0.0.34&#10;done national, mediassist, fhpl">
-      <created>1619158938857</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1619158938857</updated>
     </task>
     <task id="LOCAL-00027" summary="0.0.35&#10;done royal">
       <created>1619160222210</created>
@@ -579,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621317898790</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="0.0.76.1">
+      <created>1621330490513</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1621330490514</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -595,7 +562,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.62" />
     <MESSAGE value="0.0.63" />
     <MESSAGE value="0.0.64" />
     <MESSAGE value="0.0.65" />
@@ -620,7 +586,8 @@
     <MESSAGE value="0.0.74.2" />
     <MESSAGE value="0.0.75" />
     <MESSAGE value="0.0.76" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.76" />
+    <MESSAGE value="0.0.76.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.76.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

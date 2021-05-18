@@ -140,14 +140,15 @@ try:
             utrno, tran_date = r
 
     q = "insert into stgSettlement " \
-        "(`sett_table_sno`, `unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
+        "(`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, `AccountNo`, " \
         "`BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`," \
-        " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `file_name`) "
+        " `Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, " \
+        "`file_name`, `sett_table_sno`) "
     q = q + ' values (' + ('%s, ' * q.count(',')) + '%s) '
 
     tran_date = date_formatting(tran_date)
-    params = [sno, refrenceNo + ',' + claimNo, 'newindia', tpa, '', claimNo, patientName, '', '',
-              utrno, '', grossAmount, tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital, sys.argv[0]]
+    params = [refrenceNo + ',' + claimNo, 'newindia', tpa, '', claimNo, patientName, '', '', utrno, '', grossAmount,
+              tdsAmount, netAmount, tran_date, '', '', sys.argv[2], hospital, sys.argv[0], sno]
 
     for i, j in enumerate(params):
         try:
@@ -156,10 +157,10 @@ try:
             pass
 
 
-    q1 = "ON DUPLICATE KEY UPDATE `unique_key`=%s `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
+    q1 = "ON DUPLICATE KEY UPDATE `InsurerID`=%s, `TPAID`=%s, `ALNO`=%s, `ClaimNo`=%s, `PatientName`=%s, " \
          "`AccountNo`=%s, `BeneficiaryBank_Name`=%s, `UTRNo`=%s, `BilledAmount`=%s, `SettledAmount`=%s, `TDS`=%s," \
          "`NetPayable`=%s, `Transactiondate`=%s, `DateofAdmission`=%s, `DateofDischarge`=%s, `mail_id`=%s, " \
-         "`hospital`=%s, `file_name`=%s"
+         "`hospital`=%s, `file_name`=%s, `sett_table_sno`=%s"
     q = q + q1
 
     params = params + params[1:]

@@ -2,11 +2,12 @@ import re
 import sys
 import random
 
-from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
+from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data, get_row
 from make_log import log_exceptions
 
 try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
+    row_data = get_row(sys.argv[2])
     f = f.replace('***', '')
 
     insurer = re.compile(r"(?<=as instructed by).*").search(f)
@@ -85,8 +86,30 @@ try:
         tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)
-
-    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
+    if 'PAYEE ADVICE' in f:
+        if tmp := re.search(r"(?<=AMOUNT\(INR\)\nNo.\n).*(?=\n *Page 1)", f, re.DOTALL):
+            tmp = [re.split(r" +", i) for i in tmp.group().split('\n')]
+            for j, i in enumerate(tmp):
+                if len(i) == 8:
+                    datadict = {}
+                    datadict['ALNO'], datadict['PatientName'], datadict['ClaimNo'], datadict['BilledAmount'], \
+                    datadict['TDS'], datadict['NetPayable'], datadict['Transactiondate'] = i[0], i[2], i[3], \
+                                                                                           i[4], i[6], i[7], i[1]
+                    datadict['NetPayable'] = datadict['NetPayable'].replace(',', '')
+                    datadict['TPAID'], datadict['InsurerID'] = 'sc', insurer
+                    row = tmp[j+1]
+                    if len(row) == 3:
+                        datadict['ALNO'] += row[0]
+                        datadict['Transactiondate'] += row[1]
+                        datadict['ClaimNo'] += row[2]
+                    if len(row) == 4:
+                        datadict['ALNO'] += row[0]
+                        datadict['Transactiondate'] += row[1]
+                        datadict['PatientName'] += row[2]
+                        datadict['ClaimNo'] += row[3]
+                    datadict['unique_key'] = datadict['ClaimNo']
+                    datadict['file_name'] = sys.argv[0]
+                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
     mark_flag('X', sys.argv[2])
 except Exception:
     log_exceptions()
