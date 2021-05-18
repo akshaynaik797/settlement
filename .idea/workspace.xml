@@ -23,12 +23,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.74.2">
-      <change afterPath="$PROJECT_DIR$/excel_api.py" afterDir="false" />
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.75">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_city.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common.py" beforeDir="false" afterPath="$PROJECT_DIR$/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Good_health.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Good_health.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Medsave.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medsave.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Paramount.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Paramount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_big.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_big.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_health_insurance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_health_insurance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_reliance.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_reliance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_safeway.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_safeway.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_temp.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_temp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_vidal.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_vidal.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +82,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.excel_api">
+  <component name="RunManager" selected="Python.1">
     <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="settlement" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -182,9 +190,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.1" />
         <item itemvalue="Python.excel_api" />
         <item itemvalue="Python.backend" />
-        <item itemvalue="Python.1" />
         <item itemvalue="Python.2" />
         <item itemvalue="Python.temp" />
       </list>
@@ -204,13 +212,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00024" summary="0.0.32&#10;not done fhp into db">
-      <created>1619018998395</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1619018998395</updated>
     </task>
     <task id="LOCAL-00025" summary="0.0.33&#10;done temp.py">
       <created>1619082000561</created>
@@ -548,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620915851722</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="0.0.75">
+      <created>1620984170055</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1620984170056</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -564,7 +572,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.60" />
     <MESSAGE value="0.0.61" />
     <MESSAGE value="0.0.62" />
     <MESSAGE value="0.0.63" />
@@ -589,115 +596,141 @@
     <MESSAGE value="0.0.74" />
     <MESSAGE value="0.0.74.1" />
     <MESSAGE value="0.0.74.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.74.2" />
+    <MESSAGE value="0.0.75" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.75" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_reliance.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/pdf_hdfc.py</url>
+          <line>76</line>
+          <option name="timeStamp" value="173" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_big.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="36" />
+          <url>file://$PROJECT_DIR$/pdf_health_india.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="174" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_health_heritage.py</url>
-          <line>58</line>
-          <option name="timeStamp" value="41" />
+          <url>file://$PROJECT_DIR$/pdf_health_insurance.py</url>
+          <line>56</line>
+          <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="57" />
+          <url>file://$PROJECT_DIR$/pdf_Max_Bupa.py</url>
+          <line>80</line>
+          <option name="timeStamp" value="181" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_hdfcbank.py</url>
-          <line>58</line>
-          <option name="timeStamp" value="83" />
+          <url>file://$PROJECT_DIR$/pdf_MDINDIA.py</url>
+          <line>93</line>
+          <option name="timeStamp" value="182" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_icici_lombard.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="90" />
+          <url>file://$PROJECT_DIR$/pdf_Medi_Assist.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="183" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_health_heritage.py</url>
-          <line>43</line>
-          <option name="timeStamp" value="106" />
+          <url>file://$PROJECT_DIR$/pdf_Medsave.py</url>
+          <line>60</line>
+          <option name="timeStamp" value="184" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_national.py</url>
-          <line>99</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_royal.py</url>
-          <line>27</line>
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
-          <line>9</line>
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
-          <line>55</line>
-          <option name="timeStamp" value="147" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_national.py</url>
+          <url>file://$PROJECT_DIR$/pdf_Medsave.py</url>
           <line>50</line>
-          <option name="timeStamp" value="148" />
+          <option name="timeStamp" value="185" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_Paramount.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_Paramount.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="188" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="189" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_Raksha.py</url>
+          <line>129</line>
+          <option name="timeStamp" value="190" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_reliance.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="191" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_religare.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="196" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_religare.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="197" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_religare.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_religare.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pdf_safeway.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="149" />
+          <line>44</line>
+          <option name="timeStamp" value="200" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_city.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="150" />
+          <url>file://$PROJECT_DIR$/pdf_big.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="203" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_city.py</url>
-          <line>90</line>
-          <option name="timeStamp" value="152" />
+          <url>file://$PROJECT_DIR$/pdf_big.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="204" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_city.py</url>
-          <line>62</line>
-          <option name="timeStamp" value="153" />
+          <url>file://$PROJECT_DIR$/pdf_big.py</url>
+          <line>25</line>
+          <option name="timeStamp" value="206" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_city.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="154" />
+          <url>file://$PROJECT_DIR$/pdf_big.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/backend.py</url>
-          <line>254</line>
-          <option name="timeStamp" value="155" />
+          <url>file://$PROJECT_DIR$/pdf_Universal_Sompo.py</url>
+          <line>76</line>
+          <option name="timeStamp" value="208" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
+          <url>file://$PROJECT_DIR$/pdf_vidal.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_vidal.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="218" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/pdf_vidal.py</url>
           <line>45</line>
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pdf_bajaj.py</url>
-          <line>60</line>
-          <option name="timeStamp" value="157" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/excel_api.py</url>
-          <line>134</line>
-          <option name="timeStamp" value="158" />
+          <option name="timeStamp" value="220" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

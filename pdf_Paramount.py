@@ -2,6 +2,9 @@ import random
 import re
 import sys
 
+import camelot
+from tabula import read_pdf
+
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
 
@@ -48,6 +51,13 @@ try:
         datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
+
+
+    tables = camelot.read_pdf(sys.argv[1], pages='all')
+    flag = None
+    if tables.n > 0:
+        tables.export('temp_files/foo1.xlsx', f='excel')
+        flag = True
 
     x1 = ""
     regexes = r"(?<=Reason for Deduction\n)[\s\S]*(?=\n *Total *\d)", r""

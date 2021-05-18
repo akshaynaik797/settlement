@@ -3,6 +3,7 @@ import re
 import sys
 
 import camelot
+from tabula import read_pdf
 
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
@@ -46,24 +47,17 @@ try:
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
     deductions = []
+    df = read_pdf(sys.argv[1], pages="all")[-1]
+    tmp = list(df)
+    if 'Reason' in tmp:
+        for index, row in df.iterrows():
+            tmp = {}
+            row = row.tolist()
+            tmp["Details"], tmp["DeductedAmt"], tmp["DeductionReason"], _ = row
+            tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+            tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+            deductions.append(tmp)
 
-    # stg_sett_deduct_fields = (
-    #     "TPAID", "ClaimID", "Details", "BillAmount", "PayableAmount", "DeductedAmt", "DeductionReason",
-    #     "Discount", "DeductionCategory", "MailID", "HospitalID", "stgsettlement_sno")
-
-    # x1 = ""
-    # regex = r"(?<=REMARKS\n)[\s\S]+(?=\n *DISCOUNT DETAILS)"
-    # if data := re.search(regex, f):
-    #     data = [re.split(r" {3,}", i)[-2:] for i in data.group().split('\n')]
-
-    # for i in data:
-    #     tmp = {}
-    #     for j, k in zip(["DeductedAmt", "DeductionReason"], i):
-    #         tmp[j] = k
-    #     tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-    #     tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-    #     deductions.append(tmp)
-    #
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:

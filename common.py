@@ -138,7 +138,7 @@ def ins_upd_data_copy(mail_id, sett_sno, hospital, datadict, deductions):
     datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])
     datadict['DateofDischarge'] = date_formatting(datadict['DateofDischarge'])
 
-    q = "insert into stgSettlement (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
+    q = "insert into stgSettlement_copy (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
         "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
         "`Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `POLICYNO`, " \
         "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `sett_table_sno`)"
@@ -180,7 +180,7 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
     datadict['DateofAdmission'] = date_formatting(datadict['DateofAdmission'])
     datadict['DateofDischarge'] = date_formatting(datadict['DateofDischarge'])
 
-    q = "insert into stgSettlement_copy (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
+    q = "insert into stgSettlement (`unique_key`, `InsurerID`, `TPAID`, `ALNO`, `ClaimNo`, `PatientName`, " \
         "`AccountNo`, `BeneficiaryBank_Name`, `UTRNo`, `BilledAmount`, `SettledAmount`, `TDS`, `NetPayable`, " \
         "`Transactiondate`, `DateofAdmission`, `DateofDischarge`, `mail_id`, `hospital`, `POLICYNO`, " \
         "`CorporateName`, `MemberID`, `Diagnosis`, `Discount`, `Copay`, `sett_table_sno`)"
@@ -234,6 +234,9 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
                         row['DeductedAmt'], row['DeductionReason'], row['Discount'], row['DeductionCategory'],
                         row['MailID'], row['HospitalID']]
             cur.execute(p, p_params)
+        q = "update stgSettlement set deduction_processed='X' where srno=%s"
+        params = [last_id]
+        cur.execute(q, params)
         con.commit()
     attach_path = get_row(mail_id)['attach_path']
     if not path.exists('sftp_folder'):

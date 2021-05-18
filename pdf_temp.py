@@ -4,6 +4,7 @@ import sys
 
 import camelot
 import openpyxl
+import tabula
 
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
@@ -23,6 +24,19 @@ try:
             data.append(tmp)
         data = data[2:]
         data = [["" if j is None else j for j in i] for i in data]
+
+    # deductions = []
+    # df = tabula.read_pdf(sys.argv[1], pages="all")[-1]
+    # tmp = list(df)
+    # if 'Deduction Remarks' in tmp:
+    #     for index, row in df.iterrows():
+    #         tmp = {}
+    #         row = row.tolist()
+    #         tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["PayableAmount"], tmp[
+    #             "DeductionReason"] = row
+    #         tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+    #         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+    #         deductions.append(tmp)
 
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
 

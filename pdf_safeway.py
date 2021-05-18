@@ -4,6 +4,7 @@ import sys
 
 import camelot
 import openpyxl
+import tabula
 
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions

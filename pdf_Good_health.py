@@ -2,6 +2,8 @@ import random
 import re
 import sys
 
+from tabula import read_pdf
+
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
 from make_log import log_exceptions
 
@@ -33,6 +35,17 @@ try:
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
 
     deductions = []
+    df = read_pdf(sys.argv[1], pages="all")[-1]
+    tmp = list(df)
+    if 'Deduction Remarks' in tmp:
+        for index, row in df.iterrows():
+            tmp = {}
+            row = row.tolist()
+            tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["PayableAmount"], tmp[
+                "DeductionReason"] = row
+            tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+            tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+            deductions.append(tmp)
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:
