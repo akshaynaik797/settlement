@@ -3,6 +3,7 @@ import re
 import sys
 
 import camelot
+import openpyxl
 from tabula import read_pdf
 
 from common import mark_flag, get_from_db_and_pdf, get_data_dict, ins_upd_data
@@ -59,29 +60,20 @@ try:
     if tables.n > 0:
         tables.export('temp_files/foo1.xlsx', f='excel')
         flag = True
-
-    x1 = ""
-    regexes = r"(?<=Reason for Deduction\n)[\s\S]*(?=\n *Total *\d)", r""
-    for regex in regexes:
-        x = re.search(regex, f)
-        if x:
-            x1 = x.group().strip()
-            break
-
-    table = []
-    for i in x1.split('\n'):
-        regex = re.compile(r" {3,}")
-        t1 = [i.strip() for i in regex.split(i)]
-        while len(t1) < 6:
-            t1.append("")
-        table.append(t1)
-
-
-
+    if flag:
+        wb = openpyxl.load_workbook('temp_files/foo1.xlsx')
+        sheet = wb.worksheets[1]
+        data = []
+        for row in sheet.rows:
+            tmp = [i.value for i in row]
+            data.append(tmp)
+        data = [["" if j is None else j for j in i] for i in data]
+        data = [[str(j).replace('\t', '') for j in i] for i in data]
+        data = data[2:]
     deductions = []
-    for row in table:
+    for row in data:
         tmp = {}
-        tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["DeductionReason"] = row[2:6]
+        tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["DeductionReason"] = row[3:]
         tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)
