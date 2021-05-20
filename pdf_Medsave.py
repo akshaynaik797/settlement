@@ -48,17 +48,19 @@ try:
     datadict['file_name'] = sys.argv[0]
 
     deductions = []
-    df = read_pdf(sys.argv[1], pages="all")[-1]
-    df = df.fillna("")
-    tmp = list(df)
-    if 'Reason' in tmp:
-        for index, row in df.iterrows():
-            tmp = {}
-            row = row.tolist()
-            tmp["Details"], tmp["DeductedAmt"], tmp["DeductionReason"], _ = row
-            tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-            tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-            deductions.append(tmp)
+    df = read_pdf(sys.argv[1], pages="all")
+    if len(df) > 0:
+        df = df[-1]
+        df = df.fillna("")
+        tmp = list(df)
+        if 'Reason' in tmp:
+            for index, row in df.iterrows():
+                tmp = {}
+                row = row.tolist()
+                tmp["Details"], tmp["DeductedAmt"], tmp["DeductionReason"], _ = row
+                tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+                tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+                deductions.append(tmp)
 
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])

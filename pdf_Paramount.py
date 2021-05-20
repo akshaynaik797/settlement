@@ -72,12 +72,14 @@ try:
         data = data[2:]
     deductions = []
     for row in data:
-        tmp = {}
-        tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["DeductionReason"] = row[3:]
-        tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-        tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-        deductions.append(tmp)
-
+        try:
+            tmp = {}
+            tmp["Details"], tmp["BillAmount"], tmp["DeductedAmt"], tmp["DeductionReason"] = row[3:]
+            tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+            tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+            deductions.append(tmp)
+        except:
+            log_exceptions()
 
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
