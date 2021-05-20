@@ -232,7 +232,11 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
             p_params = [sett_table_sno, row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
                         row['DeductedAmt'], row['DeductionReason'], row['Discount'], row['DeductionCategory'],
                         row['MailID'], row['HospitalID'], datadict['file_name']]
-            cur.execute(p, p_params)
+            try:
+                cur.execute(p, p_params)
+            except:
+                log_exceptions(query=cur.statement)
+                raise Exception
             q = "update stgSettlement set deduction_processed='X' where sett_table_sno=%s"
             params = [sett_table_sno]
             cur.execute(q, params)
@@ -244,6 +248,7 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
 
 
 def get_deduction_category(details, reasons):
+    details, reasons = str(details), str(reasons)
     category = ''
     if details == None and reasons == None:
         pass

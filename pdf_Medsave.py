@@ -49,6 +49,7 @@ try:
 
     deductions = []
     df = read_pdf(sys.argv[1], pages="all")[-1]
+    df = df.fillna("")
     tmp = list(df)
     if 'Reason' in tmp:
         for index, row in df.iterrows():
