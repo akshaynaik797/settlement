@@ -87,6 +87,9 @@ try:
         tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
         deductions.append(tmp)
     if 'PAYEE ADVICE' in f:
+        utrno = ""
+        if 'UTRNo' in datadict:
+            utrno = datadict['UTRNo']
         if tmp := re.search(r"(?<=AMOUNT\(INR\)\nNo.\n).*(?=\n *Page 1)", f, re.DOTALL):
             tmp = [re.split(r" +", i) for i in tmp.group().split('\n')]
             for j, i in enumerate(tmp):
@@ -107,9 +110,12 @@ try:
                         datadict['Transactiondate'] += row[1]
                         datadict['PatientName'] += row[2]
                         datadict['ClaimNo'] += row[3]
-                    datadict['unique_key'] = datadict['ClaimNo']
+                    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+                    datadict['UTRNo'] = utrno
                     datadict['file_name'] = sys.argv[0]
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+    else:
+        ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
 except Exception:
     log_exceptions()

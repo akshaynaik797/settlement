@@ -249,7 +249,7 @@ def automate_processing():
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
             # q = "SELECT sno, attach_path, id FROM settlement_mails where sno='9792'"
-            q = "SELECT sno, attach_path, id from settlement_mails where hospital='noble' and completed != 'X' and process = 'utr_mails';;"
+            q = "SELECT sno, attach_path, id from settlement_mails where hospital='noble' and process='utr_mails' and completed != 'X';"
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:

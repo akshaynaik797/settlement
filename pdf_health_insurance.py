@@ -40,20 +40,23 @@ try:
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
     datadict['file_name'] = sys.argv[0]
     deductions = []
-    df = read_pdf(sys.argv[1], pages="all")[-1]
-    tmp = list(df)
-    if 'Reason' in tmp:
-        for index, row in df.iterrows():
-            try:
-                tmp = {}
-                record = row.tolist()
-                tmp["Details"], tmp["BillAmount"], tmp["PayableAmount"], tmp["DeductedAmt"], tmp[
-                    "DeductionReason"] = record[0], record[2].split(' ')[0], record[2].split(' ')[1], record[3], record[4]
-                tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
-                tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
-                deductions.append(tmp)
-            except:
-                pass
+    df = read_pdf(sys.argv[1], pages="all")
+    if len(df) > 0:
+        df = df[-1]
+        df = df.fillna("")
+        tmp = list(df)
+        if 'Reason' in tmp:
+            for index, row in df.iterrows():
+                try:
+                    tmp = {}
+                    record = row.tolist()
+                    tmp["Details"], tmp["BillAmount"], tmp["PayableAmount"], tmp["DeductedAmt"], tmp[
+                        "DeductionReason"] = record[0], record[2].split(' ')[0], record[2].split(' ')[1], record[3], record[4]
+                    tmp["MailID"], tmp["HospitalID"] = mail_id, hospital
+                    tmp["TPAID"], tmp["ClaimID"] = datadict["TPAID"], datadict["ClaimNo"]
+                    deductions.append(tmp)
+                except:
+                    pass
 
     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])

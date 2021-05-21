@@ -8,6 +8,7 @@ from make_log import log_exceptions
 
 try:
     mail_id, hospital, f = get_from_db_and_pdf(sys.argv[2], sys.argv[1])
+    f = f.replace('Â', '')
 
     # stg_sett_fields = (
     #     "srno", "InsurerID", "TPAID", "ALNO", "ClaimNo", "PatientName", "AccountNo", "BeneficiaryBank_Name", "UTRNo",

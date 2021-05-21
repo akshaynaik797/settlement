@@ -53,7 +53,11 @@ try:
     regex = r"(\d+) +(?P<BilledAmount>\d+) +(\d+) +(?P<Copay>\d+) +(\d+) +(\d+) +(?P<Discount>\d+) +(?P<SettledAmount>\d+) +(?P<TDS>\d+) +(?P<NetPayable>\d+)"
     if tmp := re.search(regex, f):
         tmp = tmp.groupdict()
-        datadict = {**tmp,**datadict}
+        datadict = {**tmp, **datadict}
+    if 'UTRNo' not in datadict:
+        regex = r"(?<=Cheque No:).*?(?=dated)"
+        if tmp := re.search(regex, f, re.DOTALL):
+            datadict['UTRNo'] = tmp.group().strip()
     if 'ClaimNo' not in datadict:
         datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
     datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
