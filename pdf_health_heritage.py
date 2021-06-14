@@ -28,7 +28,7 @@ try:
         'Diagnosis': [[r"(?<=Primary Diagnosis).*(?=ICD Code)"], [':'], r"^.*$"],
 
         'UTRNo': [[r"(?<=NEFT No).*(?=Date)", r"(?<=NEFT No).*?(?=Â)", r"(?<=NEFT No).*"], [':', '.'], r"^\S+$"],
-        'Transactiondate': [[r"(?<=Date of Transfer).*(?=Settled)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
+        'Transactiondate': [[r"(?<=Date of Transfer).*(?=Settled)", r"(?<=Transfer).*?(?=Settled Amount)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'AccountNo': [[], [':'], r"^\S+(?: \S+)*$"],
         'BeneficiaryBank_Name': [[], [':'], r"^\S+(?: \S+)*$"],
 
