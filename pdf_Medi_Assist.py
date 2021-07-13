@@ -20,7 +20,7 @@ try:
         'DateofDischarge': [[r"(?<=Date of Discharge).*"], [':'], r"^\S+(?: \S+)*$"],
         'InsurerID': [[r"(?<=issued by).*(?=has)"], [], r"^.*$"],
         'CorporateName': [[r"(?<=Policy Holder).*"], [], r"^.*$"],
-        'MemberID': [[r"(?<=Insurer Member ID).*"], ['.', ':'], r"^.*$"],
+        'MemberID': [[r"(?<=Medi Assist ID).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Diagnosis).*"], [':'], r"^.*$"],
         'Discount': [[], [], r"^.*$"],
         'TDS': [[r"(?<=Tax Deducted at Source).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
