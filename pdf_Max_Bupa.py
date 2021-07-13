@@ -18,6 +18,7 @@ try:
 
     regex_dict = {
         'ClaimNo': [[r"(?<=Claim Number).*"], [':'], r"^\S+$"],
+        'ALNO': [[r"(?<=Preauthorization Approval Number).*"], [':'], r"^\S+$"],
         'PatientName': [[r"(?<=Patient Name).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy Number).*"], [':', '.'], r"^\S+$"],
         'DateofAdmission': [[r"(?<=Date of Admission).*"], [':'], r"^\S+(?: \S+)*$"],
@@ -51,7 +52,7 @@ try:
     datadict = {**tmp, **datadict}
     if 'ClaimNo' not in datadict:
         datadict['ClaimNo'] = 'not_found_' + str(random.randint(9999999, 999999999))
-    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+    datadict['unique_key'] = datadict['ClaimNo']
     datadict['TPAID'] = re.compile(r"(?<=pdf_).*(?=.py)").search(sys.argv[0]).group()
     datadict['file_name'] = sys.argv[0]
     datadict['InsurerID'] = datadict['TPAID']

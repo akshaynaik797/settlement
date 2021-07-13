@@ -1,9 +1,9 @@
 import subprocess
 import os
 
-ins = 'health_heritage'
-mid = '17260d504508d4c2'
-filepath = '/home/akshay/temp/43565900_.pdf'
+ins = 'Raksha'
+mid = '1799f050168ee154'
+filepath = '/home/akshay/temp/7169_9022122038283.pdf'
 filepath = filepath.replace('file://', '')
-sett_sno = '3842'
+sett_sno = '12674'
 subprocess.run(["python", 'pdf_' + ins + ".py", filepath, mid, sett_sno])
