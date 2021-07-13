@@ -23,10 +23,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.83">
+    <list default="true" id="dc2c9c73-0ee2-4062-bab7-e65fc428aeb2" name="Default Changelist" comment="0.0.83.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_Max_Bupa.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Max_Bupa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf_Medi_Assist.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdf_Medi_Assist.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,13 +198,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614071113859</updated>
-    </task>
-    <task id="LOCAL-00033" summary="0.0.41&#10;done health india">
-      <created>1619504901526</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1619504901526</updated>
     </task>
     <task id="LOCAL-00034" summary="0.0.42&#10;done health insurence">
       <created>1619515499652</created>
@@ -543,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626162332778</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="0.0.83.1">
+      <created>1626167306608</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1626167306608</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -559,7 +558,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0.0.69" />
     <MESSAGE value="0.0.70" />
     <MESSAGE value="0.0.71" />
     <MESSAGE value="0.0.71.1" />
@@ -584,6 +582,7 @@
     <MESSAGE value="0.0.81" />
     <MESSAGE value="0.0.82" />
     <MESSAGE value="0.0.83" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.83" />
+    <MESSAGE value="0.0.83.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.0.83.1" />
   </component>
 </project>

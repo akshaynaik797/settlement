@@ -21,6 +21,7 @@ try:
         'InsurerID': [[r"(?<=issued by).*(?=has)"], [], r"^.*$"],
         'CorporateName': [[r"(?<=Policy Holder).*"], [], r"^.*$"],
         'MemberID': [[r"(?<=Medi Assist ID).*"], ['.', ':'], r"^.*$"],
+        'BeneficiaryBank_Name': [[r"(?<=Medi Assist ID).*"], ['.', ':'], r"^.*$"],
         'Diagnosis': [[r"(?<=Diagnosis).*"], [':'], r"^.*$"],
         'Discount': [[], [], r"^.*$"],
         'TDS': [[r"(?<=Tax Deducted at Source).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
