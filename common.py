@@ -9,6 +9,7 @@ import pdftotext
 
 from make_log import log_exceptions
 
+file_name = "storedeductions"
 conn_data = {'host': "database-iclaim.caq5osti8c47.ap-south-1.rds.amazonaws.com",
              'user': "admin",
              'password': "Welcome1!",
@@ -104,6 +105,22 @@ def mark_flag(flag, mid):
         cur.execute(q, (flag, mid))
         q = "update utr_mails set completed='' where id=%s;"
         cur.execute(q, (mid,))
+        q = "select srno, UTRNo, ALNO, Transactiondate, NetPayable from stgSettlement where mail_id=%s order by srno desc limit 1"
+        cur.execute(q, (mid,))
+        r = cur.fetchone()
+        if r is None:
+            flag = "NP"
+            q = "update settlement_mails set completed=%s where id=%s;"
+            cur.execute(q, (flag, mid))
+        else:
+            flag_list = ["U", "A", "T", "N"]
+            flag = ""
+            for i, j in zip(flag_list, r):
+                if j == "" or j == None:
+                    flag += i
+            if flag != "":
+                q = "update settlement_mails set completed=%s where id=%s;"
+                cur.execute(q, (flag, mid))
         con.commit()
 
 
@@ -126,6 +143,9 @@ def get_data_dict(regex_dict, text):
 
 
 def ins_upd_data_excel(mail_id, sett_sno, hospital, datadict):
+    #input mail id output utrno
+    if datadict['UTRNo'] == "":
+        datadict['UTRNo'], _ = get_from_ins_big_utr_date(mail_id)
     datadict["mail_id"], datadict["hospital"], datadict['sett_table_sno'] = mail_id, hospital, sett_sno
     for i in stg_sett_fields:
         if i not in datadict:
@@ -221,26 +241,27 @@ def ins_upd_data(mail_id, sett_sno, hospital, datadict, deductions):
         row["settlement_sno"] = sett_table_sno
         deductions[num] = row
 
-    with mysql.connector.connect(**conn_data) as con:
-        cur = con.cursor()
-        q = "delete from stgSettlementDeduction where settlement_sno=%s"
-        cur.execute(q, (sett_table_sno,))
-        for row in deductions:
-            p = "insert into stgSettlementDeduction (`settlement_sno`, `TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
-                "`DeductedAmt`, `DeductionReason`,`Discount`,`DeductionCategory`,`MailID`,`HospitalID`, `file_name`)"
-            p = p + ' values (' + ('%s, ' * p.count(',')) + '%s) '
-            p_params = [sett_table_sno, row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
-                        row['DeductedAmt'], row['DeductionReason'], row['Discount'], row['DeductionCategory'],
-                        row['MailID'], row['HospitalID'], datadict['file_name']]
-            try:
-                cur.execute(p, p_params)
-            except:
-                log_exceptions(query=cur.statement)
-                raise Exception
-            q = "update stgSettlement set deduction_processed='X' where sett_table_sno=%s"
-            params = [sett_table_sno]
-            cur.execute(q, params)
-        con.commit()
+    if path.isfile(file_name):
+        with mysql.connector.connect(**conn_data) as con:
+            cur = con.cursor()
+            q = "delete from stgSettlementDeduction where settlement_sno=%s"
+            cur.execute(q, (sett_table_sno,))
+            for row in deductions:
+                p = "insert into stgSettlementDeduction (`settlement_sno`, `TPAID`,`ClaimID`,`Details`,`BillAmount`,`PayableAmount`," \
+                    "`DeductedAmt`, `DeductionReason`,`Discount`,`DeductionCategory`,`MailID`,`HospitalID`, `file_name`)"
+                p = p + ' values (' + ('%s, ' * p.count(',')) + '%s) '
+                p_params = [sett_table_sno, row['TPAID'], row['ClaimID'], row['Details'], row['BillAmount'], row['PayableAmount'],
+                            row['DeductedAmt'], row['DeductionReason'], row['Discount'], row['DeductionCategory'],
+                            row['MailID'], row['HospitalID'], datadict['file_name']]
+                try:
+                    cur.execute(p, p_params)
+                except:
+                    log_exceptions(query=cur.statement)
+                    #raise Exception
+                q = "update stgSettlement set deduction_processed='X' where sett_table_sno=%s"
+                params = [sett_table_sno]
+                cur.execute(q, params)
+            con.commit()
     attach_path = get_row(mail_id)['attach_path']
     if not path.exists('sftp_folder'):
         move_attachment(datadict['ALNO'], attach_path, hospital)
