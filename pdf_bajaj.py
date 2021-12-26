@@ -114,6 +114,32 @@ try:
                     datadict['UTRNo'] = utrno
                     datadict['file_name'] = sys.argv[0]
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                elif len(i) == 5:
+                    z = datadict['Transactiondate']
+                    datadict = {}
+                    datadict['ALNO'], datadict['PatientName'], datadict['ClaimNo'], datadict['BilledAmount'], \
+                    datadict['TDS'], datadict['NetPayable'], datadict['Transactiondate'] = i[0], i[4], i[0], \
+                                                                                           i[1], i[2], i[3], z
+                    datadict['NetPayable'] = datadict['NetPayable'].replace(',', '')
+                    datadict['TPAID'], datadict['InsurerID'] = 'sc', insurer
+                    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+                    datadict['UTRNo'] = utrno
+                    datadict['file_name'] = sys.argv[0]
+                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                elif len(i) == 6:
+                    z = datadict['Transactiondate']
+                    datadict = {}
+                    datadict['ALNO'], datadict['PatientName'], datadict['ClaimNo'], datadict['BilledAmount'], \
+                    datadict['TDS'], datadict['NetPayable'], datadict['Transactiondate'] = i[2], '', i[2], \
+                                                                                           i[3], i[4], i[5], z
+                    datadict['NetPayable'] = datadict['NetPayable'].replace(',', '')
+                    datadict['TPAID'], datadict['InsurerID'] = 'sc', insurer
+                    datadict['unique_key'] = datadict['ALNO'] = datadict['ClaimNo']
+                    datadict['UTRNo'] = utrno
+                    datadict['file_name'] = sys.argv[0]
+                    ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                else:
+                    log_exceptions(error="length error" ,mail_id=mail_id, hospital=hospital, datadict=datadict)
     else:
         ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])
