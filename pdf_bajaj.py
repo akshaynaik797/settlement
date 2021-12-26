@@ -114,7 +114,7 @@ try:
                     datadict['UTRNo'] = utrno
                     datadict['file_name'] = sys.argv[0]
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
-                if len(i) == 5:
+                elif len(i) == 5:
                     z = datadict['Transactiondate']
                     datadict = {}
                     datadict['ALNO'], datadict['PatientName'], datadict['ClaimNo'], datadict['BilledAmount'], \
@@ -126,7 +126,7 @@ try:
                     datadict['UTRNo'] = utrno
                     datadict['file_name'] = sys.argv[0]
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
-                if len(i) == 6:
+                elif len(i) == 6:
                     z = datadict['Transactiondate']
                     datadict = {}
                     datadict['ALNO'], datadict['PatientName'], datadict['ClaimNo'], datadict['BilledAmount'], \
@@ -138,6 +138,8 @@ try:
                     datadict['UTRNo'] = utrno
                     datadict['file_name'] = sys.argv[0]
                     ins_upd_data(mail_id, sys.argv[3], hospital, datadict, [])
+                else:
+                    log_exceptions(error="length error" ,mail_id=mail_id, hospital=hospital, datadict=datadict)
     else:
         ins_upd_data(mail_id, sys.argv[3], hospital, datadict, deductions)
     mark_flag('X', sys.argv[2])

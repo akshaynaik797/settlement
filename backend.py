@@ -21,7 +21,7 @@ import re
 import mysql.connector
 import openpyxl
 
-from common import conn_data, mark_flag
+from common import conn_data, mark_flag, file_name
 from movemaster import move_master_to_master_insurer
 from make_log import log_exceptions
 
@@ -245,19 +245,32 @@ def process_insurer_pdfs(folder_name, insname, files):
 
 def automate_processing():
     try:
+        if os.path.isfile(file_name):
+            os.remove(file_name)
         with mysql.connector.connect(**conn_data) as con:
             cur = con.cursor()
             format = '%d/%m/%Y %H:%i:%s'
             # q = "SELECT sno, attach_path, id FROM settlement_mails where sno='9792'"
             q = "SELECT sno, attach_path, id from settlement_mails where hospital='noble' and completed = '' ;" #and subject like 'SUBJECT:%';"
+            storedeductions = True
+            # storedeductions = False            
+            if storedeductions is True:
+                with open(file_name, "a") as fp:
+                    fp.write("")
+            else:
+                if os.path.isfile(file_name):
+                    os.remove(file_name)
             cur.execute(q)
             result = cur.fetchall()
         for sno, filepath, mid in result:
             try:
                 with mysql.connector.connect(**conn_data) as con:
                     cur = con.cursor()
-                    q = "delete from stgSettlement where mail_id=%s"
+                    q = "SELECT * FROM stgSettlement where mail_id = %s and UTRNo != '' and ALNO != '' and Transactiondate != '' and NetPayable != ''"
                     cur.execute(q, (mid,))
+                    r = cur.fetchone()
+                    if r is not None:
+                        continue
                 sno = str(sno)
                 if os.path.exists(filepath):
                     mark_flag('p', mid)
@@ -274,6 +287,8 @@ def automate_processing():
                     mark_flag('NO_ATTACH', mid)
             except:
                 log_exceptions(filepath=filepath)
+        if os.path.isfile(file_name):
+            os.remove(file_name)
     except:
         log_exceptions()
 
