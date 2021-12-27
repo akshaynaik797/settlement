@@ -15,7 +15,7 @@ try:
         'ClaimNo': [[r"(?<=CCN No).? *:? *\S+"], [':', '(', '.'], r"^\S+$"],
         'PatientName': [[r"(?<=Name of the Patient).*"], [':'], r"^\S+(?: \S+)*$"],
         'POLICYNO': [[r"(?<=Policy No.).*"], [':', '.'], r"^\S+$"],
-        'UTRNo': [[r"(?<=Insurer UTR No).*", r"(?<=Insurer\n).*(?=\n.*UTR)"], [':', '.', 'UTR'], r"^\S+$"],
+        'UTRNo': [[r"(?<=Insurer UTR No).*", r"(?<=Insurer\n).*(?=\n.*UTR)", r"(?<=UTR No.).*"], [':', '.', 'UTR'], r"^\S+$"],
         'Transactiondate': [[r"\S+(?=\n *Hospital)"], [':'], r"^\d+(?:[\/ -]{1}\w+){2}$"],
         'BilledAmount': [[r"(?<=Amount Claimed).*", r"(?<=claimed for)[\s\S]+?(?=Towards)"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
         'SettledAmount': [[r"(?<=Claim Amt Settled).*"], [':', 'Rs.', '/-'], r"^\d+(?:\.\d+)*$"],
