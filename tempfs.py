@@ -1,9 +1,5 @@
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return 'Web App with Python Flask!'
-
-app.run(host='0.0.0.0', port=81)
+import pdftotext
+with open("84076041_.pdf", "rb") as f:
+        pdf = pdftotext.PDF(f)
+with open('temp_files/o21321utput.txt', 'w', encoding='utf-8') as f:
+    f.write(" ".join(pdf))
