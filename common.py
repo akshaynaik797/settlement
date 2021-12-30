@@ -114,10 +114,10 @@ def mark_flag(flag, mid):
             cur.execute(q, (flag, mid))
         else:
             flag_list = ["U", "A", "T", "N"]
-            flag = ""
             for i, j in zip(flag_list, r):
                 if j == "" or j == None:
                     flag += i
+                    flag = flag.replace("X", "")
             if flag != "":
                 q = "update settlement_mails set completed=%s where id=%s;"
                 cur.execute(q, (flag, mid))
