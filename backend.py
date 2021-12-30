@@ -270,6 +270,7 @@ def automate_processing():
                     cur.execute(q, (mid,))
                     r = cur.fetchone()
                     if r is not None:
+                        mark_flag('X', mid)
                         continue
                 sno = str(sno)
                 if os.path.exists(filepath):
